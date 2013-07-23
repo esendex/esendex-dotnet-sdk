@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://api.esendex.com/ns/" 
+           xmlns="http://api.esendex.com/ns/" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="message">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="from" type="xs:token" minOccurs="0" maxOccurs="1" />
+        <xs:element name="to" type="xs:token" maxOccurs="1" />
+        <xs:element name="type" type="xs:token" minOccurs="0" maxOccurs="1" />
+        <xs:element name="body" type="xs:string" maxOccurs="1" />
+        <xs:element name="lang" type="xs:token" minOccurs="0" maxOccurs="1" />
+        <xs:element name="retries" type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1" />
+        <xs:element name="validity" type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1"/>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
