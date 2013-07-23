@@ -1,4 +1,3 @@
-
 #ignore thumbnails created by windows
 Thumbs.db
 #Ignore files build by Visual Studio
@@ -35,18 +34,13 @@ _ReSharper*/
 [Ll]ogs/
 UpgradeLog*.XML
 _UpgradeReport_Files/
-/3rdParty/Logica/smscsim/sim.dbg*
-/3rdParty/Logica/smscsim/sim.evt*
 #
 # Ignore bin files built to specific locations that don't have release or debug in the path
 bin/
 #
 # Ignore automatically generated AssemblyInfo files
 BaseAssemblyInfo.cs
-
 TestResult.xml
-esendex/web/aspnet_client/*
-esendex/Rntq1F1mQ4.avi
 packages/
 !NuGet.exe
 artifacts/
