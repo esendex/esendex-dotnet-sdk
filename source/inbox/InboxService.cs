@@ -12,7 +12,17 @@ namespace com.esendex.sdk.inbox
     public class InboxService : ServiceBase, IInboxService
     {
         /// <summary>
-        /// Initialises a new instance of the com.esendex.sdk.inbox.InboxService
+        /// Initialises a new instance of the InboxService
+        /// </summary>
+        /// <param name="username">Your Esendex username.</param>
+        /// <param name="password">Your Esendex password.</param>
+        public InboxService(string username, string password)
+            :this(new EsendexCredentials(username, password))
+        {
+        }
+        
+        /// <summary>
+        /// Initialises a new instance of the InboxService
         /// </summary>
         /// <param name="credentials">A com.esendex.sdk.EsendexCredentials instance that contains access credentials.</param>
         public InboxService(EsendexCredentials credentials)

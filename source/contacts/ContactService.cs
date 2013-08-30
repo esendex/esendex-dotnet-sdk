@@ -12,6 +12,16 @@ namespace com.esendex.sdk.contacts
     public class ContactService : ServiceBase, IContactService
     {
         /// <summary>
+        /// Initialises a new instance of the ContactService
+        /// </summary>
+        /// <param name="username">Your Esendex username.</param>
+        /// <param name="password">Your Esendex password.</param>
+        public ContactService(string username, string password)
+            : this(new EsendexCredentials(username, password))
+        {
+        }
+
+        /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.contacts.ContactService
         /// </summary>
         /// <param name="credentials">A com.esendex.sdk.EsendexCredentials instance that contains access credentials.</param>

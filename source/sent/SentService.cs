@@ -12,6 +12,16 @@ namespace com.esendex.sdk.sent
     public class SentService : ServiceBase, ISentService
     {
         /// <summary>
+        /// Initialises a new instance of the SentService
+        /// </summary>
+        /// <param name="username">Your Esendex username.</param>
+        /// <param name="password">Your Esendex password.</param>
+        public SentService(string username, string password)
+            : this(new EsendexCredentials(username, password))
+        {
+        }
+
+        /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.sent.SentService
         /// </summary>
         /// <param name="credentials">A com.esendex.sdk.EsendexCredentials instance that contains access credentials.</param>

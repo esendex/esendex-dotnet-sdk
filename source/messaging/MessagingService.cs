@@ -17,7 +17,18 @@ namespace com.esendex.sdk.messaging
         public bool EnsureMessageIdsInResult { get; private set; }
 
         /// <summary>
-        /// Initialises a new instance of the com.esendex.sdk.messaging.MessagingService
+        /// Initialises a new instance of the MessagingService, defaults to not returning a collection of MessageHeader Ids in the MessagingResult
+        /// </summary>
+        /// <param name="username">Your Esendex username.</param>
+        /// <param name="password">Your Esendex password.</param>
+        public MessagingService(string username, string password)
+            :this(false, new EsendexCredentials(username, password))
+        {
+            
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the MessagingService
         /// </summary>
         /// <param name="ensureMessageIdsInResult">true, if the service should return a collection of MessageHeader Ids in the MessagingResult; otherwise, false.</param>
         /// <param name="credentials">A com.esendex.sdk.EsendexCredentials instance that contains access credentials.</param>

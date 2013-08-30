@@ -15,8 +15,8 @@ namespace com.esendex.sdk
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.EsendexCredentials
         /// </summary>
-        /// <param name="username">A System.String instance that contains the Esendex username.</param>
-        /// <param name="password">A System.String instance that contains the Esendex password.</param>
+        /// <param name="username">Your Esendex username.</param>
+        /// <param name="password">Your Esendex password.</param>
         /// <exception cref="System.ArgumentNullException"></exception>
         public EsendexCredentials(string username, string password)
         {

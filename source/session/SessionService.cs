@@ -12,6 +12,16 @@ namespace com.esendex.sdk.session
     public class SessionService : ServiceBase, ISessionService
     {
         /// <summary>
+        /// Initialises a new instance of the SessionService
+        /// </summary>
+        /// <param name="username">Your Esendex username.</param>
+        /// <param name="password">Your Esendex password.</param>
+        public SessionService(string username, string password)
+            : this(new EsendexCredentials(username, password))
+        {
+        }
+
+        /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.session.SessionService
         /// </summary>
         public SessionService(EsendexCredentials credentials)
