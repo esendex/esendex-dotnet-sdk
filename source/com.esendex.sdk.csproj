@@ -50,10 +50,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +89,7 @@
     <Compile Include="inbox\InboxMessageCollection.cs" />
     <Compile Include="inbox\InboxMessageStatus.cs" />
     <Compile Include="inbox\InboxService.cs" />
+    <Compile Include="messaging\MessageBodyService.cs" />
     <Compile Include="messaging\VoiceMessageLanguage.cs" />
     <Compile Include="rest\resources\ContactsResource.cs" />
     <Compile Include="rest\resources\InboxMessagesResource.cs" />
@@ -101,6 +98,7 @@
     <Compile Include="messaging\Message.cs" />
     <Compile Include="messaging\MessagingResult.cs" />
     <Compile Include="messaging\MessageCollection.cs" />
+    <Compile Include="rest\resources\ResourceLinkResource.cs" />
     <Compile Include="rest\resources\SessionResource.cs" />
     <Compile Include="sent\SentMessage.cs" />
     <Compile Include="messaging\SmsMessage.cs" />

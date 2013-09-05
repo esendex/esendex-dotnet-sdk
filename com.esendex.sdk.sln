@@ -1,24 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{66E8126C-A2C2-4909-83ED-660627CFC6E8}"
-	ProjectSection(SolutionItems) = preProject
-		com.esendex.sdk.vsmdi = com.esendex.sdk.vsmdi
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
-		samples.zip = samples.zip
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedLibs", "SharedLibs", "{88BB2394-4FD5-4551-B2C0-14FD04C788C3}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\codeplex\esendex\SharedLibs\Moq.dll = ..\..\codeplex\esendex\SharedLibs\Moq.dll
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "help", "help", "{A29B4894-88AF-4035-8B94-B669615C3C86}"
-	ProjectSection(SolutionItems) = preProject
-		help\help.chm = help\help.chm
-		help\help.shfbproj = help\help.shfbproj
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.esendex.sdk", "source\com.esendex.sdk.csproj", "{E5FFC32F-9C13-47FB-A1E7-8834EAF289B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.esendex.sdk.test", "test\com.esendex.sdk.test.csproj", "{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}"
@@ -33,9 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{39FA5B
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = com.esendex.sdk.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

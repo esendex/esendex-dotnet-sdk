@@ -48,21 +48,13 @@ namespace com.esendex.sdk.test.rest
         }
 
         private IRestClient restClient;
-        private MockFactory mocks;
         private Mock<IHttpClient> mockHttpClient;
 
         [SetUp]
         public void TestInitialize()
         {
-            mocks = new MockFactory(MockBehavior.Strict);
-            mockHttpClient = mocks.Create<IHttpClient>();
+            mockHttpClient = new Mock<IHttpClient>();
             restClient = new RestClient(mockHttpClient.Object);
-        }
-
-        [TearDown]
-        public void TestCleanup()
-        {
-            mocks.VerifyAll();
         }
 
         [Test]
