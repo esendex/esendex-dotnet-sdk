@@ -13,8 +13,6 @@ namespace com.esendex.sdk.test.http
     {
         private HttpClient client;
 
-        private MockFactory mocks;
-
         private Mock<IHttpRequestHelper> mockHttpRequestHelper;
         private Mock<IHttpResponseHelper> mockHttpResponseHelper;
         private Mock<EsendexCredentials> mockEsendexCredentials;
@@ -22,21 +20,13 @@ namespace com.esendex.sdk.test.http
         [SetUp]
         public void TestInitialize()
         {
-            mocks = new MockFactory(MockBehavior.Strict);
-
-            mockHttpRequestHelper = mocks.Create<IHttpRequestHelper>();
-            mockHttpResponseHelper = mocks.Create<IHttpResponseHelper>();
-            mockEsendexCredentials = mocks.Create<EsendexCredentials>();
+            mockHttpRequestHelper = new Mock<IHttpRequestHelper>();
+            mockHttpResponseHelper = new Mock<IHttpResponseHelper>();
+            mockEsendexCredentials = new Mock<EsendexCredentials>();
 
             Uri uri = new UriBuilder("http", "tempuri.org").Uri;
 
             client = new HttpClient(mockEsendexCredentials.Object, uri, mockHttpRequestHelper.Object, mockHttpResponseHelper.Object);
-        }
-
-        [TearDown]
-        public void TestCleanup()
-        {
-            mocks.VerifyAll();
         }
 
         [Test]
@@ -78,8 +68,8 @@ namespace com.esendex.sdk.test.http
                 Content = "content"
             };
 
-            Mock<IHttpWebRequestAdapter> mockWebRequest = mocks.Create<IHttpWebRequestAdapter>();
-            Mock<IHttpWebResponseAdapter> mockWebResponse = mocks.Create<IHttpWebResponseAdapter>();
+            Mock<IHttpWebRequestAdapter> mockWebRequest = new Mock<IHttpWebRequestAdapter>();
+            Mock<IHttpWebResponseAdapter> mockWebResponse = new Mock<IHttpWebResponseAdapter>();
 
             mockHttpRequestHelper
                 .Setup(rh => rh.Create(request, client.Uri))
@@ -130,8 +120,8 @@ namespace com.esendex.sdk.test.http
 
             WebException expectedException = new WebException();
 
-            Mock<IHttpWebRequestAdapter> mockWebRequest = mocks.Create<IHttpWebRequestAdapter>();
-            Mock<IHttpWebResponseAdapter> mockWebResponse = mocks.Create<IHttpWebResponseAdapter>();
+            Mock<IHttpWebRequestAdapter> mockWebRequest = new Mock<IHttpWebRequestAdapter>();
+            Mock<IHttpWebResponseAdapter> mockWebResponse = new Mock<IHttpWebResponseAdapter>();
 
             mockHttpRequestHelper
                 .Setup(rh => rh.Create(request, client.Uri))

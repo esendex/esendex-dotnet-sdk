@@ -15,26 +15,16 @@ namespace com.esendex.sdk.test.session
     {
         private SessionService service;
 
-        private MockFactory mocks;
-
         private Mock<ISerialiser> mockSerialiser;
         private Mock<IRestClient> mockRestClient;
 
         [SetUp]
         public void TestInitialize()
         {
-            mocks = new MockFactory(MockBehavior.Strict);
-
-            mockSerialiser = mocks.Create<ISerialiser>();
-            mockRestClient = mocks.Create<IRestClient>();
+            mockSerialiser = new Mock<ISerialiser>();
+            mockRestClient = new Mock<IRestClient>();
 
             service = new SessionService(mockRestClient.Object, mockSerialiser.Object);
-        }
-
-        [TearDown]
-        public void TestCleanup()
-        {
-            mocks.VerifyAll();
         }
 
         [Test]

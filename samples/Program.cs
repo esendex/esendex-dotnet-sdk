@@ -1,73 +1,141 @@
 ﻿using System;
 using System.Net;
 using com.esendex.sdk.contacts;
-using com.esendex.sdk.core;
 using com.esendex.sdk.inbox;
 using com.esendex.sdk.messaging;
 using com.esendex.sdk.sent;
 using com.esendex.sdk.session;
+using Mono.Options;
 
 namespace com.esendex.sdk.samples
 {
     class Program
     {
-        static EsendexCredentials credentials;
-        static EsendexCredentials Credentials
-        {
-            get
-            {
-                // TODO: Add your username, password and proxy information here as required.
-                return credentials ?? (credentials = new EsendexCredentials("username", "password"));
-            }
-        }
-
-        static string accountReference
-        {
-            // TODO: Add your account reference here.
-            get { return "EX000000"; }
-        }
+        private const int PageIndex = 1;
+        private const int PageSize = 15;
+        private static string _username;
+        private static string _password;
+        private static string _accountReference;
+        private static string _sendTo;
+        private static bool _getBodies;
 
         static void Main(string[] args)
         {
-            // Use session authentication
+            var helpRequested = false;
+            var sendMessage = false;
+            var optionSet = new OptionSet
+                {
+                    {"u|user=", "Username to use", user => _username = user},
+                    {"p|pass=", "Password for Username", pass => _password = pass},
+                    {"a|account=", "Account Reference to use", reference => _accountReference = reference},
+                    {
+                        "s|send=", "Send a message to the provided number", sendTo =>
+                            {
+                                sendMessage = true;
+                                _sendTo = sendTo;
+                            }
+                    },
+                    {"b|bodies+", "Retrieve message bodies", v => _getBodies = true},
+                    {
+                        "h|help", "Help about the command line interface", key =>
+                            {
+                                helpRequested = key != null;
+                            }
+                    }
+                };
+
             try
             {
-                SessionService sessionService = new SessionService(Credentials);
+                optionSet.Parse(args);
+                if (!helpRequested && (string.IsNullOrEmpty(_username) ||
+                                       string.IsNullOrEmpty(_password) ||
+                                       string.IsNullOrEmpty(_accountReference)))
+                    throw new ApplicationException("Samples require username, password and account reference be given");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                helpRequested = true;
+            }
 
-                Credentials.SessionId = sessionService.CreateSession();
+            if (helpRequested)
+            {
+                ShowUsage(optionSet);
+                return;
+            }
+
+            EsendexCredentials credentials;
+            try
+            {
+                credentials = new EsendexCredentials(_username, _password);
+                var sessionService = new SessionService(credentials);
+
+                credentials.SessionId = sessionService.CreateSession();
             }
             catch (WebException ex)
             {
                 Console.Write(ex.Message);
+                return;
             }
-            
-            // TODO: Remove these comments to expose the example functionality.
 
-            // SendMessageExample();
+            if (sendMessage)
+            {
+                Console.WriteLine("Send Message Example\r\n");
+                SendMessageExample(credentials);
+            }
 
-            // GetSentMessagesExample();
+            MessageBodyService messageBodyService = null;
+            if (_getBodies)
+            {
+                messageBodyService = new MessageBodyService(credentials);
+            }
 
-            // GetInboxMessagesExample();
+            Console.WriteLine();
+            Console.WriteLine("Sent Messages Example\r\n");
+            GetSentMessagesExample(credentials, messageBodyService);
 
-            // GetContactsExample();
+            Console.WriteLine();
+            Console.WriteLine("Inbox Messages Example\r\n");
+            GetInboxMessagesExample(credentials, messageBodyService);
 
+            Console.WriteLine();
+            Console.WriteLine("Contacts Example\r\n");
+            GetContactsExample(credentials);
+
+            Console.WriteLine();
+            Console.WriteLine("Press enter to continue ... ");
             Console.ReadLine();
         }
 
-        private static void GetContactsExample()
+        private static void ShowUsage(OptionSet optionSet)
         {
-            int pageNumber = 1;
-            int pageSize = 15;
+            Console.WriteLine(
+                @"
+Esendex .Net SDK Samples
+");
 
-            ContactService contactService = new ContactService(Credentials);
+            optionSet.WriteOptionDescriptions(Console.Out);
+
+            Console.WriteLine(@"
+Enjoy...
+");
+        }
+
+        private static void SendMessageExample(EsendexCredentials credentials)
+        {
+            var message = new SmsMessage(_sendTo, "This is a test message from the .Net SDK...", _accountReference);
+
+            var messagingService = new MessagingService(true, credentials);
 
             try
             {
-                PagedContactCollection collection = contactService.GetContacts(pageNumber, pageSize);
+                var messageResult = messagingService.SendMessage(message);
 
-                foreach (Contact item in collection.Contacts)
+                Console.WriteLine("\tMessage Batch Id: {0}", messageResult.BatchId);
+
+                foreach (var messageId in messageResult.MessageIds)
                 {
-                    Console.WriteLine("Contact Id:{0}\nQuickname:{1}\n\n", item.Id, item.QuickName);
+                    Console.WriteLine("\t\tMessage Uri: {0}", messageId.Uri);
                 }
             }
             catch (WebException ex)
@@ -76,44 +144,30 @@ namespace com.esendex.sdk.samples
             }
         }
 
-        private static void GetSentMessagesExample()
+        private static void GetSentMessagesExample(EsendexCredentials credentials, MessageBodyService messageBodyService)
         {
-            int pageNumber = 1;
-            int pageSize = 15;
-
-            SentService sentService = new SentService(Credentials);
+            var sentService = new SentService(credentials);
 
             try
             {
-                SentMessageCollection collection = sentService.GetMessages(pageNumber, pageSize);
+                var collection = sentService.GetMessages(_accountReference, PageIndex, PageSize);
 
-                foreach (SentMessage item in collection.Messages)
+                foreach (var item in collection.Messages)
                 {
-                    Console.WriteLine("Message Id:{0}\nMessage:{1}\n\n", item.Id, item.Summary);
-                }
-
-            }
-            catch (WebException ex)
-            {
-                Console.Write(ex.Message);
-            }
-        }
-
-        private static void SendMessageExample()
-        {
-            SmsMessage message = new SmsMessage("07000000000", "This is a test...", accountReference);
-
-            MessagingService messagingService = new MessagingService(true, Credentials);
-
-            try
-            {
-                MessagingResult messageResult = messagingService.SendMessage(message);
-
-                Console.WriteLine("Message Batch Id: {0}", messageResult.BatchId);
-
-                foreach (ResourceLink messageId in messageResult.MessageIds)
-                {
-                    Console.WriteLine("Message Uri: {0}", messageId.Uri);
+                    if (messageBodyService != null)
+                    {
+                        messageBodyService.LoadBodyText(item.Body);
+                        Console.WriteLine("\tMessage Id:{0}\tSummary:{1}\n\tBody:{2}\n",
+                                          item.Id,
+                                          item.Summary,
+                                          item.Body.BodyText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\tMessage Id:{0}\tSummary:{1}",
+                                          item.Id,
+                                          item.Summary);
+                    }
                 }
             }
             catch (WebException ex)
@@ -122,22 +176,50 @@ namespace com.esendex.sdk.samples
             }
         }
 
-        private static void GetInboxMessagesExample()
+        private static void GetInboxMessagesExample(EsendexCredentials credentials, MessageBodyService messageBodyService)
         {
-            int pageNumber = 1;
-            int pageSize = 15;
-
-            InboxService inboxService = new InboxService(Credentials);
+            var inboxService = new InboxService(credentials);
 
             try
             {
-                InboxMessageCollection collection = inboxService.GetMessages(pageNumber, pageSize);
+                var collection = inboxService.GetMessages(_accountReference, PageIndex, PageSize);
 
-                foreach (InboxMessage item in collection.Messages)
+                foreach (var item in collection.Messages)
                 {
-                    Console.WriteLine("Message Id:{0}\nMessage:{1}\n\n", item.Id, item.Summary);
+                    if (messageBodyService != null)
+                    {
+                        messageBodyService.LoadBodyText(item.Body);
+                        Console.WriteLine("\tMessage Id:{0}\tSummary:{1}\n\tBody:{2}\n",
+                                          item.Id,
+                                          item.Summary,
+                                          item.Body.BodyText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\tMessage Id:{0}\tSummary:{1}",
+                                          item.Id,
+                                          item.Summary);
+                    }
                 }
+            }
+            catch (WebException ex)
+            {
+                Console.Write(ex.Message);
+            }
+        }
 
+        private static void GetContactsExample(EsendexCredentials credentials)
+        {
+            var contactService = new ContactService(credentials);
+
+            try
+            {
+                var collection = contactService.GetContacts(PageIndex, PageSize);
+
+                foreach (var item in collection.Contacts)
+                {
+                    Console.WriteLine("\tContact Id:{0}\tQuickname:{1}", item.Id, item.QuickName);
+                }
             }
             catch (WebException ex)
             {

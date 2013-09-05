@@ -14,24 +14,14 @@ namespace com.esendex.sdk.test.http
     {
         private HttpRequestHelper helper;
 
-        private MockFactory mocks;
-
         private Uri uri;
 
         [SetUp]
         public void TestInitialize()
         {
-            mocks = new MockFactory(MockBehavior.Strict);
-
             helper = new HttpRequestHelper();
             
             uri = new UriBuilder("http", "tempuri.org").Uri;
-        }
-
-        [TearDown]
-        public void TestCleanup()
-        {
-            mocks.VerifyAll();
         }
 
         [Test]
@@ -114,7 +104,7 @@ namespace com.esendex.sdk.test.http
         public void AddContent_WithHttpWebRequestAdapterAndHttpRequest()
         {
             // Arrange
-            Mock<IHttpWebRequestAdapter> mockHttpWebRequest = mocks.Create<IHttpWebRequestAdapter>();
+            Mock<IHttpWebRequestAdapter> mockHttpWebRequest = new Mock<IHttpWebRequestAdapter>();
 
             HttpRequest request = new HttpRequest()
             {
@@ -124,40 +114,33 @@ namespace com.esendex.sdk.test.http
             };
             
             Stream stream = new MemoryStream();
-            
-            mockHttpWebRequest.Setup(wr=>wr.GetRequestStream()).Returns(stream);
-            mockHttpWebRequest.SetupSet(wr => wr.ContentLength = request.ContentLength);
-            mockHttpWebRequest.SetupSet(wr => wr.ContentType = request.ContentType);
+
+            mockHttpWebRequest.Setup(wr => wr.GetRequestStream()).Returns(stream);
 
             // Act
             helper.AddContent(mockHttpWebRequest.Object, request);
 
             // Assert
-            
-            // Expectations have been met.
+            mockHttpWebRequest.VerifySet(wr => wr.ContentLength = request.ContentLength);
+            mockHttpWebRequest.VerifySet(wr => wr.ContentType = request.ContentType);
         }
 
         [Test]
         public void AddContent_WithHttpWebRequestAdapterAndHttpRequestWithNoContent()
         {
             // Arrange
-            Mock<IHttpWebRequestAdapter> mockHttpWebRequest = mocks.Create<IHttpWebRequestAdapter>();
+            Mock<IHttpWebRequestAdapter> mockHttpWebRequest = new Mock<IHttpWebRequestAdapter>();
 
             HttpRequest request = new HttpRequest()
             {
                 Content = string.Empty
             };
 
-            Stream stream = new MemoryStream();
-
-            mockHttpWebRequest.SetupSet(wr => wr.ContentLength = 0);
-
             // Act
             helper.AddContent(mockHttpWebRequest.Object, request);
 
             // Assert
-
-            // Expectations have been met.
+            mockHttpWebRequest.VerifySet(wr => wr.ContentLength = 0);
         }
     }
 }

@@ -18,26 +18,16 @@ namespace com.esendex.sdk.test.messaging
     {
         private MessagingService service;
 
-        private MockFactory mocks;
-
         private Mock<ISerialiser> mockSerialiser;
         private Mock<IRestClient> mockRestClient;
 
         [SetUp]
         public void TestInitialize()
         {
-            mocks = new MockFactory(MockBehavior.Strict);
-
-            mockSerialiser = mocks.Create<ISerialiser>();
-            mockRestClient = mocks.Create<IRestClient>();
+            mockSerialiser = new Mock<ISerialiser>();
+            mockRestClient = new Mock<IRestClient>();
 
             service = new MessagingService(mockRestClient.Object, mockSerialiser.Object, false);
-        }
-
-        [TearDown]
-        public void TestCleanup()
-        {
-            mocks.VerifyAll();
         }
 
         [Test]

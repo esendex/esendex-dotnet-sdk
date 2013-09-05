@@ -13,24 +13,14 @@ namespace com.esendex.sdk.test.http
     {
         private HttpResponseHelper helper;
 
-        private MockFactory mocks;
-
         Mock<IHttpWebResponseAdapter> mockHttpWebResponse;
 
         [SetUp]
         public void TestInitialize()
         {
-            mocks = new MockFactory(MockBehavior.Strict);
-
-            mockHttpWebResponse = mocks.Create<IHttpWebResponseAdapter>();
+            mockHttpWebResponse = new Mock<IHttpWebResponseAdapter>();
 
             helper = new HttpResponseHelper();
-        }
-
-        [TearDown]
-        public void TestCleanup()
-        {
-            mocks.VerifyAll();
         }
 
         [Test]

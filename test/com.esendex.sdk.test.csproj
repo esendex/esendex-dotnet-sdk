@@ -88,6 +88,7 @@
     <Compile Include="EsendexCredentialsTests.cs" />
     <Compile Include="inbox\InboxMessageTests.cs" />
     <Compile Include="inbox\InboxServiceTests.cs" />
+    <Compile Include="messaging\MessageBodyServiceTests.cs" />
     <Compile Include="messaging\MessageSerialisationTests.cs" />
     <Compile Include="messaging\MessageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
