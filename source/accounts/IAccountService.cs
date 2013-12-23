@@ -7,6 +7,7 @@ namespace com.esendex.sdk.accounts
 {
     public interface IAccountService
     {
+        Account GetAccount(Guid id);
         AccountCollection GetAccounts();
     }
 }

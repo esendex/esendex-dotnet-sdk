@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace com.esendex.sdk.accounts
 {
     /// <summary>
-    /// Represents a contact.
+    /// Represents a account.
     /// </summary>
     [Serializable]
     [XmlRoot("account", Namespace = Constants.API_NAMESPACE)]

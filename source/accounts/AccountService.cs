@@ -1,3 +1,4 @@
+using System;
 using com.esendex.sdk.accounts;
 using com.esendex.sdk.http;
 using com.esendex.sdk.rest;
@@ -24,6 +25,13 @@ namespace com.esendex.sdk.accounts
         public AccountService(EsendexCredentials credentials) : base(credentials){ }
 
         internal AccountService(IRestClient restClient, ISerialiser serialiser) : base(restClient, serialiser) { }
+
+        public Account GetAccount(Guid id)
+        {
+            RestResource resource = new AccountsResource(id);
+
+            return MakeRequest<Account>(HttpMethod.GET, resource);
+        }
 
         public AccountCollection GetAccounts()
         {
