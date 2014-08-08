@@ -8,7 +8,7 @@ namespace com.esendex.sdk.http
     {
         IHttpWebRequestAdapter Create(HttpRequest httpRequest, Uri uri);
         void AddCredentials(IHttpWebRequestAdapter httpRequest, EsendexCredentials credentials);
-        void AddProxy(IHttpWebRequestAdapter httpRequest, WebProxy proxy);
+        void AddProxy(IHttpWebRequestAdapter httpRequest, IWebProxy proxy);
         void AddContent(IHttpWebRequestAdapter httpRequest, HttpRequest request);
     }
 }

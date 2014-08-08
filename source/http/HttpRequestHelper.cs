@@ -49,7 +49,7 @@ namespace com.esendex.sdk.http
             }
         }
 
-        public void AddProxy(IHttpWebRequestAdapter httpRequest, WebProxy proxy)
+        public void AddProxy(IHttpWebRequestAdapter httpRequest, IWebProxy proxy)
         {
             httpRequest.Proxy = proxy;
         }
