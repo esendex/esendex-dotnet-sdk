@@ -44,3 +44,4 @@ TestResult.xml
 packages/
 !NuGet.exe
 artifacts/
+build/
