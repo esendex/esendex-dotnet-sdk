@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+	<title>Esendex .NET SDK</title>
+    <id>esendex-dotnet-sdk</id>
+    <version>$version$</version>
+    <authors>Esendex</authors>
+    <owners>EsendexDevelopment</owners>    
+    <iconUrl>http://www.esendex.co.uk/sites/all/themes/esendex14/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Esendex API .NET SDK</description>
+	<licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
+    <!-- <releaseNotes>Initial NuGet release</releaseNotes> -->
+	<tags>SDK API Esendex .NET</tags>
+	<projectUrl>http://developers.esendex.com/SDKs/DotNet-SDK</projectUrl>	
+  </metadata>
+  <files>
+		<file src="com.esendex.sdk.dll" target="lib\net35" />   
+  </files>
+</package>
