@@ -25,6 +25,23 @@ namespace com.esendex.sdk.test
         }
 
         [Test]
+        public void DefaultDIConstructor_ShouldAcceptDefaultWebProxy()
+        {
+            //  Arrange
+            string username = "username";
+            string password = "password";
+            var proxy = WebRequest.DefaultWebProxy;
+
+            //  Act
+            EsendexCredentials credentials = new EsendexCredentials(username, password, proxy);
+
+            //  Assert
+            Assert.AreEqual(username, credentials.Username);
+            Assert.AreEqual(password, credentials.Password);
+            Assert.AreEqual(proxy, credentials.WebProxy);
+        }
+
+        [Test]
         public void DefaultDIConstructor_WithSessionIdAndProxy()
         {
             //  Arrange

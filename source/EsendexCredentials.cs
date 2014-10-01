@@ -42,7 +42,7 @@ namespace com.esendex.sdk
         /// <param name="sessionId">A System.Guid instance containing the session id.</param>
         /// <param name="proxy">A System.Net.WebProxy instance that contains proxy information required by the local network.</param>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public EsendexCredentials(Guid sessionId, WebProxy proxy)
+        public EsendexCredentials(Guid sessionId, IWebProxy proxy)
             : this(sessionId)
         {
             SetProxy(proxy);
@@ -55,7 +55,7 @@ namespace com.esendex.sdk
         /// <param name="password">A System.String instance that contains the Esendex password.</param>
         /// <param name="proxy">A System.Net.WebProxy instance that contains proxy information required by the local network.</param>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public EsendexCredentials(string username, string password, WebProxy proxy)
+        public EsendexCredentials(string username, string password, IWebProxy proxy)
             : this(username, password)
         {
             SetProxy(proxy);
@@ -74,7 +74,7 @@ namespace com.esendex.sdk
         /// <summary>
         /// Gets the proxy information.
         /// </summary>
-        public WebProxy WebProxy { get; private set; }
+        public IWebProxy WebProxy { get; private set; }
 
         /// <summary>
         /// Returns true if a System.Net.WebProxy instance was supplied to the constructor; otherwise, false.
@@ -97,7 +97,7 @@ namespace com.esendex.sdk
         /// </summary>
         public Guid? SessionId { get; set; }
 
-        private void SetProxy(WebProxy proxy)
+        private void SetProxy(IWebProxy proxy)
         {
             if (proxy == null) throw new ArgumentNullException("proxy");
 
