@@ -31,8 +31,6 @@ namespace com.esendex.sdk.inbox
         public DateTime? ReceivedAt { get; set; }
         public bool ShouldSerializeReceivedAt() { return ReceivedAt.HasValue; }
 
-        internal InboxMessage() : base() { }
-
         /// <summary>
         /// Determines whether the specified System.Object are considered equal.
         /// </summary>
