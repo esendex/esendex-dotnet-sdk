@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="contacts\ContactServiceTests.cs" />
     <Compile Include="contacts\ContactTests.cs" />
+    <Compile Include="helpers\MockFunction.cs" />
     <Compile Include="http\HttpClientTests.cs" />
     <Compile Include="http\HttpRequestHelperTests.cs" />
     <Compile Include="http\HttpRequestTests.cs" />

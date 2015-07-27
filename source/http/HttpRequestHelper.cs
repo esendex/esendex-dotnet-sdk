@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using System.Net;
-using System.Reflection;
 using System.Text;
 using com.esendex.sdk.adapters;
 
@@ -10,23 +7,14 @@ namespace com.esendex.sdk.http
 {
     internal class HttpRequestHelper : IHttpRequestHelper
     {
-        public IHttpWebRequestAdapter Create(HttpRequest httpRequest, Uri uri)
+        public IHttpWebRequestAdapter Create(HttpRequest httpRequest, Uri uri, Version version)
         {
-            Assembly assembly = Assembly.GetAssembly(typeof(IHttpRequestHelper));
-
-            Version version = assembly.GetName().Version;
-
-            string fullUri = string.Format("{0}v{1}.{2}/{3}", uri, version.Major, version.Minor, httpRequest.ResourcePath);
-
+            var fullUri = string.Format("{0}v1.1/{1}", uri, httpRequest.ResourcePath);
             uri = new Uri(fullUri);
 
             IHttpWebRequestAdapter httpWebRequest = new HttpWebRequestAdapter(uri);
-
             httpWebRequest.Method = httpRequest.HttpMethod.ToString();
-
-            FileVersionInfo info = FileVersionInfo.GetVersionInfo(assembly.Location);
-
-            httpWebRequest.UserAgent = string.Format("Esendex .NET SDK v{0}.{1}", info.FileMajorPart, info.FileMinorPart);
+            httpWebRequest.UserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", version.Major, version.Minor, version.Revision);
 
             return httpWebRequest;
         }
@@ -35,15 +23,20 @@ namespace com.esendex.sdk.http
         {
             if (credentials.UseSessionAuthentication)
             {
-                string value = string.Format("Basic {0}", Convert.ToBase64String(new UTF8Encoding().GetBytes(credentials.SessionId.Value.ToString())));
+                var value = string.Format("Basic {0}", Convert.ToBase64String(new UTF8Encoding().GetBytes(credentials.SessionId.Value.ToString())));
 
                 httpRequest.Headers.Add(HttpRequestHeader.Authorization, value);
             }
             else
             {
-                CredentialCache credentialCache = new CredentialCache();
-
-                credentialCache.Add(httpRequest.RequestUri, "Basic", new NetworkCredential(credentials.Username, credentials.Password));
+                var credentialCache = new CredentialCache
+                {
+                    {
+                        httpRequest.RequestUri,
+                        "Basic",
+                        new NetworkCredential(credentials.Username, credentials.Password)
+                        }
+                };
 
                 httpRequest.Credentials = credentialCache;
             }
@@ -61,9 +54,9 @@ namespace com.esendex.sdk.http
                 httpRequest.ContentType = request.ContentType;
                 httpRequest.ContentLength = request.ContentLength;
 
-                byte[] data = request.ContentEncoding.GetBytes(request.Content);
+                var data = request.ContentEncoding.GetBytes(request.Content);
 
-                using (Stream stream = httpRequest.GetRequestStream())
+                using (var stream = httpRequest.GetRequestStream())
                 {
                     stream.Write(data, 0, data.Length);
                 }
@@ -73,5 +66,8 @@ namespace com.esendex.sdk.http
                 httpRequest.ContentLength = 0;
             }
         }
+
+
+        
     }
 }

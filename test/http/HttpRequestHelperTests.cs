@@ -12,54 +12,62 @@ namespace com.esendex.sdk.test.http
     [TestFixture]
     public class HttpRequestHelperTests
     {
-        private HttpRequestHelper helper;
-
-        private Uri uri;
+        private HttpRequestHelper _helper;
+        private Uri _uri;
 
         [SetUp]
         public void TestInitialize()
         {
-            helper = new HttpRequestHelper();
+            _helper = new HttpRequestHelper();
             
-            uri = new UriBuilder("http", "tempuri.org").Uri;
+            _uri = new UriBuilder("http", "tempuri.org").Uri;
         }
 
         [Test]
         public void Create_WithHttpRequest_ReturnsHttpWebRequestAdapter()
         {
+            const int major = 1;
+            const int minor = 0;
+            const int build = 1;
+            const int revision = 3;
+
             // Arrange            
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             { 
                 ResourcePath = "resource",
                 HttpMethod = HttpMethod.POST
             };
 
-            string expectedUri = uri.ToString() + "v1.1/" + request.ResourcePath;
+            var expectedUri = string.Format("{0}v1.1/{1}", _uri, request.ResourcePath);
 
+            var expectedVersion = new Version(major, minor, build, revision);
+            
             // Act
-            IHttpWebRequestAdapter actualHttpRequest = helper.Create(request, uri);
+            var actualHttpRequest = _helper.Create(request, _uri, expectedVersion);
 
             // Assert
             Assert.That(actualHttpRequest, Is.InstanceOf<HttpWebRequestAdapter>());
             Assert.AreEqual(expectedUri, actualHttpRequest.RequestUri.ToString());
             Assert.AreEqual(request.HttpMethod.ToString(), actualHttpRequest.Method);
             Assert.IsFalse(string.IsNullOrEmpty(actualHttpRequest.UserAgent));
+            Assert.That(actualHttpRequest.UserAgent, Is.EqualTo(string.Format("Esendex .NET SDK v{0}.{1}.{2}", major, minor, revision)));
+            
         }
 
         [Test]
         public void AddCredentials_WithHttpWebRequestAdapterAndBasicEsendexCredentials()
         {
             // Arrange
-            EsendexCredentials credentials = new EsendexCredentials("username", "password");
+            var credentials = new EsendexCredentials("username", "password");
 
-            IHttpWebRequestAdapter httpRequest = new HttpWebRequestAdapter(uri);
+            IHttpWebRequestAdapter httpRequest = new HttpWebRequestAdapter(_uri);
 
             //  Act
-            helper.AddCredentials(httpRequest, credentials);
+            _helper.AddCredentials(httpRequest, credentials);
 
             //  Assert
-            string username = httpRequest.Credentials.GetCredential(uri, "Basic").UserName;
-            string password = httpRequest.Credentials.GetCredential(uri, "Basic").Password;
+            var username = httpRequest.Credentials.GetCredential(_uri, "Basic").UserName;
+            var password = httpRequest.Credentials.GetCredential(_uri, "Basic").Password;
 
             Assert.AreEqual(credentials.Username, username);
             Assert.AreEqual(credentials.Password, password);
@@ -69,18 +77,18 @@ namespace com.esendex.sdk.test.http
         public void AddCredentials_WithHttpWebRequestAdapterAndSessionEsendexCredentials()
         {
             // Arrange
-            Guid sessionId = Guid.NewGuid();
-            string expectedHeaderValue = string.Format("Basic {0}", Convert.ToBase64String(new UTF8Encoding().GetBytes(sessionId.ToString())));
+            var sessionId = Guid.NewGuid();
+            var expectedHeaderValue = string.Format("Basic {0}", Convert.ToBase64String(new UTF8Encoding().GetBytes(sessionId.ToString())));
 
-            EsendexCredentials credentials = new EsendexCredentials(sessionId);
+            var credentials = new EsendexCredentials(sessionId);
 
-            IHttpWebRequestAdapter httpRequest = new HttpWebRequestAdapter(uri);
+            IHttpWebRequestAdapter httpRequest = new HttpWebRequestAdapter(_uri);
 
             //  Act
-            helper.AddCredentials(httpRequest, credentials);
+            _helper.AddCredentials(httpRequest, credentials);
 
             //  Assert
-            string actualHeaderValue = httpRequest.Headers.Get("Authorization");
+            var actualHeaderValue = httpRequest.Headers.Get("Authorization");
 
             Assert.AreEqual(expectedHeaderValue, actualHeaderValue);
         }
@@ -89,12 +97,12 @@ namespace com.esendex.sdk.test.http
         public void AddProxy_WithHttpWebRequestAdapterAndProxy()
         {
             // Arrange
-            IHttpWebRequestAdapter httpRequest = new HttpWebRequestAdapter(uri);
+            IHttpWebRequestAdapter httpRequest = new HttpWebRequestAdapter(_uri);
 
-            WebProxy proxy = new WebProxy();
+            var proxy = new WebProxy();
 
             //  Act
-            helper.AddProxy(httpRequest, proxy);
+            _helper.AddProxy(httpRequest, proxy);
 
             //  Assert
             Assert.AreEqual(proxy, httpRequest.Proxy);
@@ -104,9 +112,9 @@ namespace com.esendex.sdk.test.http
         public void AddContent_WithHttpWebRequestAdapterAndHttpRequest()
         {
             // Arrange
-            Mock<IHttpWebRequestAdapter> mockHttpWebRequest = new Mock<IHttpWebRequestAdapter>();
+            var httpWebRequest = new Mock<IHttpWebRequestAdapter>();
 
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             {
                 Content = "content",
                 ContentEncoding = Encoding.UTF8,
@@ -115,32 +123,32 @@ namespace com.esendex.sdk.test.http
             
             Stream stream = new MemoryStream();
 
-            mockHttpWebRequest.Setup(wr => wr.GetRequestStream()).Returns(stream);
+            httpWebRequest.Setup(wr => wr.GetRequestStream()).Returns(stream);
 
             // Act
-            helper.AddContent(mockHttpWebRequest.Object, request);
+            _helper.AddContent(httpWebRequest.Object, request);
 
             // Assert
-            mockHttpWebRequest.VerifySet(wr => wr.ContentLength = request.ContentLength);
-            mockHttpWebRequest.VerifySet(wr => wr.ContentType = request.ContentType);
+            httpWebRequest.VerifySet(wr => wr.ContentLength = request.ContentLength);
+            httpWebRequest.VerifySet(wr => wr.ContentType = request.ContentType);
         }
 
         [Test]
         public void AddContent_WithHttpWebRequestAdapterAndHttpRequestWithNoContent()
         {
             // Arrange
-            Mock<IHttpWebRequestAdapter> mockHttpWebRequest = new Mock<IHttpWebRequestAdapter>();
+            var httpWebRequest = new Mock<IHttpWebRequestAdapter>();
 
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             {
                 Content = string.Empty
             };
 
             // Act
-            helper.AddContent(mockHttpWebRequest.Object, request);
+            _helper.AddContent(httpWebRequest.Object, request);
 
             // Assert
-            mockHttpWebRequest.VerifySet(wr => wr.ContentLength = 0);
+            httpWebRequest.VerifySet(wr => wr.ContentLength = 0);
         }
     }
 }

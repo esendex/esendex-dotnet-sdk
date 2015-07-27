@@ -1,11 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.Net;
-using com.esendex.sdk.adapters;
+using System.Reflection;
+
 namespace com.esendex.sdk.http
 {
     internal class HttpClient : IHttpClient
     {
+        private static readonly Version _version = Assembly.GetAssembly(typeof(IHttpRequestHelper)).GetName().Version;
         public IHttpRequestHelper HttpRequestHelper { get; private set; }
         public IHttpResponseHelper HttpResponseHelper { get; private set; }
         public EsendexCredentials Credentials { get; private set; }
@@ -23,7 +24,7 @@ namespace com.esendex.sdk.http
         {
             try
             {
-                IHttpWebRequestAdapter webRequest = HttpRequestHelper.Create(request, Uri);
+                var webRequest = HttpRequestHelper.Create(request, Uri, _version);
 
                 HttpRequestHelper.AddCredentials(webRequest, Credentials);
 
@@ -31,7 +32,7 @@ namespace com.esendex.sdk.http
 
                 HttpRequestHelper.AddContent(webRequest, request);
 
-                IHttpWebResponseAdapter webResponse = (IHttpWebResponseAdapter)webRequest.GetResponse();
+                var webResponse = webRequest.GetResponse();
 
                 return HttpResponseHelper.Create(webResponse);
             }

@@ -13,34 +13,34 @@ namespace com.esendex.sdk.test.http
     {
         private HttpClient client;
 
-        private Mock<IHttpRequestHelper> mockHttpRequestHelper;
-        private Mock<IHttpResponseHelper> mockHttpResponseHelper;
+        private Mock<IHttpRequestHelper> httpRequestHelper;
+        private Mock<IHttpResponseHelper> httpResponseHelper;
         private Mock<EsendexCredentials> mockEsendexCredentials;
 
         [SetUp]
         public void TestInitialize()
         {
-            mockHttpRequestHelper = new Mock<IHttpRequestHelper>();
-            mockHttpResponseHelper = new Mock<IHttpResponseHelper>();
+            httpRequestHelper = new Mock<IHttpRequestHelper>();
+            httpResponseHelper = new Mock<IHttpResponseHelper>();
             mockEsendexCredentials = new Mock<EsendexCredentials>();
 
-            Uri uri = new UriBuilder("http", "tempuri.org").Uri;
+            var uri = new UriBuilder("http", "tempuri.org").Uri;
 
-            client = new HttpClient(mockEsendexCredentials.Object, uri, mockHttpRequestHelper.Object, mockHttpResponseHelper.Object);
+            client = new HttpClient(mockEsendexCredentials.Object, uri, httpRequestHelper.Object, httpResponseHelper.Object);
         }
 
         [Test]
         public void DefaultDIConstructor()
         {
             // Arrange
-            EsendexCredentials credentials = new EsendexCredentials("username", "password");
-            Uri uri = new Uri("http://tempuri.org");
+            var credentials = new EsendexCredentials("username", "password");
+            var uri = new Uri("http://tempuri.org");
 
-            IHttpRequestHelper httpRequestHelper = new HttpRequestHelper();
-            IHttpResponseHelper httpResponseHelper = new HttpResponseHelper();
+            var httpRequestHelper = new HttpRequestHelper();
+            var httpResponseHelper = new HttpResponseHelper();
 
             // Act
-            HttpClient clientInstance = new HttpClient(credentials, uri, httpRequestHelper, httpResponseHelper);
+            var clientInstance = new HttpClient(credentials, uri, httpRequestHelper, httpResponseHelper);
 
             // Assert
             Assert.That(clientInstance.Credentials, Is.InstanceOf<EsendexCredentials>());
@@ -53,7 +53,7 @@ namespace com.esendex.sdk.test.http
         public void Submit_WithHttpRequest_ReturnsHttpResponse()
         {
             // Arrange
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             {
                 ResourcePath = "resource",
                 HttpMethod = HttpMethod.POST,
@@ -62,38 +62,34 @@ namespace com.esendex.sdk.test.http
                 ContentType = "application/xml"
             };
 
-            HttpResponse expectedResponse = new HttpResponse()
+            var expectedResponse = new HttpResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "content"
             };
 
-            Mock<IHttpWebRequestAdapter> mockWebRequest = new Mock<IHttpWebRequestAdapter>();
-            Mock<IHttpWebResponseAdapter> mockWebResponse = new Mock<IHttpWebResponseAdapter>();
-
-            mockHttpRequestHelper
-                .Setup(rh => rh.Create(request, client.Uri))
+            var mockWebRequest = new Mock<IHttpWebRequestAdapter>();
+            httpRequestHelper
+                .Setup(rh => rh.Create(request, client.Uri, It.IsAny<Version>()))
                 .Returns(mockWebRequest.Object);
-
-            mockHttpRequestHelper
+            httpRequestHelper
                 .Setup(rh => rh.AddCredentials(mockWebRequest.Object, mockEsendexCredentials.Object));
-
-            mockHttpRequestHelper
+            httpRequestHelper
                 .Setup(rh => rh.AddProxy(mockWebRequest.Object, mockEsendexCredentials.Object.WebProxy));
-
-            mockHttpRequestHelper
+            httpRequestHelper
                 .Setup(rh => rh.AddContent(mockWebRequest.Object, request));
 
+            var mockWebResponse = new Mock<IHttpWebResponseAdapter>();
             mockWebRequest
                 .Setup(wr => wr.GetResponse())
                 .Returns(mockWebResponse.Object);
 
-            mockHttpResponseHelper
+            httpResponseHelper
                 .Setup(rh => rh.Create(mockWebResponse.Object))
                 .Returns(expectedResponse);
 
             // Act
-            HttpResponse actualResponse = client.Submit(request);
+            var actualResponse = client.Submit(request);
 
             // Assert
             Assert.IsNotNull(actualResponse);
@@ -104,7 +100,7 @@ namespace com.esendex.sdk.test.http
         public void Submit_GetResponseThrowsWebException_ReturnsHttpResponse()
         {
             // Arrange
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             {
                 ResourcePath = "http://tempuri.org",
                 HttpMethod = HttpMethod.POST,
@@ -113,39 +109,32 @@ namespace com.esendex.sdk.test.http
                 ContentType = "application/xml"
             };
 
-            HttpResponse expectedResponse = new HttpResponse()
-            {
-                StatusCode = HttpStatusCode.InternalServerError
-            };
+            var webRequest = new Mock<IHttpWebRequestAdapter>();
+            httpRequestHelper
+                .Setup(rh => rh.Create(request, client.Uri, It.IsAny<Version>()))
+                .Returns(webRequest.Object);
+            httpRequestHelper
+                .Setup(rh => rh.AddCredentials(webRequest.Object, mockEsendexCredentials.Object));
+            httpRequestHelper
+                .Setup(rh => rh.AddProxy(webRequest.Object, mockEsendexCredentials.Object.WebProxy));
+            httpRequestHelper
+                .Setup(rh => rh.AddContent(webRequest.Object, request));
 
-            WebException expectedException = new WebException();
-
-            Mock<IHttpWebRequestAdapter> mockWebRequest = new Mock<IHttpWebRequestAdapter>();
-            Mock<IHttpWebResponseAdapter> mockWebResponse = new Mock<IHttpWebResponseAdapter>();
-
-            mockHttpRequestHelper
-                .Setup(rh => rh.Create(request, client.Uri))
-                .Returns(mockWebRequest.Object);
-
-            mockHttpRequestHelper
-                .Setup(rh => rh.AddCredentials(mockWebRequest.Object, mockEsendexCredentials.Object));
-
-            mockHttpRequestHelper
-                .Setup(rh => rh.AddProxy(mockWebRequest.Object, mockEsendexCredentials.Object.WebProxy));
-
-            mockHttpRequestHelper
-                .Setup(rh => rh.AddContent(mockWebRequest.Object, request));
-
-            mockWebRequest
+            var expectedException = new WebException();
+            webRequest
                 .Setup(wr => wr.GetResponse())
                 .Throws(expectedException);
 
-            mockHttpResponseHelper
+            var expectedResponse = new HttpResponse
+            {
+                StatusCode = HttpStatusCode.InternalServerError
+            };
+            httpResponseHelper
                 .Setup(rh => rh.Create(expectedException))
                 .Returns(expectedResponse);
 
             // Act
-            HttpResponse actualResponse = client.Submit(request);
+            var actualResponse = client.Submit(request);
 
             // Assert
             Assert.IsNotNull(actualResponse);
