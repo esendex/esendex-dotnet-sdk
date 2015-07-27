@@ -14,7 +14,7 @@ namespace com.esendex.sdk.http
 
             IHttpWebRequestAdapter httpWebRequest = new HttpWebRequestAdapter(uri);
             httpWebRequest.Method = httpRequest.HttpMethod.ToString();
-            httpWebRequest.UserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", version.Major, version.Minor, version.Revision);
+            httpWebRequest.UserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", version.Major, version.Minor, version.Build);
 
             return httpWebRequest;
         }

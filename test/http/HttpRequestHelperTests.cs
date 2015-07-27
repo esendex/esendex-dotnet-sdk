@@ -28,7 +28,7 @@ namespace com.esendex.sdk.test.http
         {
             const int major = 1;
             const int minor = 0;
-            const int build = 1;
+            const int build = 4;
             const int revision = 3;
 
             // Arrange            
@@ -50,7 +50,7 @@ namespace com.esendex.sdk.test.http
             Assert.AreEqual(expectedUri, actualHttpRequest.RequestUri.ToString());
             Assert.AreEqual(request.HttpMethod.ToString(), actualHttpRequest.Method);
             Assert.IsFalse(string.IsNullOrEmpty(actualHttpRequest.UserAgent));
-            Assert.That(actualHttpRequest.UserAgent, Is.EqualTo(string.Format("Esendex .NET SDK v{0}.{1}.{2}", major, minor, revision)));
+            Assert.That(actualHttpRequest.UserAgent, Is.EqualTo(string.Format("Esendex .NET SDK v{0}.{1}.{2}", major, minor, build)));
             
         }
 

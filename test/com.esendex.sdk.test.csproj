@@ -81,7 +81,6 @@
   <ItemGroup>
     <Compile Include="contacts\ContactServiceTests.cs" />
     <Compile Include="contacts\ContactTests.cs" />
-    <Compile Include="helpers\MockFunction.cs" />
     <Compile Include="http\HttpClientTests.cs" />
     <Compile Include="http\HttpRequestHelperTests.cs" />
     <Compile Include="http\HttpRequestTests.cs" />
@@ -135,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
