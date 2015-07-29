@@ -13,8 +13,5 @@
     <!-- <releaseNotes>Initial NuGet release</releaseNotes> -->
 	<tags>SDK API Esendex .NET</tags>
 	<projectUrl>http://developers.esendex.com/SDKs/DotNet-SDK</projectUrl>	
-  </metadata>
-  <files>
-		<file src="com.esendex.sdk.dll" target="lib\net35" />   
-  </files>
+  </metadata> 
 </package>

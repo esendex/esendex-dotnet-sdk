@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("com.esendex.sdk")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Esendex .NET SDK")]
+[assembly: AssemblyDescription("Esendex API .NET SDK")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Esendex Ltd")]
-[assembly: AssemblyProduct("com.esendex.sdk")]
-[assembly: AssemblyCopyright("Copyright © Esendex Ltd 2010")]
+[assembly: AssemblyCompany("Esendex")]
+[assembly: AssemblyProduct("Esendex .NET SDK")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
