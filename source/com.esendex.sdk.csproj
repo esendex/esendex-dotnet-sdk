@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="accounts\Account.cs" />
+    <Compile Include="accounts\AccountCollection.cs" />
+    <Compile Include="accounts\AccountService.cs" />
+    <Compile Include="accounts\AccountType.cs" />
+    <Compile Include="accounts\IAccountService.cs" />
+    <Compile Include="accounts\ModelBase.cs" />
     <Compile Include="contacts\Contact.cs" />
     <Compile Include="contacts\ContactCollection.cs" />
     <Compile Include="contacts\ContactGroupSummary.cs" />
@@ -91,6 +97,7 @@
     <Compile Include="inbox\InboxService.cs" />
     <Compile Include="messaging\MessageBodyService.cs" />
     <Compile Include="messaging\VoiceMessageLanguage.cs" />
+    <Compile Include="rest\resources\AccountsResource.cs" />
     <Compile Include="rest\resources\ContactsResource.cs" />
     <Compile Include="rest\resources\InboxMessagesResource.cs" />
     <Compile Include="rest\resources\MessageHeadersResource.cs" />
