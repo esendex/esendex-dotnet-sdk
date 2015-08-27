@@ -9,6 +9,11 @@ namespace com.esendex.sdk.core
     public enum CharacterSet
     {
         /// <summary>
+        /// Default value does not set characterset element.
+        /// </summary>
+        Default,
+
+        /// <summary>
         /// Auto detect characterset.
         /// </summary>
         Auto,

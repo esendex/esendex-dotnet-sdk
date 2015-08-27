@@ -14,10 +14,7 @@ namespace com.esendex.sdk.messaging
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.messaging.SmsMessage
         /// </summary>
-        public SmsMessage() : base()
-        {
-            CharacterSet = CharacterSet.GSM;
-        }
+        public SmsMessage() : base() { }
 
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.messaging.SmsMessage
@@ -29,7 +26,6 @@ namespace com.esendex.sdk.messaging
         public SmsMessage(string recipients, string body, string accountReference)
             : base(recipients, body, accountReference)
         {
-            CharacterSet = CharacterSet.GSM;
         }
 
         /// <summary>
@@ -69,6 +65,15 @@ namespace com.esendex.sdk.messaging
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        /// <summary>
+        /// Dictates whether character set should be serialised.
+        /// </summary>
+        /// <returns>Whether character set should be serialised</returns>
+        public bool ShouldSerializeCharacterSet()
+        {
+            return CharacterSet != CharacterSet.Default;
         }
     }
 }
