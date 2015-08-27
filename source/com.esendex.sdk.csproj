@@ -61,6 +61,7 @@
     <Compile Include="contacts\ModelBase.cs" />
     <Compile Include="contacts\ContactType.cs" />
     <Compile Include="contacts\PagedContactCollection.cs" />
+    <Compile Include="core\CharacterSet.cs" />
     <Compile Include="core\MessageCollection.cs" />
     <Compile Include="core\PagedCollection.cs" />
     <Compile Include="http\HttpClient.cs" />

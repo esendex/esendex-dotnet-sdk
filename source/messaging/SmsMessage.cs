@@ -14,7 +14,10 @@ namespace com.esendex.sdk.messaging
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.messaging.SmsMessage
         /// </summary>
-        public SmsMessage() : base() { }
+        public SmsMessage() : base()
+        {
+            CharacterSet = CharacterSet.GSM;
+        }
 
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.messaging.SmsMessage
@@ -24,7 +27,10 @@ namespace com.esendex.sdk.messaging
         /// <param name="accountReference">A System.String instance that contains the Esendex Account Reference.</param>
         /// <exception cref="System.ArgumentNullException"></exception>
         public SmsMessage(string recipients, string body, string accountReference)
-            : base (recipients, body, accountReference) { }
+            : base(recipients, body, accountReference)
+        {
+            CharacterSet = CharacterSet.GSM;
+        }
 
         /// <summary>
         /// Gets the message type
@@ -35,6 +41,12 @@ namespace com.esendex.sdk.messaging
             get { return MessageType.SMS; }
             set { }
         }
+
+        /// <summary>
+        /// Gets and sets the message character set
+        /// </summary>
+        [XmlElement("characterset")]
+        public CharacterSet CharacterSet { get; set; }
 
         /// <summary>
         /// Determines whether the specified System.Object are considered equal.
