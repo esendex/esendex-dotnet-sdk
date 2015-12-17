@@ -22,7 +22,6 @@ namespace com.esendex.sdk.contacts
         /// </summary>
         /// <param name="contact">A com.esendex.sdk.contacts.Contact instance that contains a contact.</param>
         public ContactCollection(Contact contact)
-            : base()
         {
             if (contact == null) throw new ArgumentNullException("contact");
 
@@ -53,13 +52,13 @@ namespace com.esendex.sdk.contacts
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            ContactCollection other = obj as ContactCollection;
+            var other = obj as ContactCollection;
 
             if (other == null) return false;
 
             if (Items.Count != other.Items.Count) return false;
 
-            for (int i = 0; i < Items.Count; i++)
+            for (var i = 0; i < Items.Count; i++)
             {
                 if (Items.ElementAt(i) != other.Items.ElementAt(i)) return false;
             }

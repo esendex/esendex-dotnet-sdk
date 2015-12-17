@@ -13,29 +13,31 @@ namespace com.esendex.sdk.test.contacts
         public void Contact_DefaultDIConstructor()
         {
             // Arrange
-            string quickname = "quickname";
-            string phonenumber = "phonenumber";
+            const string accountReference = "account";
+            const string quickname = "quickname";
+            const string phonenumber = "phonenumber";
 
             // Act
-            Contact contactInstance = new Contact(quickname, phonenumber);
+            var contactInstance = new Contact(accountReference, quickname, phonenumber);
 
             // Assert
+            Assert.AreEqual(accountReference, contactInstance.AccountReference);
             Assert.AreEqual(quickname, contactInstance.QuickName);
             Assert.AreEqual(phonenumber, contactInstance.PhoneNumber);
-            Assert.That(contactInstance.Groups, Is.InstanceOf<IEnumerable<ContactGroupSummary>>());
         }
 
         [Test]
         public void Contact_DefaultDIConstructor_WithNullQuickNameAndMobileNumber_ThrowsException()
         {
             // Arrange
-            string quickname = string.Empty;
+            const string accountReference = "account";
+            var quickname = string.Empty;
             string phonenumber = null;
 
             // Act
             try
             {
-                Contact contactInstance = new Contact(quickname, phonenumber);
+                new Contact(accountReference, quickname, phonenumber);
 
                 Assert.Fail();
             }

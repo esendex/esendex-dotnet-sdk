@@ -5,7 +5,6 @@ namespace com.esendex.sdk.contacts
     /// <summary>
     /// Defines methods to manage contacts.
     /// </summary>
-    [Obsolete("This feature has now been deprecated in the new major version. It will be completely removed on 2016-06-04. Please make a local copy of your contacts and re-create using the new major version of the SDK.")]
     public interface IContactService
     {
         /// <summary>
@@ -16,15 +15,6 @@ namespace com.esendex.sdk.contacts
         /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="System.Net.WebException"></exception>        
         Contact CreateContact(Contact contact);
-
-        /// <summary>
-        /// Adds a com.esendex.sdk.contacts.ContactCollection instance and returns true if the contacts were added successfully; otherwise, false.
-        /// </summary>
-        /// <param name="contacts">A com.esendex.sdk.contacts.ContactCollection instance.</param>
-        /// <returns>true, if the contacts were added successfully; otherwise, false.</returns>        
-        /// <exception cref="System.ArgumentException"></exception>
-        /// <exception cref="System.Net.WebException"></exception>     
-        bool CreateContacts(ContactCollection contacts);
 
         /// <summary>
         /// Returns true if the contact was successfully deleted; otherwise, false.
@@ -59,6 +49,6 @@ namespace com.esendex.sdk.contacts
         /// <returns>A com.esendex.sdk.contacts.PagedContactCollection instance that contains the contacts.</returns>        
         /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="System.Net.WebException"></exception>
-        PagedContactCollection GetContacts(int pageNumber, int pageSize);
+        PagedContactCollection GetContacts(string accountReference, int pageNumber, int pageSize);
     }
 }

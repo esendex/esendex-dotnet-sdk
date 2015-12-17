@@ -9,13 +9,13 @@ namespace com.esendex.sdk.http
     {
         public IHttpWebRequestAdapter Create(HttpRequest httpRequest, Uri uri, Version version)
         {
-            var fullUri = string.Format("{0}v1.1/{1}", uri, httpRequest.ResourcePath);
+            var fullUri = string.Format("{0}{1}/{2}", uri, httpRequest.ResourceVersion, httpRequest.ResourcePath);
             uri = new Uri(fullUri);
 
             IHttpWebRequestAdapter httpWebRequest = new HttpWebRequestAdapter(uri);
             httpWebRequest.Method = httpRequest.HttpMethod.ToString();
             httpWebRequest.UserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", version.Major, version.Minor, version.Build);
-
+            
             return httpWebRequest;
         }
 
@@ -35,7 +35,7 @@ namespace com.esendex.sdk.http
                         httpRequest.RequestUri,
                         "Basic",
                         new NetworkCredential(credentials.Username, credentials.Password)
-                        }
+                    }
                 };
 
                 httpRequest.Credentials = credentialCache;
@@ -66,8 +66,5 @@ namespace com.esendex.sdk.http
                 httpRequest.ContentLength = 0;
             }
         }
-
-
-        
     }
 }

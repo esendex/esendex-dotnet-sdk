@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using com.esendex.sdk.http;
 
 namespace com.esendex.sdk.rest
@@ -20,6 +21,7 @@ namespace com.esendex.sdk.rest
                 ContentType = "application/xml",
                 ContentEncoding = Encoding.UTF8,
                 ResourcePath = resource.ResourcePath,
+                ResourceVersion = resource.ResourceVersion,
                 HttpMethod = HttpMethod.POST
             };
 
@@ -27,7 +29,7 @@ namespace com.esendex.sdk.rest
 
             if (response == null) return null;
 
-            return new RestResponse()
+            return new RestResponse
             {
                 StatusCode = response.StatusCode,
                 Content = response.Content
@@ -40,6 +42,7 @@ namespace com.esendex.sdk.rest
             {
                 ContentType = "text/plain",
                 ResourcePath = resource.ResourcePath,
+                ResourceVersion = resource.ResourceVersion,
                 HttpMethod = HttpMethod.GET
             };
 
@@ -63,6 +66,7 @@ namespace com.esendex.sdk.rest
                 ContentType = "application/xml",
                 ContentEncoding = Encoding.UTF8,
                 ResourcePath = resource.ResourcePath,
+                ResourceVersion = resource.ResourceVersion,
                 HttpMethod = HttpMethod.PUT
             };
 
@@ -83,6 +87,7 @@ namespace com.esendex.sdk.rest
             {
                 ContentType = "text/plain",
                 ResourcePath = resource.ResourcePath,
+                ResourceVersion = resource.ResourceVersion,
                 HttpMethod = HttpMethod.DELETE
             };
 

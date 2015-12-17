@@ -7,6 +7,11 @@ namespace com.esendex.sdk.rest.resources
     {
         public override string ResourceName { get { return "inbox"; } }
 
+        public override string ResourceVersion
+        {
+            get { return "v1.1"; }
+        }
+
         public InboxMessagesResource() 
             : base()
         {

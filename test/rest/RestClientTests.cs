@@ -17,6 +17,11 @@ namespace com.esendex.sdk.test.rest
             {
                 get { return "resource"; }
             }
+
+            public override string ResourceVersion
+            {
+                get { return "v1.0"; }
+            }
         }
 
         internal class PostRestResourceContext : RestResource
@@ -24,6 +29,11 @@ namespace com.esendex.sdk.test.rest
             public override string ResourceName
             {
                 get { return "resource"; }
+            }
+
+            public override string ResourceVersion
+            {
+                get { return "v1.2"; }
             }
 
             public PostRestResourceContext(string content) : base(content) { }
@@ -36,6 +46,11 @@ namespace com.esendex.sdk.test.rest
                 get { return "resource"; }
             }
 
+            public override string ResourceVersion
+            {
+                get { return "v1.3"; }
+            }
+
             public PutRestResourceContext(string content) : base(content) { }
         }
 
@@ -44,6 +59,11 @@ namespace com.esendex.sdk.test.rest
             public override string ResourceName
             {
                 get { return "resource"; }
+            }
+
+            public override string ResourceVersion
+            {
+                get { return "v1.6"; }
             }
         }
 

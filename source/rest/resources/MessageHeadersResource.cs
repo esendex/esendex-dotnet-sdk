@@ -4,7 +4,15 @@ namespace com.esendex.sdk.rest.resources
 {
     internal class MessageHeadersResource : RestResource
     {
-        public override string ResourceName { get { return "messageheaders"; } }
+        public override string ResourceName
+        {
+            get { return "messageheaders"; }
+        }
+
+        public override string ResourceVersion
+        {
+            get { return "v1.1"; }
+        }
 
         public MessageHeadersResource(Guid id)
             : base()

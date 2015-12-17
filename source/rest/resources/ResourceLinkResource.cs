@@ -14,5 +14,10 @@ namespace com.esendex.sdk.rest.resources
         {
             get { return string.Empty; }
         }
+
+        public override string ResourceVersion
+        {
+            get { return "v1.1"; }
+        }
     }
 }

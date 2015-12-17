@@ -12,10 +12,10 @@ namespace com.esendex.sdk
     {
         internal ServiceBase(EsendexCredentials credentials)
         {
-            IHttpRequestHelper httpRequestHelper = new HttpRequestHelper();
-            IHttpResponseHelper httpResponseHelper = new HttpResponseHelper();
+            var httpRequestHelper = new HttpRequestHelper();
+            var httpResponseHelper = new HttpResponseHelper();
 
-            IHttpClient httpClient = new HttpClient(credentials, Constants.API_URI, httpRequestHelper, httpResponseHelper);
+            var httpClient = new HttpClient(credentials, Constants.API_URI, httpRequestHelper, httpResponseHelper);
 
             Serialiser = new XmlSerialiser();
             RestClient = new RestClient(httpClient);
@@ -32,11 +32,9 @@ namespace com.esendex.sdk
 
         internal TResult MakeRequest<TResult>(HttpMethod method, RestResource resource) where TResult : class
         {
-            RestResponse response = MakeRequest(method, resource);
+            var response = MakeRequest(method, resource);
 
-            if (response == null) return null;
-
-            return Serialiser.Deserialise<TResult>(response.Content);
+            return response == null ? null : Serialiser.Deserialise<TResult>(response.Content);
         }
 
         internal RestResponse MakeRequest(HttpMethod method, RestResource resource)
@@ -52,7 +50,7 @@ namespace com.esendex.sdk
                 case HttpMethod.DELETE:
                     return RestClient.Delete(resource);
                 default:
-                    throw new ArgumentException(string.Format("An invalid HttpMethod was supplied for this type of resource."), "method");
+                    throw new ArgumentException("An invalid HttpMethod was supplied for this type of resource.", "method");
             }
         }
     }

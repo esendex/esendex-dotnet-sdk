@@ -25,11 +25,8 @@ namespace com.esendex.sdk.http
             try
             {
                 var webRequest = HttpRequestHelper.Create(request, Uri, _version);
-
                 HttpRequestHelper.AddCredentials(webRequest, Credentials);
-
                 HttpRequestHelper.AddProxy(webRequest, Credentials.WebProxy);
-
                 HttpRequestHelper.AddContent(webRequest, request);
 
                 var webResponse = webRequest.GetResponse();

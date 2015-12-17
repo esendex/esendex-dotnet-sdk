@@ -4,13 +4,15 @@ namespace com.esendex.sdk.rest
     internal abstract class RestResource
     {
         public abstract string ResourceName { get; }
+        public abstract string ResourceVersion { get; }
 
         public string Content { get; protected set; }
-
         public string ResourcePath { get; protected set; }
+        public string Version { get; protected set; }
 
         public RestResource()
         {
+            Version = ResourceVersion;
             ResourcePath = ResourceName;
             Content = string.Empty;
         }

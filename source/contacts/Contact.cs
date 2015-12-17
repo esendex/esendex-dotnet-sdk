@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace com.esendex.sdk.contacts
@@ -9,7 +8,7 @@ namespace com.esendex.sdk.contacts
     /// </summary>
     [Serializable]
     [XmlRoot("contact", Namespace = Constants.API_NAMESPACE)]
-    public class Contact : ModelBase
+    public class Contact 
     {
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.contacts.Contact
@@ -17,14 +16,17 @@ namespace com.esendex.sdk.contacts
         /// <param name="quickName">A System.String instance that contains the quick name.</param>
         /// <param name="phoneNumber">A System.String instance that contains the phone number.</param>
         /// <exception cref="System.ArgumentNullException"></exception>
-        public Contact(string quickName, string phoneNumber)
+        public Contact(string accountReference, string quickName, string phoneNumber)
             : this()
         {
             if (string.IsNullOrEmpty(quickName)) throw new ArgumentNullException("quickName");
             if (string.IsNullOrEmpty(phoneNumber)) throw new ArgumentNullException("phoneNumber");
 
+            AccountReference = accountReference;
             QuickName = quickName;
             PhoneNumber = phoneNumber;
+            FirstName = string.Empty;
+            LastName = string.Empty;
         }
 
         /// <summary>
@@ -32,15 +34,14 @@ namespace com.esendex.sdk.contacts
         /// </summary>
         public Contact()
         {
-            Groups = new List<ContactGroupSummary>();
         }
 
         /// <summary>
-        /// Gets or sets the Concurrency Id.
+        /// Gets or sets a the Id.
         /// </summary>
-        [XmlElement("concurrencyid")]
-        public Guid ConcurrencyId { get; set; }
-        public bool ShouldSerializeConcurrencyId() { return ConcurrencyId != Guid.Empty; }
+        [XmlAttribute("id")]
+        public Guid Id { get; set; }
+        public bool ShouldSerializeId() { return Id != Guid.Empty; }
 
         /// <summary>
         /// Gets or sets the first name.
@@ -61,57 +62,47 @@ namespace com.esendex.sdk.contacts
         public string QuickName { get; set; }
 
         /// <summary>
-        /// Gets or sets the mobile number.
+        /// Gets or sets the phone number.
         /// </summary>
-        [XmlElement("mobilenumber")]
+        [XmlElement("phonenumber")]
         public string PhoneNumber { get; set; }
 
         /// <summary>
-        /// Gets or sets the contact type.
+        /// Gets or sets the account reference.
         /// </summary>
-        [XmlElement("type")]
-        public ContactType Type { get; set; }
+        [XmlElement("accountreference")]
+        public string AccountReference { get; set; }
 
-        /// <summary>
-        /// Gets or sets the contact group summary.
-        /// </summary>
-        [XmlArray("groups")]
-        [XmlArrayItem("groupsummary")]
-        public List<ContactGroupSummary> Groups { get; set; }
-        public bool ShouldSerializeGroups() { return Groups.Count > 0; }
-        
-        /// <summary>
-        /// Determines whether the specified System.Object are considered equal.
-        /// </summary>
-        /// <param name="obj">The System.Object to compare with the current System.Object</param>
-        /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            Contact other = obj as Contact;
-
-            if (other == null) return false;
-
-            if (ConcurrencyId != other.ConcurrencyId) return false;
-            if (FirstName !=  other.FirstName) return false;
-            if (LastName !=  other.LastName) return false;
-            if (QuickName !=  other.QuickName) return false;
-            if (PhoneNumber != other.PhoneNumber) return false;
-
-            for (int i = 0; i < this.Groups.Count; i++)
-            {
-                if (Groups[i] != other.Groups[i]) return false;
-            }
-
-            return base.Equals(obj);
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+            return Equals((Contact) obj);
         }
 
-        /// <summary>
-        /// Serves as a hash function for a particular type.
-        /// </summary>
-        /// <returns>A hash code for the current System.Object</returns>
+        protected bool Equals(Contact other)
+        {
+            return Id.Equals(other.Id)
+                   && string.Equals(FirstName, other.FirstName)
+                   && string.Equals(LastName, other.LastName)
+                   && string.Equals(QuickName, other.QuickName)
+                   && string.Equals(PhoneNumber, other.PhoneNumber)
+                   && string.Equals(AccountReference, other.AccountReference);
+        }
+
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            unchecked
+            {
+                var hashCode = Id.GetHashCode();
+                hashCode = (hashCode*397) ^ (FirstName != null ? FirstName.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (LastName != null ? LastName.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (QuickName != null ? QuickName.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (PhoneNumber != null ? PhoneNumber.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (AccountReference != null ? AccountReference.GetHashCode() : 0);
+                return hashCode;
+            }
         }
     }
 }

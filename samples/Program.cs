@@ -214,7 +214,7 @@ Enjoy...
 
             try
             {
-                var collection = contactService.GetContacts(PageIndex, PageSize);
+                var collection = contactService.GetContacts(_accountReference, PageIndex, PageSize);
 
                 foreach (var item in collection.Contacts)
                 {

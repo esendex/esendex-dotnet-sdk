@@ -42,14 +42,14 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithPageNumber1AndPageSize15()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            string accountReference = "frgjbhjrehre";
             int pageNumber = 1;
             int pageSize = 15;
 
-            string expectedResourcePath = string.Format("contacts?startIndex=0&count={0}", pageSize);
+            string expectedResourcePath = string.Format("contacts?accountReference={0}&startIndex=0&count={1}", accountReference, pageSize);
 
             // Act
-            RestResource resource = new ContactsResource(pageNumber, pageSize);
+            RestResource resource = new ContactsResource(accountReference, pageNumber, pageSize);
 
             // Assert
             Assert.AreEqual(expectedResourcePath, resource.ResourcePath);
@@ -59,14 +59,14 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithPageNumber2AndPageSize15()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            string accountReference = "frgjbhjrehre";
             int pageNumber = 2;
             int pageSize = 15;
 
-            string expectedResourcePath = string.Format("contacts?startIndex=15&count={0}", pageSize);            
+            string expectedResourcePath = string.Format("contacts?accountReference={0}&startIndex=15&count={1}", accountReference, pageSize);            
 
             // Act
-            RestResource resource = new ContactsResource(pageNumber, pageSize);
+            RestResource resource = new ContactsResource(accountReference, pageNumber, pageSize);
 
             // Assert
             Assert.AreEqual(expectedResourcePath, resource.ResourcePath);
@@ -76,13 +76,14 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithInvalidPageNumberAndPageSize()
         {
             // Arrange
+            string accountReference = "frgjbhjrehre";
             int pageNumber = 0;
             int pageSize = 0;
 
             // Act
             try
             {
-                RestResource resource = new ContactsResource(pageNumber, pageSize);
+                new ContactsResource(accountReference, pageNumber, pageSize);
 
                 Assert.Fail();
             }

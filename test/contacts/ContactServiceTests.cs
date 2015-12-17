@@ -68,8 +68,6 @@ namespace com.esendex.sdk.test.contacts
             // Arrange
             Contact requestedContact = new Contact();
 
-            ContactCollection requestedCollection = new ContactCollection(requestedContact);
-
             string serialisedContent = "serialisedContent";
 
             RestResource resource = new ContactsResource(serialisedContent);
@@ -82,7 +80,7 @@ namespace com.esendex.sdk.test.contacts
             Contact expectedContact = new Contact();
 
             mockSerialiser
-                .Setup(s => s.Serialise(requestedCollection))
+                .Setup(s => s.Serialise(requestedContact))
                 .Returns(serialisedContent);
 
             mockRestClient
@@ -90,75 +88,14 @@ namespace com.esendex.sdk.test.contacts
                 .Returns(response);
 
             mockSerialiser
-                .Setup(s => s.Deserialise<Contact>(response.Content))
-                .Returns(expectedContact);
+                .Setup(s => s.Deserialise<ContactResponse>(response.Content))
+                .Returns(new ContactResponse {Contact = expectedContact});
 
             // Act
             Contact actualContact = service.CreateContact(requestedContact);
 
             // Assert
             Assert.AreEqual(expectedContact, actualContact);
-        }
-
-        [Test]
-        public void CreateContacts_WithContactsCollection_ReturnsTrueWhenSuccessful()
-        {
-            // Arrange
-            Contact requestedContact = new Contact();
-
-            ContactCollection requestedCollection = new ContactCollection(requestedContact);
-
-            string serialisedContent = "serialisedContent";
-
-            RestResource resource = new ContactsResource(serialisedContent);
-            
-            RestResponse response = new RestResponse() 
-            {
-                StatusCode = HttpStatusCode.OK
-            };
-
-            mockSerialiser
-                .Setup(s => s.Serialise(requestedCollection))
-                .Returns(serialisedContent);
-
-            mockRestClient
-                .Setup(r => r.Post(resource))
-                .Returns(response);
-
-            // Act
-            bool actualResult = service.CreateContacts(requestedCollection);
-
-            // Assert
-            Assert.IsTrue(actualResult);
-        }
-
-        [Test]
-        public void CreateContacts_WithContactsCollection_ReturnsTrueWhenFailed()
-        {
-            // Arrange
-            Contact contact = new Contact();
-
-            ContactCollection collection = new ContactCollection(contact);
-
-            string serialisedContent = "serialisedContent";
-
-            RestResource resource = new ContactsResource(serialisedContent);
-
-            RestResponse response = null;
-
-            mockSerialiser
-                .Setup(s => s.Serialise(collection))
-                .Returns(serialisedContent);
-
-            mockRestClient
-                .Setup(r => r.Post(resource))
-                .Returns(response);
-
-            // Act
-            bool actualResult = service.CreateContacts(collection);
-
-            // Assert
-            Assert.IsFalse(actualResult);
         }
 
         [Test]
@@ -303,12 +240,13 @@ namespace com.esendex.sdk.test.contacts
         public void GetContacts_WithPageNumberWithPageSize_ReturnsContacts()
         {
             // Arrange            
+            string accountReference = "frgjbhjrehre";
             int pageNumber = 1;
             int pageSize = 15;
 
-            RestResource resource = new ContactsResource(pageNumber, pageSize);
+            RestResource resource = new ContactsResource(accountReference, pageNumber, pageSize);
 
-            RestResponse response = new RestResponse()
+            RestResponse response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "content"
@@ -329,7 +267,7 @@ namespace com.esendex.sdk.test.contacts
                 .Returns(expectedContacts);
 
             // Act
-            PagedContactCollection actualContact = service.GetContacts(pageNumber, pageSize);
+            PagedContactCollection actualContact = service.GetContacts(accountReference, pageNumber, pageSize);
 
             // Assert
             Assert.AreEqual(pageNumber, actualContact.PageNumber);

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace com.esendex.sdk.http
 {
@@ -14,10 +15,12 @@ namespace com.esendex.sdk.http
     {
         public HttpRequest()
         {
+            ResourceVersion = "v1.1";
             ContentEncoding = Encoding.UTF8;
         }
 
         public string ResourcePath { get; set; }
+        public string ResourceVersion { get; set; }
         public HttpMethod HttpMethod { get; set; }
         public Encoding ContentEncoding { get; set; }
         public string ContentType { get; set; }

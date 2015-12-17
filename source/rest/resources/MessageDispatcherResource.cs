@@ -3,7 +3,15 @@ namespace com.esendex.sdk.rest.resources
 {
     internal class MessageDispatcherResource : RestResource
     {
-        public override string ResourceName { get { return "messagedispatcher"; } }
+        public override string ResourceName
+        {
+            get { return "messagedispatcher"; }
+        }
+
+        public override string ResourceVersion
+        {
+            get { return "v1.1"; }
+        }
 
         public MessageDispatcherResource(string content, bool ensureMessageIdsInResult)
             : base(content)

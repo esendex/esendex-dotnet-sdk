@@ -8,6 +8,11 @@ namespace com.esendex.sdk.rest.resources
             get { return "session"; }
         }
 
+        public override string ResourceVersion
+        {
+            get { return "v1.1"; }
+        }
+
         public SessionResource()
             : base()
         {

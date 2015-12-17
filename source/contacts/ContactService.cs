@@ -9,7 +9,6 @@ namespace com.esendex.sdk.contacts
     /// <summary>
     /// Defines methods to manage contacts.
     /// </summary>
-    [Obsolete("This feature has now been deprecated in the new major version. It will be completely removed on 2016-06-04. Please make a local copy of your contacts and re-create using the new major version of the SDK.")]
     public class ContactService : ServiceBase, IContactService
     {
         /// <summary>
@@ -41,31 +40,13 @@ namespace com.esendex.sdk.contacts
         /// <exception cref="System.Net.WebException"></exception>        
         public Contact CreateContact(Contact contact)
         {
-            ContactCollection contacts = new ContactCollection(contact);
+            var requestXml = Serialiser.Serialise(contact);
 
-            string requestXml = Serialiser.Serialise<ContactCollection>(contacts);
-
-            RestResource resource = new ContactsResource(requestXml);
-
-            return MakeRequest<Contact>(HttpMethod.POST, resource);
-        }
-
-        /// <summary>
-        /// Adds a com.esendex.sdk.contacts.ContactCollection instance and returns true if the contacts were added successfully; otherwise, false.
-        /// </summary>
-        /// <param name="contacts">A com.esendex.sdk.contacts.ContactCollection instance.</param>
-        /// <returns>true, if the contacts were added successfully; otherwise, false.</returns>        
-        /// <exception cref="System.ArgumentException"></exception>
-        /// <exception cref="System.Net.WebException"></exception>
-        public bool CreateContacts(ContactCollection contacts)
-        {
-            string requestXml = Serialiser.Serialise<ContactCollection>(contacts);
+            Console.WriteLine(requestXml);
 
             RestResource resource = new ContactsResource(requestXml);
 
-            RestResponse response = MakeRequest(HttpMethod.POST, resource);
-
-            return (response != null);
+            return MakeRequest<ContactResponse>(HttpMethod.POST, resource).Contact;
         }
 
         /// <summary>
@@ -92,7 +73,7 @@ namespace com.esendex.sdk.contacts
         /// <exception cref="System.Net.WebException"></exception>      
         public bool UpdateContact(Contact contact)
         {
-            string requestXml = Serialiser.Serialise<Contact>(contact);
+            string requestXml = Serialiser.Serialise(contact);
 
             RestResource resource = new ContactsResource(contact.Id, requestXml);
 
@@ -122,9 +103,9 @@ namespace com.esendex.sdk.contacts
         /// <returns>A com.esendex.sdk.contacts.PagedContactCollection instance that contains the contacts.</returns>        
         /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="System.Net.WebException"></exception>
-        public PagedContactCollection GetContacts(int pageNumber, int pageSize)
+        public PagedContactCollection GetContacts(string accountReference, int pageNumber, int pageSize)
         {
-            RestResource resource = new ContactsResource(pageNumber, pageSize);
+            RestResource resource = new ContactsResource(accountReference, pageNumber, pageSize);
 
             return MakeRequest<PagedContactCollection>(HttpMethod.GET, resource);
         }
