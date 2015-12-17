@@ -9,6 +9,7 @@ namespace com.esendex.sdk.contacts
     /// <summary>
     /// Defines methods to manage contacts.
     /// </summary>
+    [Obsolete("This feature has now been deprecated in the new major version. It will be completely removed on 2016-06-04. Please make a local copy of your contacts and re-create using the new major version of the SDK.")]
     public class ContactService : ServiceBase, IContactService
     {
         /// <summary>
