@@ -149,11 +149,6 @@ namespace com.esendex.sdk.test.rest
                 ContentEncoding = Encoding.UTF8
             };
 
-            RestResponse expectedResponse = new RestResponse()
-            {
-                StatusCode = HttpStatusCode.NotFound
-            };
-
             HttpResponse httpResponse = null;
 
             mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
@@ -215,11 +210,6 @@ namespace com.esendex.sdk.test.rest
                 HttpMethod = HttpMethod.GET,
                 ResourcePath = getResourceContext.ResourcePath,
                 ContentType = "text/plain"
-            };
-
-            RestResponse expectedResponse = new RestResponse()
-            {
-                StatusCode = HttpStatusCode.NotFound
             };
 
             HttpResponse httpResponse = null;
@@ -287,11 +277,6 @@ namespace com.esendex.sdk.test.rest
                 ContentEncoding = Encoding.UTF8
             };
 
-            RestResponse expectedResponse = new RestResponse()
-            {
-                StatusCode = HttpStatusCode.NotFound
-            };
-
             HttpResponse httpResponse = null;
 
             mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
@@ -347,11 +332,6 @@ namespace com.esendex.sdk.test.rest
                 HttpMethod = HttpMethod.DELETE,
                 ResourcePath = deleteResourceContext.ResourcePath,
                 ContentType = "text/plain"
-            };
-
-            RestResponse expectedResponse = new RestResponse()
-            {
-                StatusCode = HttpStatusCode.NotFound
             };
 
             HttpResponse httpResponse = null;

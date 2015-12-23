@@ -42,8 +42,6 @@ namespace com.esendex.sdk.contacts
         {
             var requestXml = Serialiser.Serialise(contact);
 
-            Console.WriteLine(requestXml);
-
             RestResource resource = new ContactsResource(requestXml);
 
             return MakeRequest<ContactResponse>(HttpMethod.POST, resource).Contact;
