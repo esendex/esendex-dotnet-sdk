@@ -20,7 +20,11 @@ namespace com.esendex.sdk.core
         /// </summary>
         [XmlAttribute("uri")]
         public string Uri { get; set; }
-        public bool ShouldSerializeUri() { return Uri != null; }
+
+        public bool ShouldSerializeUri()
+        {
+            return Uri != null;
+        }
 
         /// <summary>
         /// Gets the message type.
@@ -57,7 +61,11 @@ namespace com.esendex.sdk.core
         /// </summary>
         [XmlElement("direction")]
         public MessageDirection? Direction { get; set; }
-        public bool ShouldSerializeDirection() { return Direction.HasValue; }
+
+        public bool ShouldSerializeDirection()
+        {
+            return Direction.HasValue;
+        }
 
         /// <summary>
         /// Gets or sets the number of parts of the message.
@@ -82,7 +90,11 @@ namespace com.esendex.sdk.core
         /// </summary>
         [XmlElement("index")]
         public int? Index { get; set; }
-        public bool ShouldSerializeIndex() { return Index.HasValue; }
+
+        public bool ShouldSerializeIndex()
+        {
+            return Index.HasValue;
+        }
 
         /// <summary>
         /// Gets or sets the reference
@@ -107,7 +119,7 @@ namespace com.esendex.sdk.core
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            Message other = obj as Message;
+            var other = obj as Message;
 
             if (other == null) return false;
 

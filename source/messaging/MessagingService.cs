@@ -22,9 +22,8 @@ namespace com.esendex.sdk.messaging
         /// <param name="username">Your Esendex username.</param>
         /// <param name="password">Your Esendex password.</param>
         public MessagingService(string username, string password)
-            :this(false, new EsendexCredentials(username, password))
+            : this(false, new EsendexCredentials(username, password))
         {
-            
         }
 
         /// <summary>
@@ -52,7 +51,7 @@ namespace com.esendex.sdk.messaging
         /// <exception cref="System.Net.WebException"></exception>
         public MessagingResult SendMessage(SmsMessage message)
         {
-            SmsMessageCollection messages = new SmsMessageCollection(message);
+            var messages = new SmsMessageCollection(message);
 
             return SendMessages<SmsMessageCollection>(messages);
         }
@@ -65,7 +64,7 @@ namespace com.esendex.sdk.messaging
         /// <exception cref="System.Net.WebException"></exception>
         public MessagingResult SendMessage(VoiceMessage message)
         {
-            VoiceMessageCollection messages = new VoiceMessageCollection(message);
+            var messages = new VoiceMessageCollection(message);
 
             return SendMessages<VoiceMessageCollection>(messages);
         }
@@ -101,7 +100,7 @@ namespace com.esendex.sdk.messaging
         /// <exception cref="System.Net.WebException"></exception>
         public MessagingResult SendScheduledMessage(SmsMessage message, DateTime sendAt)
         {
-            SmsMessageCollection messages = new SmsMessageCollection(message) { SendAt = sendAt };
+            var messages = new SmsMessageCollection(message) {SendAt = sendAt};
 
             return SendMessages<SmsMessageCollection>(messages);
         }
@@ -115,7 +114,7 @@ namespace com.esendex.sdk.messaging
         /// <exception cref="System.Net.WebException"></exception>
         public MessagingResult SendScheduledMessage(VoiceMessage message, DateTime sendAt)
         {
-            VoiceMessageCollection messages = new VoiceMessageCollection(message) { SendAt = sendAt };
+            var messages = new VoiceMessageCollection(message) {SendAt = sendAt};
 
             return SendMessages<VoiceMessageCollection>(messages);
         }
@@ -150,7 +149,7 @@ namespace com.esendex.sdk.messaging
 
         private MessagingResult SendMessages<TMessages>(TMessages messages)
         {
-            string requestXml = Serialiser.Serialise<TMessages>(messages);
+            var requestXml = Serialiser.Serialise(messages);
 
             RestResource resource = new MessageDispatcherResource(requestXml, EnsureMessageIdsInResult);
 

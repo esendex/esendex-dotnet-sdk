@@ -11,17 +11,17 @@ namespace com.esendex.sdk.test.http
         public void ContentLength_WithStandardCharacters()
         {
             // Arrange
-            string text =  "this is a test";
+            var text = "this is a test";
 
-            int expectedContentLength = Encoding.UTF8.GetByteCount(text);
+            var expectedContentLength = Encoding.UTF8.GetByteCount(text);
 
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             {
-                Content = text     
+                Content = text
             };
 
             // Act
-            long actualContentLength = request.ContentLength;
+            var actualContentLength = request.ContentLength;
 
             // Assert
             Assert.AreEqual(expectedContentLength, actualContentLength);
@@ -31,17 +31,17 @@ namespace com.esendex.sdk.test.http
         public void ContentLength_WithNonASCIICharacters()
         {
             // Arrange
-            string text = "this is a £££ test";
+            var text = "this is a £££ test";
 
-            int expectedContentLength = Encoding.UTF8.GetByteCount(text);
+            var expectedContentLength = Encoding.UTF8.GetByteCount(text);
 
-            HttpRequest httpRequest = new HttpRequest()
+            var httpRequest = new HttpRequest
             {
                 Content = text
             };
 
             // Act
-            long actualContentLength = httpRequest.ContentLength;
+            var actualContentLength = httpRequest.ContentLength;
 
             // Assert
             Assert.AreEqual(expectedContentLength, actualContentLength);
@@ -53,7 +53,7 @@ namespace com.esendex.sdk.test.http
             // Arrange
 
             // Act
-            HttpRequest httpRequest = new HttpRequest();
+            var httpRequest = new HttpRequest();
 
             // Assert
             Assert.AreEqual(Encoding.UTF8, httpRequest.ContentEncoding);

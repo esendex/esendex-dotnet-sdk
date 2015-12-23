@@ -25,10 +25,14 @@ namespace com.esendex.sdk.session
         /// Initialises a new instance of the com.esendex.sdk.session.SessionService
         /// </summary>
         public SessionService(EsendexCredentials credentials)
-            : base(credentials) { }
+            : base(credentials)
+        {
+        }
 
         internal SessionService(IRestClient restClient, ISerialiser serialiser)
-            : base(restClient, serialiser) { }
+            : base(restClient, serialiser)
+        {
+        }
 
         /// <summary>
         /// Creates a System.Guid instance that contains the session id.
@@ -39,7 +43,7 @@ namespace com.esendex.sdk.session
         {
             RestResource resource = new SessionResource();
 
-            EsendexSession session = MakeRequest<EsendexSession>(HttpMethod.POST, resource);
+            var session = MakeRequest<EsendexSession>(HttpMethod.POST, resource);
 
             return session.Id;
         }

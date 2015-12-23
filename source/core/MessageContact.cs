@@ -7,27 +7,39 @@ namespace com.esendex.sdk.core
     /// Represents a summary of contact.
     /// </summary>
     public class MessageContact
-    {        
+    {
         /// <summary>
         /// Gets or sets the Id.
         /// </summary>
         [XmlAttribute("id")]
         public Guid Id { get; set; }
-        public bool ShouldSerializeID() { return (Id != Guid.Empty); }
+
+        public bool ShouldSerializeID()
+        {
+            return (Id != Guid.Empty);
+        }
 
         /// <summary>
         /// Gets or sets the Uri.
         /// </summary>
         [XmlAttribute("uri")]
         public string Uri { get; set; }
-        public bool ShouldSerializeUri() { return (!string.IsNullOrEmpty(Uri)); }
+
+        public bool ShouldSerializeUri()
+        {
+            return (!string.IsNullOrEmpty(Uri));
+        }
 
         /// <summary>
         /// Gets or sets the display name.
         /// </summary>
         [XmlElement("displayname")]
         public string DisplayName { get; set; }
-        public bool ShouldSerializeDisplayName() { return (!string.IsNullOrEmpty(DisplayName)); }
+
+        public bool ShouldSerializeDisplayName()
+        {
+            return (!string.IsNullOrEmpty(DisplayName));
+        }
 
         /// <summary>
         /// Gets or sets the phone number.
@@ -38,7 +50,9 @@ namespace com.esendex.sdk.core
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.core.MessageHeaderContact
         /// </summary>
-        public MessageContact() { }
+        public MessageContact()
+        {
+        }
 
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.core.MessageHeaderContact
@@ -56,7 +70,7 @@ namespace com.esendex.sdk.core
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            MessageContact other = obj as MessageContact;
+            var other = obj as MessageContact;
 
             if (other == null) return false;
 

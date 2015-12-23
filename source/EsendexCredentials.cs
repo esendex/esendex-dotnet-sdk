@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Net;
 
 namespace com.esendex.sdk
@@ -10,7 +9,9 @@ namespace com.esendex.sdk
     [Serializable]
     public class EsendexCredentials
     {
-        internal EsendexCredentials() { }
+        internal EsendexCredentials()
+        {
+        }
 
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.EsendexCredentials

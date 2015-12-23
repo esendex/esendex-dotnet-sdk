@@ -11,7 +11,7 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor()
         {
             // Arrange
-            string expectedResourcePath = "session/constructor";
+            var expectedResourcePath = "session/constructor";
 
             // Act
             RestResource resource = new SessionResource();

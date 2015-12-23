@@ -13,7 +13,7 @@ namespace com.esendex.sdk.test.inbox
             //  Arrange            
 
             //  Act
-            InboxMessageCollection collection = new InboxMessageCollection();
+            var collection = new InboxMessageCollection();
 
             //  Assert
             Assert.That(collection.Messages, Is.InstanceOf<IEnumerable<InboxMessage>>());
@@ -23,12 +23,12 @@ namespace com.esendex.sdk.test.inbox
         public void InboxMessageCollection_SetPageNumber_WithZeroIndex_GetPageNumber_ReturnsPageNumber1()
         {
             // Arrange
-            int startIndex = 0;
-            int pageSize = 15;
+            var startIndex = 0;
+            var pageSize = 15;
 
-            int expectedPageNumber = 1;
+            var expectedPageNumber = 1;
 
-            InboxMessageCollection collection = new InboxMessageCollection()
+            var collection = new InboxMessageCollection
             {
                 PageSize = pageSize
             };
@@ -44,12 +44,12 @@ namespace com.esendex.sdk.test.inbox
         public void InboxMessageCollection_SetPageNumber_WithNonZeroIndex_GetPageNumber_ReturnsPageNumber()
         {
             // Arrange
-            int startIndex = 30;
-            int pageSize = 15;
+            var startIndex = 30;
+            var pageSize = 15;
 
-            int expectedPageNumber = 3;
+            var expectedPageNumber = 3;
 
-            InboxMessageCollection collection = new InboxMessageCollection()
+            var collection = new InboxMessageCollection
             {
                 PageSize = pageSize
             };

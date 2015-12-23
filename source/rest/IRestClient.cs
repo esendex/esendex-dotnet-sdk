@@ -1,5 +1,4 @@
-﻿
-namespace com.esendex.sdk.rest
+﻿namespace com.esendex.sdk.rest
 {
     internal interface IRestClient
     {

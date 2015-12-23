@@ -22,14 +22,22 @@ namespace com.esendex.sdk.inbox
         /// </summary>
         [XmlElement("readat")]
         public DateTime? ReadAt { get; set; }
-        public bool ShouldSerializeReadAt() { return ReadAt.HasValue; }
+
+        public bool ShouldSerializeReadAt()
+        {
+            return ReadAt.HasValue;
+        }
 
         /// <summary>
         /// Gets or sets the System.DateTime at which the message was received at.
         /// </summary>
         [XmlElement("receivedat")]
         public DateTime? ReceivedAt { get; set; }
-        public bool ShouldSerializeReceivedAt() { return ReceivedAt.HasValue; }
+
+        public bool ShouldSerializeReceivedAt()
+        {
+            return ReceivedAt.HasValue;
+        }
 
         /// <summary>
         /// Determines whether the specified System.Object are considered equal.
@@ -38,7 +46,7 @@ namespace com.esendex.sdk.inbox
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            InboxMessage other = obj as InboxMessage;
+            var other = obj as InboxMessage;
 
             if (other == null) return false;
 

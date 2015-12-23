@@ -12,8 +12,8 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithId()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
-            string expectedResourcePath = string.Format("messageheaders/{0}", id);
+            var id = Guid.NewGuid();
+            var expectedResourcePath = string.Format("messageheaders/{0}", id);
 
             // Act
             RestResource resource = new MessageHeadersResource(id);
@@ -26,10 +26,10 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithPageNumber1AndPageSize()
         {
             // Arrange
-            int pageNumber = 1;
-            int pageSize = 15;
+            var pageNumber = 1;
+            var pageSize = 15;
 
-            string expectedResourcePath = string.Format("messageheaders?startIndex=0&count={0}", pageSize);
+            var expectedResourcePath = string.Format("messageheaders?startIndex=0&count={0}", pageSize);
 
             // Act
             RestResource resource = new MessageHeadersResource(pageNumber, pageSize);
@@ -42,10 +42,10 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithPageNumber2AndPageSize()
         {
             // Arrange
-            int pageNumber = 2;
-            int pageSize = 15;
+            var pageNumber = 2;
+            var pageSize = 15;
 
-            string expectedResourcePath = string.Format("messageheaders?startIndex=15&count={0}", pageSize);
+            var expectedResourcePath = string.Format("messageheaders?startIndex=15&count={0}", pageSize);
 
             // Act
             RestResource resource = new MessageHeadersResource(pageNumber, pageSize);
@@ -58,8 +58,8 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithInvalidPageNumberAndPageSize()
         {
             // Arrange
-            int pageNumber = 0;
-            int pageSize = 0;
+            var pageNumber = 0;
+            var pageSize = 0;
 
             // Act
             try
@@ -68,7 +68,7 @@ namespace com.esendex.sdk.test.rest.resources
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentException ex)
             {
                 Assert.AreEqual("pageNumber", ex.ParamName);
@@ -79,13 +79,13 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithPageNumberAndPageSizeAndAccountReference()
         {
             // Arrange
-            int pageNumber = 1;
-            int pageSize = 15;
-            string accountReference = "accountReference";
+            var pageNumber = 1;
+            var pageSize = 15;
+            var accountReference = "accountReference";
 
-            string expectedResourcePath =
+            var expectedResourcePath =
                 string.Format("messageheaders?startIndex=0&count={0}&filterBy=account&filterValue={1}",
-                    pageSize, accountReference);
+                              pageSize, accountReference);
 
             // Act
             RestResource resource = new MessageHeadersResource(accountReference, pageNumber, pageSize);
@@ -98,8 +98,8 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithNullAccountReference()
         {
             // Arrange
-            int pageNumber = 1;
-            int pageSize = 15;
+            var pageNumber = 1;
+            var pageSize = 15;
             string accountReference = null;
 
             // Act
@@ -109,7 +109,7 @@ namespace com.esendex.sdk.test.rest.resources
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentException ex)
             {
                 Assert.AreEqual("accountReference", ex.ParamName);

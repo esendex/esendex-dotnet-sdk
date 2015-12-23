@@ -32,16 +32,16 @@ namespace com.esendex.sdk.test.utilities
         public void Serialise_WithModelContext_ReturnsExpectedXml()
         {
             // Arrange
-            string expectedXml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><ModelContext Id=\"fe715b9e-facc-4353-bcb1-bec1b313423a\" xmlns=\"http://api.esendex.com/ns/\"><Value>5</Value></ModelContext>";
+            var expectedXml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><ModelContext Id=\"fe715b9e-facc-4353-bcb1-bec1b313423a\" xmlns=\"http://api.esendex.com/ns/\"><Value>5</Value></ModelContext>";
 
-            ModelContext model = new ModelContext()
+            var model = new ModelContext
             {
                 Id = new Guid("FE715B9E-FACC-4353-BCB1-BEC1B313423A"),
                 Value = 5
             };
 
             // Act
-            string actualXml = serialiser.Serialise<ModelContext>(model);
+            var actualXml = serialiser.Serialise(model);
 
             // Assert
             Assert.AreEqual(expectedXml, actualXml);
@@ -51,16 +51,16 @@ namespace com.esendex.sdk.test.utilities
         public void Deserialise_WithXml_ReturnsExpectedModel()
         {
             // Arrange
-            ModelContext expectedModel = new ModelContext()
+            var expectedModel = new ModelContext
             {
                 Id = new Guid("FE715B9E-FACC-4353-BCB1-BEC1B313423A"),
                 Value = 5
             };
 
-            string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><ModelContext xmlns=\"http://api.esendex.com/ns/\" Id=\"fe715b9e-facc-4353-bcb1-bec1b313423a\"><Value>5</Value></ModelContext>";
+            var xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><ModelContext xmlns=\"http://api.esendex.com/ns/\" Id=\"fe715b9e-facc-4353-bcb1-bec1b313423a\"><Value>5</Value></ModelContext>";
 
             // Act
-            ModelContext actualModel = serialiser.Deserialise<ModelContext>(xml);
+            var actualModel = serialiser.Deserialise<ModelContext>(xml);
 
             // Assert
             Assert.IsNotNull(actualModel);

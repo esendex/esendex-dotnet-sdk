@@ -4,8 +4,8 @@ using System.Net;
 using System.Text;
 using com.esendex.sdk.adapters;
 using com.esendex.sdk.http;
-using NUnit.Framework;
 using Moq;
+using NUnit.Framework;
 
 namespace com.esendex.sdk.test.http
 {
@@ -19,7 +19,7 @@ namespace com.esendex.sdk.test.http
         public void TestInitialize()
         {
             _helper = new HttpRequestHelper();
-            
+
             _uri = new UriBuilder("http", "tempuri.org").Uri;
         }
 
@@ -33,7 +33,7 @@ namespace com.esendex.sdk.test.http
 
             // Arrange            
             var request = new HttpRequest
-            { 
+            {
                 ResourcePath = "resource",
                 HttpMethod = HttpMethod.POST
             };
@@ -41,7 +41,7 @@ namespace com.esendex.sdk.test.http
             var expectedUri = string.Format("{0}v1.1/{1}", _uri, request.ResourcePath);
 
             var expectedVersion = new Version(major, minor, build, revision);
-            
+
             // Act
             var actualHttpRequest = _helper.Create(request, _uri, expectedVersion);
 
@@ -51,7 +51,6 @@ namespace com.esendex.sdk.test.http
             Assert.AreEqual(request.HttpMethod.ToString(), actualHttpRequest.Method);
             Assert.IsFalse(string.IsNullOrEmpty(actualHttpRequest.UserAgent));
             Assert.That(actualHttpRequest.UserAgent, Is.EqualTo(string.Format("Esendex .NET SDK v{0}.{1}.{2}", major, minor, build)));
-            
         }
 
         [Test]
@@ -66,8 +65,10 @@ namespace com.esendex.sdk.test.http
             _helper.AddCredentials(httpRequest, credentials);
 
             //  Assert
-            var username = httpRequest.Credentials.GetCredential(_uri, "Basic").UserName;
-            var password = httpRequest.Credentials.GetCredential(_uri, "Basic").Password;
+            var username = httpRequest.Credentials.GetCredential(_uri, "Basic")
+                                      .UserName;
+            var password = httpRequest.Credentials.GetCredential(_uri, "Basic")
+                                      .Password;
 
             Assert.AreEqual(credentials.Username, username);
             Assert.AreEqual(credentials.Password, password);
@@ -120,10 +121,11 @@ namespace com.esendex.sdk.test.http
                 ContentEncoding = Encoding.UTF8,
                 ContentType = "application/xml"
             };
-            
+
             Stream stream = new MemoryStream();
 
-            httpWebRequest.Setup(wr => wr.GetRequestStream()).Returns(stream);
+            httpWebRequest.Setup(wr => wr.GetRequestStream())
+                          .Returns(stream);
 
             // Act
             _helper.AddContent(httpWebRequest.Object, request);

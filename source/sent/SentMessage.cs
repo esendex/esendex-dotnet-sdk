@@ -16,20 +16,28 @@ namespace com.esendex.sdk.sent
         /// </summary>
         [XmlElement("submittedat")]
         public DateTime SubmittedAt { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the System.DateTime at which the message was sent at.
         /// </summary>
         [XmlElement("sentat")]
         public DateTime? SentAt { get; set; }
-        public bool ShouldSerializeSentAt() { return SentAt.HasValue; }
+
+        public bool ShouldSerializeSentAt()
+        {
+            return SentAt.HasValue;
+        }
 
         /// <summary>
         /// Gets or sets the System.DateTime at which the message was delivered at.
         /// </summary>
         [XmlElement("deliveredat")]
         public DateTime? DeliveredAt { get; set; }
-        public bool ShouldSerializeDeliveredAt() { return DeliveredAt.HasValue; }
+
+        public bool ShouldSerializeDeliveredAt()
+        {
+            return DeliveredAt.HasValue;
+        }
 
         /// <summary>
         /// Gets or set the System.DateTime at which the status last changed.
@@ -43,7 +51,9 @@ namespace com.esendex.sdk.sent
         [XmlElement("username")]
         public string Username { get; set; }
 
-        internal SentMessage() : base() { }
+        internal SentMessage()
+        {
+        }
 
         /// <summary>
         /// Determines whether the specified System.Object are considered equal.
@@ -52,7 +62,7 @@ namespace com.esendex.sdk.sent
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            SentMessage other = obj as SentMessage;
+            var other = obj as SentMessage;
 
             if (other == null) return false;
 

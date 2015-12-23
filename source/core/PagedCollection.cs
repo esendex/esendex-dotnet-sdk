@@ -29,10 +29,10 @@ namespace com.esendex.sdk.core
         [XmlAttribute("startindex")]
         public int PageNumber
         {
-            get 
+            get
             {
                 // Convert the zero based collection index to a real page number.
-                return (startIndex / PageSize) + 1;
+                return (startIndex/PageSize) + 1;
             }
             set { startIndex = value; }
         }
@@ -56,7 +56,7 @@ namespace com.esendex.sdk.core
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            PagedCollection<T> other = obj as PagedCollection<T>;
+            var other = obj as PagedCollection<T>;
 
             if (other == null) return false;
 
@@ -66,7 +66,7 @@ namespace com.esendex.sdk.core
 
             if (Items.Count != other.Items.Count) return false;
 
-            for (int i = 0; i < Items.Count; i++)
+            for (var i = 0; i < Items.Count; i++)
             {
                 if (Items.ElementAt(i) != other.Items.ElementAt(i)) return false;
             }

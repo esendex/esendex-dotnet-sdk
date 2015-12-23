@@ -1,5 +1,4 @@
-﻿
-namespace com.esendex.sdk.utilities
+﻿namespace com.esendex.sdk.utilities
 {
     internal interface ISerialiser
     {

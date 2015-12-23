@@ -1,12 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 
 namespace com.esendex.sdk.adapters
 {
     internal class HttpWebResponseAdapter : IHttpWebResponseAdapter
     {
-        private HttpWebResponse httpWebResponse;
+        private readonly HttpWebResponse httpWebResponse;
 
         public HttpWebResponseAdapter(HttpWebResponse response)
         {
@@ -18,7 +17,7 @@ namespace com.esendex.sdk.adapters
             return httpWebResponse.GetResponseStream();
         }
 
-        public Int64 ContentLength
+        public long ContentLength
         {
             get { return httpWebResponse.ContentLength; }
             set { httpWebResponse.ContentLength = value; }

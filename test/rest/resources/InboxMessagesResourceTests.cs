@@ -13,7 +13,7 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor()
         {
             // Arrange
-            string expectedResourcePath = "inbox/messages";
+            var expectedResourcePath = "inbox/messages";
 
             // Act
             RestResource resource = new InboxMessagesResource();
@@ -26,10 +26,10 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithPageNumber1AndPageSize()
         {
             // Arrange
-            int pageNumber = 1;
-            int pageSize = 15;
+            var pageNumber = 1;
+            var pageSize = 15;
 
-            string expectedResourcePath = string.Format("inbox/messages?startIndex=0&count={0}", pageSize);
+            var expectedResourcePath = string.Format("inbox/messages?startIndex=0&count={0}", pageSize);
 
             // Act
             RestResource resource = new InboxMessagesResource(pageNumber, pageSize);
@@ -42,10 +42,10 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithPageNumber2AndPageSize()
         {
             // Arrange
-            int pageNumber = 2;
-            int pageSize = 15;
+            var pageNumber = 2;
+            var pageSize = 15;
 
-            string expectedResourcePath = string.Format("inbox/messages?startIndex=15&count={0}", pageSize);
+            var expectedResourcePath = string.Format("inbox/messages?startIndex=15&count={0}", pageSize);
 
             // Act
             RestResource resource = new InboxMessagesResource(pageNumber, pageSize);
@@ -58,8 +58,8 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithInvalidPageNumberAndPageSize()
         {
             // Arrange
-            int pageNumber = 0;
-            int pageSize = 0;
+            var pageNumber = 0;
+            var pageSize = 0;
 
             // Act
             try
@@ -68,7 +68,7 @@ namespace com.esendex.sdk.test.rest.resources
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentException ex)
             {
                 Assert.AreEqual("pageNumber", ex.ParamName);
@@ -79,9 +79,9 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithAccountReference()
         {
             // Arrange
-            string accountReference = "accountReference";
+            var accountReference = "accountReference";
 
-            string expectedResourcePath = string.Format("inbox/{0}/messages", accountReference);
+            var expectedResourcePath = string.Format("inbox/{0}/messages", accountReference);
 
             // Act
             RestResource resource = new InboxMessagesResource(accountReference);
@@ -95,7 +95,7 @@ namespace com.esendex.sdk.test.rest.resources
         {
             // Arrange
             string accountReference = null;
-            
+
             // Act
             try
             {
@@ -103,7 +103,7 @@ namespace com.esendex.sdk.test.rest.resources
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentException ex)
             {
                 Assert.AreEqual("accountReference", ex.ParamName);
@@ -114,11 +114,11 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithAccountReferenceAndPageNumberAndPageSize()
         {
             // Arrange
-            string accountReference = "accountReference";
-            int pageNumber = 2;
-            int pageSize = 15;
+            var accountReference = "accountReference";
+            var pageNumber = 2;
+            var pageSize = 15;
 
-            string expectedResourcePath = string.Format("inbox/{0}/messages?startIndex=15&count={1}", accountReference, pageSize);
+            var expectedResourcePath = string.Format("inbox/{0}/messages?startIndex=15&count={1}", accountReference, pageSize);
 
             // Act
             RestResource resource = new InboxMessagesResource(accountReference, pageNumber, pageSize);
@@ -131,9 +131,9 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithIdAndInboxMessageStatus()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
-            string expectedResourcePath = string.Format("inbox/messages/{0}?action=read", id);
+            var expectedResourcePath = string.Format("inbox/messages/{0}?action=read", id);
 
             // Act
             RestResource resource = new InboxMessagesResource(id, InboxMessageStatus.Read);
@@ -146,9 +146,9 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithId()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
-            string expectedResourcePath = string.Format("inbox/messages/{0}", id);
+            var expectedResourcePath = string.Format("inbox/messages/{0}", id);
 
             // Act
             RestResource resource = new InboxMessagesResource(id);

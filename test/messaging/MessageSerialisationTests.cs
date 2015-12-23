@@ -8,26 +8,27 @@ namespace com.esendex.sdk.test.messaging
     [TestFixture]
     public class MessageSerialisationTests
     {
-        private XNamespace ns = @"http://api.esendex.com/ns/";
+        private readonly XNamespace ns = @"http://api.esendex.com/ns/";
 
         [Test]
         public void Message_WithoutBlankOriginator_ShouldNotSerialiseOriginator()
         {
             // Arrange
-            SmsMessage message = new SmsMessage()
+            var message = new SmsMessage
             {
                 Originator = string.Empty
             };
 
-            XmlSerialiser serialiser = new XmlSerialiser();
+            var serialiser = new XmlSerialiser();
 
             // Act
-            string serialisedXml = serialiser.Serialise(message);
+            var serialisedXml = serialiser.Serialise(message);
 
             // Assert
             var document = XDocument.Parse(serialisedXml);
 
-            var originator = document.Element("message").Element("from");
+            var originator = document.Element("message")
+                                     .Element("from");
 
             Assert.IsNull(originator);
         }
@@ -36,20 +37,21 @@ namespace com.esendex.sdk.test.messaging
         public void Message_WithOriginator_SerialisesOriginator()
         {
             // Arrange
-            SmsMessage message = new SmsMessage()
+            var message = new SmsMessage
             {
                 Originator = "07000000000"
             };
 
-            XmlSerialiser serialiser = new XmlSerialiser();
+            var serialiser = new XmlSerialiser();
 
             // Act
-            string serialisedXml = serialiser.Serialise(message);
+            var serialisedXml = serialiser.Serialise(message);
 
             // Assert
             var document = XDocument.Parse(serialisedXml);
 
-            var originator = document.Element("message").Element("from");
+            var originator = document.Element("message")
+                                     .Element("from");
 
             Assert.IsNotNull(originator);
             Assert.AreEqual(message.Originator, originator.Value);
@@ -59,20 +61,21 @@ namespace com.esendex.sdk.test.messaging
         public void MessageCollection_WithoutBlankOriginator_ShouldNotSerialiseOriginator()
         {
             // Arrange
-            SmsMessageCollection message = new SmsMessageCollection()
+            var message = new SmsMessageCollection
             {
                 Originator = string.Empty
             };
 
-            XmlSerialiser serialiser = new XmlSerialiser();
+            var serialiser = new XmlSerialiser();
 
             // Act
-            string serialisedXml = serialiser.Serialise(message);
+            var serialisedXml = serialiser.Serialise(message);
 
             // Assert
             var document = XDocument.Parse(serialisedXml);
 
-            var originator = document.Element(ns + "messages").Element(ns + "from");
+            var originator = document.Element(ns + "messages")
+                                     .Element(ns + "from");
 
             Assert.IsNull(originator);
         }
@@ -81,20 +84,21 @@ namespace com.esendex.sdk.test.messaging
         public void MessageCollection_WithOriginator_SerialisesOriginator()
         {
             // Arrange
-            SmsMessageCollection messages = new SmsMessageCollection()
+            var messages = new SmsMessageCollection
             {
                 Originator = "07000000000"
             };
 
-            XmlSerialiser serialiser = new XmlSerialiser();
+            var serialiser = new XmlSerialiser();
 
             // Act
-            string serialisedXml = serialiser.Serialise(messages);
+            var serialisedXml = serialiser.Serialise(messages);
 
             // Assert
             var document = XDocument.Parse(serialisedXml);
 
-            var originator = document.Element(ns + "messages").Element(ns + "from");
+            var originator = document.Element(ns + "messages")
+                                     .Element(ns + "from");
 
             Assert.IsNotNull(originator);
             Assert.AreEqual(messages.Originator, originator.Value);

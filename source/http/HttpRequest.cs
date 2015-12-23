@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace com.esendex.sdk.http
 {
@@ -9,7 +8,7 @@ namespace com.esendex.sdk.http
         GET,
         POST,
         PUT
-    };
+    }
 
     internal class HttpRequest
     {
@@ -26,9 +25,9 @@ namespace com.esendex.sdk.http
         public string ContentType { get; set; }
         public string Content { get; set; }
 
-        public long ContentLength 
-        { 
-            get { return Content == null ? 0 : ContentEncoding.GetByteCount(Content); } 
+        public long ContentLength
+        {
+            get { return Content == null ? 0 : ContentEncoding.GetByteCount(Content); }
         }
 
         public bool HasContent
@@ -38,7 +37,7 @@ namespace com.esendex.sdk.http
 
         public override bool Equals(object obj)
         {
-            HttpRequest other = obj as HttpRequest;
+            var other = obj as HttpRequest;
 
             if (other == null) return false;
 

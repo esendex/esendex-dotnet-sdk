@@ -1,5 +1,4 @@
-﻿
-namespace com.esendex.sdk.rest.resources
+﻿namespace com.esendex.sdk.rest.resources
 {
     internal class MessageDispatcherResource : RestResource
     {
@@ -24,7 +23,7 @@ namespace com.esendex.sdk.rest.resources
 
         public override bool Equals(object obj)
         {
-            MessageDispatcherResource other = obj as MessageDispatcherResource;
+            var other = obj as MessageDispatcherResource;
 
             if (other == null) return false;
 

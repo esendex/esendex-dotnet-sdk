@@ -1,5 +1,4 @@
-﻿
-namespace com.esendex.sdk.rest.resources
+﻿namespace com.esendex.sdk.rest.resources
 {
     internal class SessionResource : RestResource
     {
@@ -14,7 +13,6 @@ namespace com.esendex.sdk.rest.resources
         }
 
         public SessionResource()
-            : base()
         {
             ResourcePath += "/constructor";
         }

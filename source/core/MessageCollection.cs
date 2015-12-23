@@ -14,7 +14,7 @@ namespace com.esendex.sdk.core
         /// <![CDATA[A System.Collections.Generic.List<TMessage> instance that contains the messages.]]>
         /// </summary>
         [XmlElement("messageheader")]
-        public List<TMessage> Messages 
+        public List<TMessage> Messages
         {
             get { return Items; }
             set { Items = value; }

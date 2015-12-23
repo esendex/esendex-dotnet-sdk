@@ -13,7 +13,7 @@ namespace com.esendex.sdk.test.sent
             //  Arrange            
 
             //  Act
-            SentMessageCollection collection = new SentMessageCollection();
+            var collection = new SentMessageCollection();
 
             //  Assert
             Assert.That(collection.Messages, Is.InstanceOf<IEnumerable<SentMessage>>());
@@ -24,18 +24,18 @@ namespace com.esendex.sdk.test.sent
         {
             // Arrange
             var startIndex = 0;
-            int pageSize = 15;
+            var pageSize = 15;
 
-            int expectedPageNumber = 1;
+            var expectedPageNumber = 1;
 
-            SentMessageCollection collection = new SentMessageCollection()
+            var collection = new SentMessageCollection
             {
                 PageSize = pageSize
-            };             
+            };
 
             // Act
             collection.PageNumber = startIndex;
-            
+
             // Assert
             Assert.AreEqual(expectedPageNumber, collection.PageNumber);
         }
@@ -44,12 +44,12 @@ namespace com.esendex.sdk.test.sent
         public void SentMessageCollection_SetPageNumber_WithNonZeroIndex_GetPageNumber_ReturnsPageNumber()
         {
             // Arrange
-            int startIndex = 30;
-            int pageSize = 15;
+            var startIndex = 30;
+            var pageSize = 15;
 
-            int expectedPageNumber = 3;
+            var expectedPageNumber = 3;
 
-            SentMessageCollection collection = new SentMessageCollection()
+            var collection = new SentMessageCollection
             {
                 PageSize = pageSize
             };

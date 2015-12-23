@@ -11,13 +11,13 @@ namespace com.esendex.sdk.test
         public void DefaultDIConstructor_UsernameAndPasswordAndProxy()
         {
             //  Arrange
-            string username = "username";
-            string password = "password";            
-            WebProxy proxy = new WebProxy();
-            
+            var username = "username";
+            var password = "password";
+            var proxy = new WebProxy();
+
             //  Act            
-            EsendexCredentials credentials = new EsendexCredentials(username, password, proxy);
-            
+            var credentials = new EsendexCredentials(username, password, proxy);
+
             //  Assert
             Assert.AreEqual(username, credentials.Username);
             Assert.AreEqual(password, credentials.Password);
@@ -28,12 +28,12 @@ namespace com.esendex.sdk.test
         public void DefaultDIConstructor_ShouldAcceptDefaultWebProxy()
         {
             //  Arrange
-            string username = "username";
-            string password = "password";
+            var username = "username";
+            var password = "password";
             var proxy = WebRequest.DefaultWebProxy;
 
             //  Act
-            EsendexCredentials credentials = new EsendexCredentials(username, password, proxy);
+            var credentials = new EsendexCredentials(username, password, proxy);
 
             //  Assert
             Assert.AreEqual(username, credentials.Username);
@@ -45,11 +45,11 @@ namespace com.esendex.sdk.test
         public void DefaultDIConstructor_WithSessionIdAndProxy()
         {
             //  Arrange
-            Guid sessionId = Guid.NewGuid();
-            WebProxy proxy = new WebProxy();
+            var sessionId = Guid.NewGuid();
+            var proxy = new WebProxy();
 
             //  Act            
-            EsendexCredentials credentials = new EsendexCredentials(sessionId, proxy);
+            var credentials = new EsendexCredentials(sessionId, proxy);
 
             //  Assert
             Assert.AreEqual(proxy, credentials.WebProxy);
@@ -60,10 +60,10 @@ namespace com.esendex.sdk.test
         public void DefaultDIConstructor_WithSessionId()
         {
             //  Arrange
-            Guid sessionId = Guid.NewGuid();
+            var sessionId = Guid.NewGuid();
 
             //  Act            
-            EsendexCredentials credentials = new EsendexCredentials(sessionId);
+            var credentials = new EsendexCredentials(sessionId);
 
             //  Assert
             Assert.IsFalse(credentials.UseProxy);
@@ -74,15 +74,15 @@ namespace com.esendex.sdk.test
         public void DefaultDIConstructor_WithNullProxy()
         {
             // Arrange
-            WebProxy proxy = null;            
+            WebProxy proxy = null;
 
             // Act
             try
             {
-                EsendexCredentials credentails = new EsendexCredentials("username", "password", proxy); 
+                var credentails = new EsendexCredentials("username", "password", proxy);
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("proxy", ex.ParamName);
@@ -94,21 +94,19 @@ namespace com.esendex.sdk.test
         {
             // Arrange
             string username = null;
-            string password = string.Empty;
+            var password = string.Empty;
 
             // Act
             try
             {
-                EsendexCredentials credentails = new EsendexCredentials(username, password);
+                var credentails = new EsendexCredentials(username, password);
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("username", ex.ParamName);
             }
         }
-
     }
 }
-

@@ -6,7 +6,7 @@ namespace com.esendex.sdk.rest.resources
     {
         public override string ResourceName
         {
-            get { return "contacts" ; }
+            get { return "contacts"; }
         }
 
         public override string ResourceVersion
@@ -19,21 +19,23 @@ namespace com.esendex.sdk.rest.resources
             AppendWithId(id);
         }
 
-        public ContactsResource(string content) 
-            : base(content) { }
+        public ContactsResource(string content)
+            : base(content)
+        {
+        }
 
         public ContactsResource(Guid id, string content)
             : base(content)
         {
-            AppendWithId(id);            
+            AppendWithId(id);
         }
 
-        public ContactsResource(string accountReference, int pageNumber, int pageSize) 
+        public ContactsResource(string accountReference, int pageNumber, int pageSize)
         {
             if (pageNumber < 1) throw new ArgumentException("Page number must be greater than zero.", "pageNumber");
             if (pageSize < 1) throw new ArgumentException("Page size must be greater than zero.", "pageSize");
 
-            var startIndex = ((--pageNumber) * pageSize);
+            var startIndex = ((--pageNumber)*pageSize);
 
             ResourcePath += string.Format("?accountReference={0}&startIndex={1}&count={2}", accountReference, startIndex, pageSize);
         }

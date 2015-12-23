@@ -5,15 +5,17 @@ namespace com.esendex.sdk.rest.resources
 {
     internal class InboxMessagesResource : RestResource
     {
-        public override string ResourceName { get { return "inbox"; } }
+        public override string ResourceName
+        {
+            get { return "inbox"; }
+        }
 
         public override string ResourceVersion
         {
             get { return "v1.1"; }
         }
 
-        public InboxMessagesResource() 
-            : base()
+        public InboxMessagesResource()
         {
             ResourcePath += "/messages";
         }
@@ -31,22 +33,21 @@ namespace com.esendex.sdk.rest.resources
         }
 
         public InboxMessagesResource(string accountReference)
-            : base()
         {
             Initialise(accountReference);
         }
 
         public InboxMessagesResource(string accountReference, int pageNumber, int pageSize)
-            : base()
         {
             Initialise(accountReference);
             Initialise(pageNumber, pageSize);
         }
 
-        public InboxMessagesResource(Guid id, InboxMessageStatus status) 
+        public InboxMessagesResource(Guid id, InboxMessageStatus status)
             : this()
         {
-            ResourcePath += string.Format("/{0}?action={1}", id, status.ToString().ToLowerInvariant());
+            ResourcePath += string.Format("/{0}?action={1}", id, status.ToString()
+                                                                       .ToLowerInvariant());
         }
 
         private void Initialise(int pageNumber, int pageSize)
@@ -54,7 +55,7 @@ namespace com.esendex.sdk.rest.resources
             if (pageNumber < 1) throw new ArgumentException("Page number must be greater than zero.", "pageNumber");
             if (pageSize < 1) throw new ArgumentException("Page size must be greater than zero.", "pageSize");
 
-            int startIndex = ((--pageNumber) * pageSize);
+            var startIndex = ((--pageNumber)*pageSize);
 
             ResourcePath += string.Format("?startIndex={0}&count={1}", startIndex, pageSize);
         }

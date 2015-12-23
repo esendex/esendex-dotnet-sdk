@@ -11,6 +11,5 @@ namespace com.esendex.sdk.inbox
     [XmlRoot("messageheaders", Namespace = Constants.API_NAMESPACE)]
     public class InboxMessageCollection : MessageCollection<InboxMessage>
     {
-        
     }
 }

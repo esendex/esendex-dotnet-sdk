@@ -6,13 +6,18 @@ namespace com.esendex.sdk.http
     {
         public HttpStatusCode StatusCode { get; set; }
         public string ContentType { get; set; }
-        public long ContentLength { get { return Content.Length; } }
+
+        public long ContentLength
+        {
+            get { return Content.Length; }
+        }
+
         public string Content { get; set; }
         public string ContentEncoding { get; set; }
 
         public override bool Equals(object obj)
         {
-            HttpResponse other = obj as HttpResponse;
+            var other = obj as HttpResponse;
 
             if (other == null) return false;
 

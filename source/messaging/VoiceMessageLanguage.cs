@@ -12,31 +12,26 @@ namespace com.esendex.sdk.messaging
         /// <summary>
         /// English
         /// </summary>
-        [XmlEnum("en-GB")]
-        en_GB,
+        [XmlEnum("en-GB")] en_GB,
 
         /// <summary>
         /// English (Austrailian)
         /// </summary>
-        [XmlEnum("en-AU")]
-        en_AU,
+        [XmlEnum("en-AU")] en_AU,
 
         /// <summary>
         /// Spanish
         /// </summary>
-        [XmlEnum("es-ES")]
-        es_ES,
+        [XmlEnum("es-ES")] es_ES,
 
         /// <summary>
         /// French
         /// </summary>
-        [XmlEnum("fr-FR")]
-        fr_FR,
+        [XmlEnum("fr-FR")] fr_FR,
 
         /// <summary>
         /// German
         /// </summary>
-        [XmlEnum("de-DE")]
-        de_DE
+        [XmlEnum("de-DE")] de_DE
     }
 }

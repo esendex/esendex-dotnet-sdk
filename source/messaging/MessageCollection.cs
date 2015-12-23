@@ -14,7 +14,9 @@ namespace com.esendex.sdk.messaging
         /// <summary>
         /// <![CDATA[Initialises a new instance of the com.esendex.sdk.messaging.MessageCollection<TMessage>]]>
         /// </summary>
-        public MessageCollection() { }
+        public MessageCollection()
+        {
+        }
 
         /// <summary>
         /// <![CDATA[Initialises a new instance of the com.esendex.sdk.messaging.Message<TMessage>]]>
@@ -57,34 +59,49 @@ namespace com.esendex.sdk.messaging
         /// </summary>
         [XmlElement("from")]
         public string Originator { get; set; }
-        public bool ShouldSerializeOriginator() { return !string.IsNullOrEmpty(Originator); }        
-        
+
+        public bool ShouldSerializeOriginator()
+        {
+            return !string.IsNullOrEmpty(Originator);
+        }
+
         /// <summary>
         /// Gets or sets the message type
         /// </summary>
         [XmlElement("type")]
         public virtual MessageType? Type { get; set; }
-        public bool ShouldSerializeType() { return Type.HasValue; }
+
+        public bool ShouldSerializeType()
+        {
+            return Type.HasValue;
+        }
 
         /// <summary>
         /// Gets or sets the validity period
         /// </summary>
         [XmlElement("validity")]
         public int? ValidityPeriod { get; set; }
-        public bool ShouldSerializeValidityPeriod() { return ValidityPeriod.HasValue; }
+
+        public bool ShouldSerializeValidityPeriod()
+        {
+            return ValidityPeriod.HasValue;
+        }
 
         /// <summary>
         /// Gets or sets a timestamp for scheduling 
         /// </summary>
         [XmlElement("sendat")]
         public DateTime? SendAt { get; set; }
-        public bool ShouldSerializeSendAt() { return SendAt.HasValue; }
+
+        public bool ShouldSerializeSendAt()
+        {
+            return SendAt.HasValue;
+        }
 
         /// <summary>
         /// <![CDATA[A System.Collections.Generic.List<TMessage> instance that contains the messages.]]>
         /// </summary>
-        [XmlElement("message")]
-        public List<TMessage> Items = new List<TMessage>();
+        [XmlElement("message")] public List<TMessage> Items = new List<TMessage>();
 
         /// <summary>
         /// Determines whether the specified System.Object are considered equal.
@@ -93,7 +110,7 @@ namespace com.esendex.sdk.messaging
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            MessageCollection<TMessage> other = obj as MessageCollection<TMessage>;
+            var other = obj as MessageCollection<TMessage>;
 
             if (other == null) return false;
 
@@ -105,7 +122,7 @@ namespace com.esendex.sdk.messaging
 
             if (Items.Count != other.Items.Count) return false;
 
-            for (int i = 0; i < Items.Count; i++)
+            for (var i = 0; i < Items.Count; i++)
             {
                 if (Items[i] != other.Items[i]) return false;
             }

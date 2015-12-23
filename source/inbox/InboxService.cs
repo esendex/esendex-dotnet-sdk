@@ -17,19 +17,23 @@ namespace com.esendex.sdk.inbox
         /// <param name="username">Your Esendex username.</param>
         /// <param name="password">Your Esendex password.</param>
         public InboxService(string username, string password)
-            :this(new EsendexCredentials(username, password))
+            : this(new EsendexCredentials(username, password))
         {
         }
-        
+
         /// <summary>
         /// Initialises a new instance of the InboxService
         /// </summary>
         /// <param name="credentials">A com.esendex.sdk.EsendexCredentials instance that contains access credentials.</param>
         public InboxService(EsendexCredentials credentials)
-            : base(credentials) { }
+            : base(credentials)
+        {
+        }
 
         internal InboxService(IRestClient restClient, ISerialiser serialiser)
-            : base(restClient, serialiser) { }
+            : base(restClient, serialiser)
+        {
+        }
 
         /// <summary>
         /// Gets a com.esendex.sdk.inbox.InboxMessage instance containing an inbox message.
@@ -110,7 +114,7 @@ namespace com.esendex.sdk.inbox
         {
             RestResource resource = new InboxMessagesResource(id, InboxMessageStatus.Read);
 
-            RestResponse response = MakeRequest(HttpMethod.PUT, resource);
+            var response = MakeRequest(HttpMethod.PUT, resource);
 
             return (response != null);
         }
@@ -125,7 +129,7 @@ namespace com.esendex.sdk.inbox
         {
             RestResource resource = new InboxMessagesResource(id, InboxMessageStatus.Unread);
 
-            RestResponse response = MakeRequest(HttpMethod.PUT, resource);
+            var response = MakeRequest(HttpMethod.PUT, resource);
 
             return (response != null);
         }
@@ -140,7 +144,7 @@ namespace com.esendex.sdk.inbox
         {
             RestResource resource = new InboxMessagesResource(id);
 
-            RestResponse response = MakeRequest(HttpMethod.DELETE, resource);
+            var response = MakeRequest(HttpMethod.DELETE, resource);
 
             return (response != null);
         }

@@ -6,11 +6,11 @@ namespace com.esendex.sdk.adapters
 {
     internal class HttpWebRequestAdapter : IHttpWebRequestAdapter
     {
-        private HttpWebRequest httpWebRequest;
+        private readonly HttpWebRequest httpWebRequest;
 
         public HttpWebRequestAdapter(Uri url)
         {
-            httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(url);
+            httpWebRequest = (HttpWebRequest) HttpWebRequest.Create(url);
         }
 
         public Stream GetRequestStream()
@@ -20,16 +20,16 @@ namespace com.esendex.sdk.adapters
 
         public IHttpWebResponseAdapter GetResponse()
         {
-            return new HttpWebResponseAdapter((HttpWebResponse)httpWebRequest.GetResponse());
+            return new HttpWebResponseAdapter((HttpWebResponse) httpWebRequest.GetResponse());
         }
 
-        public Int64 ContentLength
+        public long ContentLength
         {
             get { return httpWebRequest.ContentLength; }
             set { httpWebRequest.ContentLength = value; }
         }
 
-        public string Method 
+        public string Method
         {
             get { return httpWebRequest.Method; }
             set { httpWebRequest.Method = value; }

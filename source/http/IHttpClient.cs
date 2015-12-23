@@ -1,5 +1,4 @@
-﻿
-namespace com.esendex.sdk.http
+﻿namespace com.esendex.sdk.http
 {
     internal interface IHttpClient
     {

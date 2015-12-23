@@ -11,8 +11,8 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithMessageIdsInResult()
         {
             // Arrange
-            string content = "content";
-            bool ensureMessageIdsInResult = true;
+            var content = "content";
+            var ensureMessageIdsInResult = true;
 
             // Act
             RestResource resource = new MessageDispatcherResource(content, ensureMessageIdsInResult);
@@ -26,8 +26,8 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithoutMessageIdsInResult()
         {
             // Arrange
-            string content = "content";
-            bool ensureMessageIdsInResult = false;
+            var content = "content";
+            var ensureMessageIdsInResult = false;
 
             // Act
             RestResource resource = new MessageDispatcherResource(content, ensureMessageIdsInResult);

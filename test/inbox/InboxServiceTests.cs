@@ -5,8 +5,8 @@ using com.esendex.sdk.inbox;
 using com.esendex.sdk.rest;
 using com.esendex.sdk.rest.resources;
 using com.esendex.sdk.utilities;
-using NUnit.Framework;
 using Moq;
+using NUnit.Framework;
 
 namespace com.esendex.sdk.test.inbox
 {
@@ -31,10 +31,10 @@ namespace com.esendex.sdk.test.inbox
         public void DefaultConstructor()
         {
             // Arrange
-            EsendexCredentials credentials = new EsendexCredentials("username", "password");
+            var credentials = new EsendexCredentials("username", "password");
 
             // Act
-            InboxService serviceInstance = new InboxService(credentials);
+            var serviceInstance = new InboxService(credentials);
 
             // Assert
             Assert.That(serviceInstance.RestClient, Is.InstanceOf<RestClient>());
@@ -45,8 +45,8 @@ namespace com.esendex.sdk.test.inbox
         public void DefaultDIConstructor()
         {
             // Arrange
-            Uri uri = new Uri("http://tempuri.org");
-            EsendexCredentials credentials = new EsendexCredentials("username", "password");
+            var uri = new Uri("http://tempuri.org");
+            var credentials = new EsendexCredentials("username", "password");
             IHttpRequestHelper httpRequestHelper = new HttpRequestHelper();
             IHttpResponseHelper httpResponseHelper = new HttpResponseHelper();
             IHttpClient httpClient = new HttpClient(credentials, uri, httpRequestHelper, httpResponseHelper);
@@ -55,7 +55,7 @@ namespace com.esendex.sdk.test.inbox
             ISerialiser serialiser = new XmlSerialiser();
 
             // Act
-            InboxService serviceInstance = new InboxService(restClient, serialiser);
+            var serviceInstance = new InboxService(restClient, serialiser);
 
             // Assert
             Assert.That(serviceInstance.RestClient, Is.InstanceOf<RestClient>());
@@ -68,13 +68,13 @@ namespace com.esendex.sdk.test.inbox
             // Arrange
             RestResource resource = new InboxMessagesResource();
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedItem"
             };
 
-            InboxMessageCollection expectedResult = new InboxMessageCollection();
+            var expectedResult = new InboxMessageCollection();
 
             mockRestClient
                 .Setup(rc => rc.Get(resource))
@@ -85,7 +85,7 @@ namespace com.esendex.sdk.test.inbox
                 .Returns(expectedResult);
 
             // Act
-            InboxMessageCollection actualResult = service.GetMessages();
+            var actualResult = service.GetMessages();
 
             // Assert
             Assert.AreEqual(expectedResult, actualResult);
@@ -95,88 +95,18 @@ namespace com.esendex.sdk.test.inbox
         public void GetMessages_WithPageNumberAndPageSize_ReturnsInboxMessages()
         {
             // Arrange
-            int pageNumber = 1;
-            int pageSize = 15;
+            var pageNumber = 1;
+            var pageSize = 15;
 
             RestResource resource = new InboxMessagesResource(pageNumber, pageSize);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedItem"
             };
 
-            InboxMessageCollection expectedResult = new InboxMessageCollection()
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-            };
-
-            mockRestClient
-                .Setup(rc => rc.Get(resource))
-                .Returns(response);
-
-            mockSerialiser
-                .Setup(s => s.Deserialise<InboxMessageCollection>(response.Content))
-                .Returns(expectedResult);
-
-            // Act
-            InboxMessageCollection actualResult = service.GetMessages(pageNumber, pageSize);
-
-            // Assert
-            Assert.AreEqual(expectedResult, actualResult);
-            Assert.AreEqual(pageNumber, actualResult.PageNumber);
-            Assert.AreEqual(pageSize, actualResult.PageSize);
-        }
-
-        [Test]
-        public void GetMessages_WithAccountReference_ReturnsInboxMessages()
-        {
-            // Arrange
-            string accountReference = "accountReference";
-
-            RestResource resource = new InboxMessagesResource(accountReference);
-
-            RestResponse response = new RestResponse()
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = "serialisedItem"
-            };
-
-            InboxMessageCollection expectedResult = new InboxMessageCollection();
-
-            mockRestClient
-                .Setup(rc => rc.Get(resource))
-                .Returns(response);
-
-            mockSerialiser
-                .Setup(s => s.Deserialise<InboxMessageCollection>(response.Content))
-                .Returns(expectedResult);
-
-            // Act
-            InboxMessageCollection actualResult = service.GetMessages(accountReference);
-
-            // Assert
-            Assert.AreEqual(expectedResult, actualResult);
-        }
-
-        [Test]
-        public void GetMessages_WithAccountReferenceAndPageNumberAndPageSize_ReturnsInboxMessages()
-        {
-            // Arrange
-            string accountReference = "accountReference";
-            int pageNumber = 1;
-            int pageSize = 15;
-
-            RestResource resource = new InboxMessagesResource(accountReference, pageNumber, pageSize);
-
-            RestResponse response = new RestResponse()
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = "serialisedItem"
-            };
-
-            InboxMessageCollection expectedResult = new InboxMessageCollection()
+            var expectedResult = new InboxMessageCollection
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize
@@ -191,7 +121,77 @@ namespace com.esendex.sdk.test.inbox
                 .Returns(expectedResult);
 
             // Act
-            InboxMessageCollection actualResult = service.GetMessages(accountReference, pageNumber, pageSize);
+            var actualResult = service.GetMessages(pageNumber, pageSize);
+
+            // Assert
+            Assert.AreEqual(expectedResult, actualResult);
+            Assert.AreEqual(pageNumber, actualResult.PageNumber);
+            Assert.AreEqual(pageSize, actualResult.PageSize);
+        }
+
+        [Test]
+        public void GetMessages_WithAccountReference_ReturnsInboxMessages()
+        {
+            // Arrange
+            var accountReference = "accountReference";
+
+            RestResource resource = new InboxMessagesResource(accountReference);
+
+            var response = new RestResponse
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = "serialisedItem"
+            };
+
+            var expectedResult = new InboxMessageCollection();
+
+            mockRestClient
+                .Setup(rc => rc.Get(resource))
+                .Returns(response);
+
+            mockSerialiser
+                .Setup(s => s.Deserialise<InboxMessageCollection>(response.Content))
+                .Returns(expectedResult);
+
+            // Act
+            var actualResult = service.GetMessages(accountReference);
+
+            // Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [Test]
+        public void GetMessages_WithAccountReferenceAndPageNumberAndPageSize_ReturnsInboxMessages()
+        {
+            // Arrange
+            var accountReference = "accountReference";
+            var pageNumber = 1;
+            var pageSize = 15;
+
+            RestResource resource = new InboxMessagesResource(accountReference, pageNumber, pageSize);
+
+            var response = new RestResponse
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = "serialisedItem"
+            };
+
+            var expectedResult = new InboxMessageCollection
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            mockRestClient
+                .Setup(rc => rc.Get(resource))
+                .Returns(response);
+
+            mockSerialiser
+                .Setup(s => s.Deserialise<InboxMessageCollection>(response.Content))
+                .Returns(expectedResult);
+
+            // Act
+            var actualResult = service.GetMessages(accountReference, pageNumber, pageSize);
 
             // Assert
             Assert.AreEqual(expectedResult, actualResult);
@@ -203,17 +203,17 @@ namespace com.esendex.sdk.test.inbox
         public void GetMessage_WithId_ReturnsSentMessage()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
             RestResource resource = new MessageHeadersResource(id);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedItem"
             };
 
-            InboxMessage expectedResult = new InboxMessage();
+            var expectedResult = new InboxMessage();
 
             mockRestClient
                 .Setup(rc => rc.Get(resource))
@@ -224,7 +224,7 @@ namespace com.esendex.sdk.test.inbox
                 .Returns(expectedResult);
 
             // Act
-            InboxMessage actualResult = service.GetMessage(id);
+            var actualResult = service.GetMessage(id);
 
             // Assert
             Assert.AreEqual(expectedResult, actualResult);
@@ -234,11 +234,11 @@ namespace com.esendex.sdk.test.inbox
         public void MarkMessageAsRead_WithId_ReturnsTrueWhenSuccessful()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
             RestResource resource = new InboxMessagesResource(id, InboxMessageStatus.Read);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK
             };
@@ -248,7 +248,7 @@ namespace com.esendex.sdk.test.inbox
                 .Returns(response);
 
             // Act
-            bool actualResult = service.MarkMessageAsRead(id);
+            var actualResult = service.MarkMessageAsRead(id);
 
             // Assert
             Assert.IsTrue(actualResult);
@@ -258,7 +258,7 @@ namespace com.esendex.sdk.test.inbox
         public void MarkMessageAsRead_WithId_ReturnsFalseWhenUnsuccessful()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
             RestResource resource = new InboxMessagesResource(id, InboxMessageStatus.Read);
 
@@ -269,7 +269,7 @@ namespace com.esendex.sdk.test.inbox
                 .Returns(response);
 
             // Act
-            bool actualResult = service.MarkMessageAsRead(id);
+            var actualResult = service.MarkMessageAsRead(id);
 
             // Assert
             Assert.IsFalse(actualResult);
@@ -279,11 +279,11 @@ namespace com.esendex.sdk.test.inbox
         public void MarkMessageAsUnread_WithId_ReturnsTrueWhenSuccessful()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
             RestResource resource = new InboxMessagesResource(id, InboxMessageStatus.Unread);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK
             };
@@ -293,7 +293,7 @@ namespace com.esendex.sdk.test.inbox
                 .Returns(response);
 
             // Act
-            bool actualResult = service.MarkMessageAsUnread(id);
+            var actualResult = service.MarkMessageAsUnread(id);
 
             // Assert
             Assert.IsTrue(actualResult);
@@ -303,7 +303,7 @@ namespace com.esendex.sdk.test.inbox
         public void MarkMessageAsUnread_WithId_ReturnsFalseWhenUnsuccessful()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
             RestResource resource = new InboxMessagesResource(id, InboxMessageStatus.Unread);
 
@@ -314,7 +314,7 @@ namespace com.esendex.sdk.test.inbox
                 .Returns(response);
 
             // Act
-            bool actualResult = service.MarkMessageAsUnread(id);
+            var actualResult = service.MarkMessageAsUnread(id);
 
             // Assert
             Assert.IsFalse(actualResult);
@@ -324,11 +324,11 @@ namespace com.esendex.sdk.test.inbox
         public void DeleteMessage_WithId_ReturnsTrueWhenSuccessful()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
             RestResource resource = new InboxMessagesResource(id);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK
             };
@@ -338,7 +338,7 @@ namespace com.esendex.sdk.test.inbox
                 .Returns(response);
 
             // Act
-            bool actualResult = service.DeleteMessage(id);
+            var actualResult = service.DeleteMessage(id);
 
             // Assert
             Assert.IsTrue(actualResult);
@@ -349,7 +349,7 @@ namespace com.esendex.sdk.test.inbox
         public void DeleteMessage_WithId_ReturnsFalseWhenUnsuccessful()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
             RestResource resource = new InboxMessagesResource(id);
 
@@ -360,7 +360,7 @@ namespace com.esendex.sdk.test.inbox
                 .Returns(response);
 
             // Act
-            bool actualResult = service.DeleteMessage(id);
+            var actualResult = service.DeleteMessage(id);
 
             // Assert
             Assert.IsFalse(actualResult);

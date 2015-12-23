@@ -28,7 +28,7 @@ namespace com.esendex.sdk.core
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            ResourceLink other = obj as ResourceLink;
+            var other = obj as ResourceLink;
 
             if (other == null) return false;
 

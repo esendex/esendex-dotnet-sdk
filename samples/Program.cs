@@ -24,25 +24,22 @@ namespace com.esendex.sdk.samples
             var helpRequested = false;
             var sendMessage = false;
             var optionSet = new OptionSet
+            {
+                {"u|user=", "Username to use", user => _username = user},
+                {"p|pass=", "Password for Username", pass => _password = pass},
+                {"a|account=", "Account Reference to use", reference => _accountReference = reference},
                 {
-                    {"u|user=", "Username to use", user => _username = user},
-                    {"p|pass=", "Password for Username", pass => _password = pass},
-                    {"a|account=", "Account Reference to use", reference => _accountReference = reference},
+                    "s|send=", "Send a message to the provided number", sendTo =>
                     {
-                        "s|send=", "Send a message to the provided number", sendTo =>
-                            {
-                                sendMessage = true;
-                                _sendTo = sendTo;
-                            }
-                    },
-                    {"b|bodies+", "Retrieve message bodies", v => _getBodies = true},
-                    {
-                        "h|help", "Help about the command line interface", key =>
-                            {
-                                helpRequested = key != null;
-                            }
+                        sendMessage = true;
+                        _sendTo = sendTo;
                     }
-                };
+                },
+                {"b|bodies+", "Retrieve message bodies", v => _getBodies = true},
+                {
+                    "h|help", "Help about the command line interface", key => { helpRequested = key != null; }
+                }
+            };
 
             try
             {

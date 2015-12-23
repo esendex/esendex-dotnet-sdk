@@ -23,7 +23,7 @@ namespace com.esendex.sdk.session
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            EsendexSession other = obj as EsendexSession;
+            var other = obj as EsendexSession;
 
             if (other == null) return false;
 

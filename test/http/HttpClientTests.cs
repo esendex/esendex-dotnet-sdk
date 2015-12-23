@@ -3,8 +3,8 @@ using System.Net;
 using System.Text;
 using com.esendex.sdk.adapters;
 using com.esendex.sdk.http;
-using NUnit.Framework;
 using Moq;
+using NUnit.Framework;
 
 namespace com.esendex.sdk.test.http
 {

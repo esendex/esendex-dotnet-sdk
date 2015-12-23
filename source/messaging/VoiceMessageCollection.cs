@@ -15,7 +15,6 @@ namespace com.esendex.sdk.messaging
         /// Initialises a new instance of the com.esendex.sdk.messaging.VoiceMessageCollection
         /// </summary>
         public VoiceMessageCollection()
-            : base()
         {
             SetDefaultValues();
         }

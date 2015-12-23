@@ -26,10 +26,14 @@ namespace com.esendex.sdk.sent
         /// </summary>
         /// <param name="credentials">A com.esendex.sdk.EsendexCredentials instance that contains access credentials.</param>
         public SentService(EsendexCredentials credentials)
-            : base(credentials) { }
+            : base(credentials)
+        {
+        }
 
         internal SentService(IRestClient restClient, ISerialiser serialiser)
-            : base(restClient, serialiser) { }
+            : base(restClient, serialiser)
+        {
+        }
 
         /// <summary>
         /// Gets a sent message for a specific message Id.

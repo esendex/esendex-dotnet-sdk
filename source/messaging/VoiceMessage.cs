@@ -15,7 +15,6 @@ namespace com.esendex.sdk.messaging
         /// Initialises a new instance of the com.esendex.sdk.messaging.VoiceMessage
         /// </summary>
         public VoiceMessage()
-            : base()
         {
             SetDefaultValues();
         }
@@ -62,7 +61,7 @@ namespace com.esendex.sdk.messaging
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            VoiceMessage other = obj as VoiceMessage;
+            var other = obj as VoiceMessage;
 
             if (other == null) return false;
 

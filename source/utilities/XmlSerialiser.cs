@@ -9,20 +9,20 @@ namespace com.esendex.sdk.utilities
     {
         public string Serialise<T>(T obj)
         {
-            XmlSerializer xmlSerialiser = new XmlSerializer(typeof(T));
+            var xmlSerialiser = new XmlSerializer(typeof (T));
 
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
 
-            using (EncodedStringWriter stringWriter = new EncodedStringWriter(builder, Encoding.UTF8))
+            using (var stringWriter = new EncodedStringWriter(builder, Encoding.UTF8))
             {
-                XmlWriterSettings xmlWriterSettings = new XmlWriterSettings()
+                var xmlWriterSettings = new XmlWriterSettings
                 {
                     Indent = false
                 };
 
-                using (XmlWriter xmlWriter = XmlTextWriter.Create(stringWriter, xmlWriterSettings))
+                using (var xmlWriter = XmlTextWriter.Create(stringWriter, xmlWriterSettings))
                 {
-                    XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
+                    var xmlSerializerNamespaces = new XmlSerializerNamespaces();
 
                     xmlSerializerNamespaces.Add(string.Empty, string.Empty);
 
@@ -37,18 +37,18 @@ namespace com.esendex.sdk.utilities
 
         public T Deserialise<T>(string source)
         {
-            XmlSerializer ser = new XmlSerializer(typeof(T));
+            var ser = new XmlSerializer(typeof (T));
 
-            using (StringReader reader = new StringReader(source))
+            using (var reader = new StringReader(source))
             {
-                return (T)ser.Deserialize(reader);
+                return (T) ser.Deserialize(reader);
             }
         }
     }
 
     internal class EncodedStringWriter : StringWriter
     {
-        private Encoding encoding;
+        private readonly Encoding encoding;
 
         public EncodedStringWriter(StringBuilder builder, Encoding encoding)
             : base(builder)

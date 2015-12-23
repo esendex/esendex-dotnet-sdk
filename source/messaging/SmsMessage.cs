@@ -14,7 +14,9 @@ namespace com.esendex.sdk.messaging
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.messaging.SmsMessage
         /// </summary>
-        public SmsMessage() : base() { }
+        public SmsMessage()
+        {
+        }
 
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.messaging.SmsMessage
@@ -51,7 +53,7 @@ namespace com.esendex.sdk.messaging
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            SmsMessage other = obj as SmsMessage;
+            var other = obj as SmsMessage;
 
             if (other == null) return false;
 

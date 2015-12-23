@@ -12,12 +12,12 @@ namespace com.esendex.sdk.test.messaging
         public void SmsMessage_DefaultDIConstructor()
         {
             // Arrange
-            string recipients = "recipients";
-            string body = "body";
-            string accountReference = "accountReference";
+            var recipients = "recipients";
+            var body = "body";
+            var accountReference = "accountReference";
 
             // Act
-            SmsMessage messageInstance = new SmsMessage(recipients, body, accountReference);
+            var messageInstance = new SmsMessage(recipients, body, accountReference);
 
             // Assert
             Assert.AreEqual(accountReference, messageInstance.AccountReference);
@@ -29,14 +29,14 @@ namespace com.esendex.sdk.test.messaging
         public void VoiceMessage_DefaultDIConstructor()
         {
             // Arrange
-            string recipients = "recipients";
-            string body = "body";
-            string accountReference = "accountReference";
-            int retries = 1;
-            VoiceMessageLanguage language = VoiceMessageLanguage.en_GB;
+            var recipients = "recipients";
+            var body = "body";
+            var accountReference = "accountReference";
+            var retries = 1;
+            var language = VoiceMessageLanguage.en_GB;
 
             // Act
-            VoiceMessage messageInstance = new VoiceMessage(recipients, body, accountReference);
+            var messageInstance = new VoiceMessage(recipients, body, accountReference);
 
             // Assert
             Assert.AreEqual(accountReference, messageInstance.AccountReference);
@@ -50,11 +50,11 @@ namespace com.esendex.sdk.test.messaging
         public void VoiceMessage_DefaultConstructor()
         {
             // Arrange
-            int retries = 1;
-            VoiceMessageLanguage language = VoiceMessageLanguage.en_GB;
+            var retries = 1;
+            var language = VoiceMessageLanguage.en_GB;
 
             // Act
-            VoiceMessage messageInstance = new VoiceMessage();
+            var messageInstance = new VoiceMessage();
 
             // Assert
             Assert.AreEqual(retries, messageInstance.Retries);
@@ -65,14 +65,14 @@ namespace com.esendex.sdk.test.messaging
         public void SmsMessageCollection_ConstructorWithSmsMessage()
         {
             // Arrange
-            string recipients = "recipients";
-            string body = "body";
-            string accountReference = "accountReference";
+            var recipients = "recipients";
+            var body = "body";
+            var accountReference = "accountReference";
 
-            SmsMessage message = new SmsMessage(recipients, body, accountReference);
+            var message = new SmsMessage(recipients, body, accountReference);
 
             // Act
-            SmsMessageCollection messagesInstance = new SmsMessageCollection(message);
+            var messagesInstance = new SmsMessageCollection(message);
 
             // Assert
             Assert.AreEqual(message, messagesInstance.Items.ElementAt(0));
@@ -82,16 +82,16 @@ namespace com.esendex.sdk.test.messaging
         public void VoiceMessageCollection_ConstructorWithVoiceMessage()
         {
             // Arrange
-            string recipients = "recipients";
-            string body = "body";
-            string accountReference = "accountReference";
-            int retries = 1;
-            VoiceMessageLanguage language = VoiceMessageLanguage.en_GB;
+            var recipients = "recipients";
+            var body = "body";
+            var accountReference = "accountReference";
+            var retries = 1;
+            var language = VoiceMessageLanguage.en_GB;
 
-            VoiceMessage message = new VoiceMessage(recipients, body, accountReference);
+            var message = new VoiceMessage(recipients, body, accountReference);
 
             // Act
-            VoiceMessageCollection messagesInstance = new VoiceMessageCollection(message);
+            var messagesInstance = new VoiceMessageCollection(message);
 
             // Assert
             Assert.AreEqual(message, messagesInstance.Items.ElementAt(0));
@@ -103,18 +103,18 @@ namespace com.esendex.sdk.test.messaging
         public void SmsMessageCollection_ConstructorWithSmsMessageArray()
         {
             // Arrange
-            string recipients = "recipients";
-            string body = "body";
-            string accountReference = "accountReference";
+            var recipients = "recipients";
+            var body = "body";
+            var accountReference = "accountReference";
 
-            SmsMessage[] messages = new SmsMessage[]
+            SmsMessage[] messages =
             {
                 new SmsMessage(recipients, body, accountReference),
                 new SmsMessage(recipients, body, accountReference)
             };
 
             // Act
-            SmsMessageCollection messagesInstance = new SmsMessageCollection(messages, accountReference);
+            var messagesInstance = new SmsMessageCollection(messages, accountReference);
 
             // Assert
             Assert.AreEqual(messages[0], messagesInstance.Items.ElementAt(0));
@@ -125,20 +125,20 @@ namespace com.esendex.sdk.test.messaging
         public void VoiceMessageCollection_ConstructorWithVoiceMessageArray()
         {
             // Arrange
-            string recipients = "recipients";
-            string body = "body";
-            string accountReference = "accountReference";
-            int retries = 1;
-            VoiceMessageLanguage language = VoiceMessageLanguage.en_GB;
+            var recipients = "recipients";
+            var body = "body";
+            var accountReference = "accountReference";
+            var retries = 1;
+            var language = VoiceMessageLanguage.en_GB;
 
-            VoiceMessage[] messages = new VoiceMessage[]
+            VoiceMessage[] messages =
             {
                 new VoiceMessage(recipients, body, accountReference),
                 new VoiceMessage(recipients, body, accountReference)
             };
 
             // Act
-            VoiceMessageCollection messagesInstance = new VoiceMessageCollection(messages, accountReference);
+            var messagesInstance = new VoiceMessageCollection(messages, accountReference);
 
             // Assert
             Assert.AreEqual(messages[0], messagesInstance.Items.ElementAt(0));
@@ -151,18 +151,18 @@ namespace com.esendex.sdk.test.messaging
         public void SmsMessage_DefaultDIConstructor_WithNullOrEmptyParams()
         {
             // Arrange
-            string recipients = string.Empty;
+            var recipients = string.Empty;
             string body = null;
-            string accountReference = string.Empty;
+            var accountReference = string.Empty;
 
             // Act
             try
             {
-                SmsMessage messageInstance = new SmsMessage(recipients, body, accountReference);
+                var messageInstance = new SmsMessage(recipients, body, accountReference);
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("recipients", ex.ParamName);
@@ -173,18 +173,18 @@ namespace com.esendex.sdk.test.messaging
         public void VoiceMessage_DefaultDIConstructor_WithNullOrEmptyParams()
         {
             // Arrange
-            string recipients = string.Empty;
+            var recipients = string.Empty;
             string body = null;
-            string accountReference = string.Empty;
+            var accountReference = string.Empty;
 
             // Act
             try
             {
-                VoiceMessage messageInstance = new VoiceMessage(recipients, body, accountReference);
+                var messageInstance = new VoiceMessage(recipients, body, accountReference);
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("recipients", ex.ParamName);
@@ -200,11 +200,11 @@ namespace com.esendex.sdk.test.messaging
             // Act
             try
             {
-                SmsMessageCollection messageInstances = new SmsMessageCollection(message);
+                var messageInstances = new SmsMessageCollection(message);
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("message", ex.ParamName);
@@ -220,11 +220,11 @@ namespace com.esendex.sdk.test.messaging
             // Act
             try
             {
-                VoiceMessageCollection messageInstances = new VoiceMessageCollection(message);
+                var messageInstances = new VoiceMessageCollection(message);
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("message", ex.ParamName);
@@ -239,11 +239,11 @@ namespace com.esendex.sdk.test.messaging
             // Act
             try
             {
-                SmsMessageCollection messageInstances = new SmsMessageCollection(null, string.Empty);
+                var messageInstances = new SmsMessageCollection(null, string.Empty);
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("messages", ex.ParamName);
@@ -258,11 +258,11 @@ namespace com.esendex.sdk.test.messaging
             // Act
             try
             {
-                VoiceMessageCollection messageInstances = new VoiceMessageCollection(null, string.Empty);
+                var messageInstances = new VoiceMessageCollection(null, string.Empty);
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("messages", ex.ParamName);

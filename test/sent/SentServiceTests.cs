@@ -5,8 +5,8 @@ using com.esendex.sdk.rest;
 using com.esendex.sdk.rest.resources;
 using com.esendex.sdk.sent;
 using com.esendex.sdk.utilities;
-using NUnit.Framework;
 using Moq;
+using NUnit.Framework;
 
 namespace com.esendex.sdk.test.sent
 {
@@ -31,10 +31,10 @@ namespace com.esendex.sdk.test.sent
         public void DefaultConstructor()
         {
             // Arrange
-            EsendexCredentials credentials = new EsendexCredentials("username", "password");
+            var credentials = new EsendexCredentials("username", "password");
 
             // Act
-            SentService serviceInstance = new SentService(credentials);
+            var serviceInstance = new SentService(credentials);
 
             // Assert
             Assert.That(serviceInstance.RestClient, Is.InstanceOf<RestClient>());
@@ -45,8 +45,8 @@ namespace com.esendex.sdk.test.sent
         public void DefaultDIConstructor()
         {
             // Arrange
-            Uri uri = new Uri("http://tempuri.org");
-            EsendexCredentials credentials = new EsendexCredentials("username", "password");
+            var uri = new Uri("http://tempuri.org");
+            var credentials = new EsendexCredentials("username", "password");
             IHttpRequestHelper httpRequestHelper = new HttpRequestHelper();
             IHttpResponseHelper httpResponseHelper = new HttpResponseHelper();
             IHttpClient httpClient = new HttpClient(credentials, uri, httpRequestHelper, httpResponseHelper);
@@ -55,7 +55,7 @@ namespace com.esendex.sdk.test.sent
             ISerialiser serialiser = new XmlSerialiser();
 
             // Act
-            SentService serviceInstance = new SentService(restClient, serialiser);
+            var serviceInstance = new SentService(restClient, serialiser);
 
             // Assert
             Assert.That(serviceInstance.RestClient, Is.InstanceOf<RestClient>());
@@ -66,17 +66,17 @@ namespace com.esendex.sdk.test.sent
         public void GetMessage_WithId_ReturnsSentMessage()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
             RestResource resource = new MessageHeadersResource(id);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedItem"
             };
 
-            SentMessage expectedResult = new SentMessage();
+            var expectedResult = new SentMessage();
 
             mockRestClient
                 .Setup(rc => rc.Get(resource))
@@ -87,7 +87,7 @@ namespace com.esendex.sdk.test.sent
                 .Returns(expectedResult);
 
             // Act
-            SentMessage actualResult = service.GetMessage(id);
+            var actualResult = service.GetMessage(id);
 
             // Assert
             Assert.AreEqual(expectedResult, actualResult);
@@ -97,21 +97,21 @@ namespace com.esendex.sdk.test.sent
         public void GetMessages_WithPageNumberAndPageSize_ReturnsSentMessages()
         {
             // Arrange
-            int pageNumber = 1;
-            int pageSize = 15;
+            var pageNumber = 1;
+            var pageSize = 15;
 
             RestResource resource = new MessageHeadersResource(pageNumber, pageSize);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedItem"
             };
 
-            SentMessageCollection expectedResult = new SentMessageCollection()
+            var expectedResult = new SentMessageCollection
             {
                 PageNumber = pageNumber,
-                PageSize = pageSize,
+                PageSize = pageSize
             };
 
             mockRestClient
@@ -123,7 +123,7 @@ namespace com.esendex.sdk.test.sent
                 .Returns(expectedResult);
 
             // Act
-            SentMessageCollection actualResult = service.GetMessages(pageNumber, pageSize);
+            var actualResult = service.GetMessages(pageNumber, pageSize);
 
             // Assert
             Assert.AreEqual(pageNumber, actualResult.PageNumber);
@@ -134,22 +134,22 @@ namespace com.esendex.sdk.test.sent
         public void GetMessages_WithPageNumberAndPageSizeAndAccountReference_ReturnsSentMessages()
         {
             // Arrange
-            int pageNumber = 1;
-            int pageSize = 15;
-            string accountReference = "accountReference";
+            var pageNumber = 1;
+            var pageSize = 15;
+            var accountReference = "accountReference";
 
             RestResource resource = new MessageHeadersResource(accountReference, pageNumber, pageSize);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedItem"
             };
 
-            SentMessageCollection expectedResult = new SentMessageCollection()
+            var expectedResult = new SentMessageCollection
             {
                 PageNumber = pageNumber,
-                PageSize = pageSize,
+                PageSize = pageSize
             };
 
             mockRestClient
@@ -161,7 +161,7 @@ namespace com.esendex.sdk.test.sent
                 .Returns(expectedResult);
 
             // Act
-            SentMessageCollection actualResult = service.GetMessages(accountReference, pageNumber, pageSize);
+            var actualResult = service.GetMessages(accountReference, pageNumber, pageSize);
 
             // Assert
             Assert.AreEqual(pageNumber, actualResult.PageNumber);

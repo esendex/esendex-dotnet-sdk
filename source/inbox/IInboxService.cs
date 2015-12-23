@@ -49,8 +49,8 @@ namespace com.esendex.sdk.inbox
         /// <returns>A com.esendex.sdk.inbox.InboxMessageCollection instance containing inbox messages.</returns>
         /// <exception cref="System.Net.WebException"></exception>
         /// <exception cref="System.ArgumentException"></exception>
-        InboxMessageCollection GetMessages(string accountReference);        
-        
+        InboxMessageCollection GetMessages(string accountReference);
+
         /// <summary>
         /// Returns true if the message was successfully marked as read; otherwise, false.
         /// </summary>
@@ -73,6 +73,6 @@ namespace com.esendex.sdk.inbox
         /// <param name="id">A System.Guid instance that contains the Id of an inbox message.</param>
         /// <returns>true, if the message was successfully marked as read; otherwise, false.</returns>
         /// <exception cref="System.Net.WebException"></exception>
-        bool DeleteMessage(Guid id);        
+        bool DeleteMessage(Guid id);
     }
 }

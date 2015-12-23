@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+
 namespace com.esendex.sdk.inbox
 {
     /// <summary>

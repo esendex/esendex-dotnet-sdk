@@ -21,7 +21,7 @@ namespace com.esendex.sdk.core
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            MessageBody other = obj as MessageBody;
+            var other = obj as MessageBody;
 
             if (other == null) return false;
             if (BodyText != other.BodyText) return false;

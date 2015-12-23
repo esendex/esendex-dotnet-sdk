@@ -12,7 +12,9 @@ namespace com.esendex.sdk.messaging
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.messaging.Message
         /// </summary>
-        public Message() { }
+        public Message()
+        {
+        }
 
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.messaging.Message
@@ -43,7 +45,11 @@ namespace com.esendex.sdk.messaging
         /// </summary>
         [XmlElement("from")]
         public string Originator { get; set; }
-        public bool ShouldSerializeOriginator() { return !string.IsNullOrEmpty(Originator); }        
+
+        public bool ShouldSerializeOriginator()
+        {
+            return !string.IsNullOrEmpty(Originator);
+        }
 
         /// <summary>
         /// Gets or sets the recipients.
@@ -76,7 +82,7 @@ namespace com.esendex.sdk.messaging
         /// <returns>true if the specified System.Object is equal to the current System.Object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            Message other = obj as Message;
+            var other = obj as Message;
 
             if (other == null) return false;
 
@@ -100,4 +106,3 @@ namespace com.esendex.sdk.messaging
         }
     }
 }
-

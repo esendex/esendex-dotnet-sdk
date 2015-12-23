@@ -1,5 +1,4 @@
-﻿
-namespace com.esendex.sdk.core
+﻿namespace com.esendex.sdk.core
 {
     /// <summary>
     /// Defines the attributes of a paged result set.

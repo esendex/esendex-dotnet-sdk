@@ -8,8 +8,8 @@ using com.esendex.sdk.messaging;
 using com.esendex.sdk.rest;
 using com.esendex.sdk.rest.resources;
 using com.esendex.sdk.utilities;
-using NUnit.Framework;
 using Moq;
+using NUnit.Framework;
 
 namespace com.esendex.sdk.test.messaging
 {
@@ -34,12 +34,12 @@ namespace com.esendex.sdk.test.messaging
         public void DefaultConstructor()
         {
             // Arrange
-            bool ensureMessageIdsInResult = false;
-            EsendexCredentials credentials = new EsendexCredentials("username", "password");
-           
+            var ensureMessageIdsInResult = false;
+            var credentials = new EsendexCredentials("username", "password");
+
             // Act
-            MessagingService serviceInstance = new MessagingService(ensureMessageIdsInResult, credentials);
-            
+            var serviceInstance = new MessagingService(ensureMessageIdsInResult, credentials);
+
             // Assert
             Assert.That(serviceInstance.RestClient, Is.InstanceOf<RestClient>());
             Assert.That(serviceInstance.Serialiser, Is.InstanceOf<XmlSerialiser>());
@@ -51,17 +51,17 @@ namespace com.esendex.sdk.test.messaging
         public void DefaultDIConstructor()
         {
             // Arrange
-            Uri uri = new Uri("http://tempuri.org");
-            EsendexCredentials credentials = new EsendexCredentials("username", "password");
+            var uri = new Uri("http://tempuri.org");
+            var credentials = new EsendexCredentials("username", "password");
             IHttpRequestHelper httpRequestHelper = new HttpRequestHelper();
             IHttpResponseHelper httpResponseHelper = new HttpResponseHelper();
-            IHttpClient httpClient = new HttpClient(credentials, uri, httpRequestHelper, httpResponseHelper);           
+            IHttpClient httpClient = new HttpClient(credentials, uri, httpRequestHelper, httpResponseHelper);
 
             IRestClient restClient = new RestClient(httpClient);
             ISerialiser serialiser = new XmlSerialiser();
 
             // Act
-            MessagingService serviceInstance = new MessagingService(restClient, serialiser, true);
+            var serviceInstance = new MessagingService(restClient, serialiser, true);
 
             // Assert
             Assert.That(serviceInstance.RestClient, Is.InstanceOf<RestClient>());
@@ -72,22 +72,22 @@ namespace com.esendex.sdk.test.messaging
 
         [Test]
         public void SendMessage_WithSmsMessage_ReturnsBatchIdResult()
-        { 
+        {
             // Arrange
-            SmsMessage message = new SmsMessage("recipients", "body", "accountReference");
-            SmsMessageCollection messages = new SmsMessageCollection(message);
+            var message = new SmsMessage("recipients", "body", "accountReference");
+            var messages = new SmsMessageCollection(message);
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedResponse"
             };
-            
-            MessagingResult expectedResult = new MessagingResult()
+
+            var expectedResult = new MessagingResult
             {
                 BatchId = Guid.NewGuid(),
                 MessageIds = new List<ResourceLink>()
@@ -106,7 +106,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(expectedResult);
 
             // Act
-            MessagingResult actualResult = service.SendMessage(message);
+            var actualResult = service.SendMessage(message);
 
             // Assert
             Assert.IsNotNull(actualResult);
@@ -118,20 +118,20 @@ namespace com.esendex.sdk.test.messaging
         public void SendMessage_WithVoiceMessage_ReturnsBatchIdResult()
         {
             // Arrange
-            VoiceMessage message = new VoiceMessage("recipients", "body", "accountReference");
-            VoiceMessageCollection messages = new VoiceMessageCollection(message);
+            var message = new VoiceMessage("recipients", "body", "accountReference");
+            var messages = new VoiceMessageCollection(message);
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedResponse"
             };
 
-            MessagingResult expectedResult = new MessagingResult()
+            var expectedResult = new MessagingResult
             {
                 BatchId = Guid.NewGuid(),
                 MessageIds = new List<ResourceLink>()
@@ -150,7 +150,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(expectedResult);
 
             // Act
-            MessagingResult actualResult = service.SendMessage(message);
+            var actualResult = service.SendMessage(message);
 
             // Assert
             Assert.IsNotNull(actualResult);
@@ -162,20 +162,20 @@ namespace com.esendex.sdk.test.messaging
         public void SendMessages_WithSmsMessage_ReturnsBatchIdResult()
         {
             // Arrange
-            SmsMessage message = new SmsMessage("recipients", "body", "accountReference");
-            SmsMessageCollection messages = new SmsMessageCollection(message);
+            var message = new SmsMessage("recipients", "body", "accountReference");
+            var messages = new SmsMessageCollection(message);
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedResponse"
             };
 
-            MessagingResult expectedResult = new MessagingResult()
+            var expectedResult = new MessagingResult
             {
                 BatchId = Guid.NewGuid(),
                 MessageIds = new List<ResourceLink>()
@@ -194,7 +194,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(expectedResult);
 
             // Act
-            MessagingResult actualResult = service.SendMessages(messages);
+            var actualResult = service.SendMessages(messages);
 
             // Assert
             Assert.IsNotNull(actualResult);
@@ -206,20 +206,20 @@ namespace com.esendex.sdk.test.messaging
         public void SendMessages_WithVoiceMessage_ReturnsBatchIdResult()
         {
             // Arrange
-            VoiceMessage message = new VoiceMessage("recipients", "body", "accountReference");
-            VoiceMessageCollection messages = new VoiceMessageCollection(message);
+            var message = new VoiceMessage("recipients", "body", "accountReference");
+            var messages = new VoiceMessageCollection(message);
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedResponse"
             };
 
-            MessagingResult expectedResult = new MessagingResult()
+            var expectedResult = new MessagingResult
             {
                 BatchId = Guid.NewGuid(),
                 MessageIds = new List<ResourceLink>()
@@ -238,7 +238,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(expectedResult);
 
             // Act
-            MessagingResult actualResult = service.SendMessages(messages);
+            var actualResult = service.SendMessages(messages);
 
             // Assert
             Assert.IsNotNull(actualResult);
@@ -250,22 +250,22 @@ namespace com.esendex.sdk.test.messaging
         public void SendScheduledMessage_WithSmsMessage_ReturnsBatchIdResult()
         {
             // Arrange
-            DateTime timestamp = DateTime.UtcNow;
+            var timestamp = DateTime.UtcNow;
 
-            SmsMessage message = new SmsMessage("recipients", "body", "accountReference");
-            SmsMessageCollection messages = new SmsMessageCollection(message) { SendAt = timestamp };
+            var message = new SmsMessage("recipients", "body", "accountReference");
+            var messages = new SmsMessageCollection(message) {SendAt = timestamp};
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedResponse"
             };
 
-            MessagingResult expectedResult = new MessagingResult()
+            var expectedResult = new MessagingResult
             {
                 BatchId = Guid.NewGuid(),
                 MessageIds = new List<ResourceLink>()
@@ -284,7 +284,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(expectedResult);
 
             // Act
-            MessagingResult actualResult = service.SendScheduledMessage(message, timestamp);
+            var actualResult = service.SendScheduledMessage(message, timestamp);
 
             // Assert
             Assert.IsNotNull(actualResult);
@@ -296,22 +296,22 @@ namespace com.esendex.sdk.test.messaging
         public void SendScheduledMessage_WithVoiceMessage_ReturnsBatchIdResult()
         {
             // Arrange
-            DateTime timestamp = DateTime.UtcNow;
+            var timestamp = DateTime.UtcNow;
 
-            VoiceMessage message = new VoiceMessage("recipients", "body", "accountReference");
-            VoiceMessageCollection messages = new VoiceMessageCollection(message) { SendAt = timestamp };
+            var message = new VoiceMessage("recipients", "body", "accountReference");
+            var messages = new VoiceMessageCollection(message) {SendAt = timestamp};
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedResponse"
             };
 
-            MessagingResult expectedResult = new MessagingResult()
+            var expectedResult = new MessagingResult
             {
                 BatchId = Guid.NewGuid(),
                 MessageIds = new List<ResourceLink>()
@@ -330,7 +330,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(expectedResult);
 
             // Act
-            MessagingResult actualResult = service.SendScheduledMessage(message, timestamp);
+            var actualResult = service.SendScheduledMessage(message, timestamp);
 
             // Assert
             Assert.IsNotNull(actualResult);
@@ -342,22 +342,22 @@ namespace com.esendex.sdk.test.messaging
         public void SendScheduledMessages_WithSmsMessage_ReturnsBatchIdResult()
         {
             // Arrange
-            DateTime timestamp = DateTime.UtcNow;
+            var timestamp = DateTime.UtcNow;
 
-            SmsMessage message = new SmsMessage("recipients", "body", "accountReference");
-            SmsMessageCollection messages = new SmsMessageCollection(message) { SendAt = timestamp };
+            var message = new SmsMessage("recipients", "body", "accountReference");
+            var messages = new SmsMessageCollection(message) {SendAt = timestamp};
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedResponse"
             };
 
-            MessagingResult expectedResult = new MessagingResult()
+            var expectedResult = new MessagingResult
             {
                 BatchId = Guid.NewGuid(),
                 MessageIds = new List<ResourceLink>()
@@ -376,7 +376,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(expectedResult);
 
             // Act
-            MessagingResult actualResult = service.SendScheduledMessages(messages, timestamp);
+            var actualResult = service.SendScheduledMessages(messages, timestamp);
 
             // Assert
             Assert.IsNotNull(actualResult);
@@ -388,22 +388,22 @@ namespace com.esendex.sdk.test.messaging
         public void SendScheduledMessages_WithVoiceMessage_ReturnsBatchIdResult()
         {
             // Arrange
-            DateTime timestamp = DateTime.UtcNow;
+            var timestamp = DateTime.UtcNow;
 
-            VoiceMessage message = new VoiceMessage("recipients", "body", "accountReference");
-            VoiceMessageCollection messages = new VoiceMessageCollection(message) { SendAt = timestamp };
+            var message = new VoiceMessage("recipients", "body", "accountReference");
+            var messages = new VoiceMessageCollection(message) {SendAt = timestamp};
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
-            RestResponse response = new RestResponse()
+            var response = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = "serialisedResponse"
             };
 
-            MessagingResult expectedResult = new MessagingResult()
+            var expectedResult = new MessagingResult
             {
                 BatchId = Guid.NewGuid(),
                 MessageIds = new List<ResourceLink>()
@@ -422,7 +422,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(expectedResult);
 
             // Act
-            MessagingResult actualResult = service.SendScheduledMessages(messages, timestamp);
+            var actualResult = service.SendScheduledMessages(messages, timestamp);
 
             // Assert
             Assert.IsNotNull(actualResult);
@@ -434,10 +434,10 @@ namespace com.esendex.sdk.test.messaging
         public void SendSmsMessageCollection_RestClientReturnsNull_ReturnsNull()
         {
             // Arrange
-            SmsMessage message = new SmsMessage("recipients", "body", "accountReference");
-            SmsMessageCollection messages = new SmsMessageCollection(message);
+            var message = new SmsMessage("recipients", "body", "accountReference");
+            var messages = new SmsMessageCollection(message);
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
@@ -452,7 +452,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(response);
 
             // Act
-            MessagingResult actualResult = service.SendMessages(messages);
+            var actualResult = service.SendMessages(messages);
 
             // Assert
             Assert.IsNull(actualResult);
@@ -462,10 +462,10 @@ namespace com.esendex.sdk.test.messaging
         public void SendVoiceMessageCollection_RestClientReturnsNull_ReturnsNull()
         {
             // Arrange
-            VoiceMessage message = new VoiceMessage("recipients", "body", "accountReference");
-            VoiceMessageCollection messages = new VoiceMessageCollection(message);
+            var message = new VoiceMessage("recipients", "body", "accountReference");
+            var messages = new VoiceMessageCollection(message);
 
-            string serialisedMessage = "serialisedMessage";
+            var serialisedMessage = "serialisedMessage";
 
             RestResource resource = new MessageDispatcherResource(serialisedMessage, false);
 
@@ -480,7 +480,7 @@ namespace com.esendex.sdk.test.messaging
                 .Returns(response);
 
             // Act
-            MessagingResult actualResult = service.SendMessages(messages);
+            var actualResult = service.SendMessages(messages);
 
             // Assert
             Assert.IsNull(actualResult);
