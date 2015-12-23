@@ -1,5 +1,4 @@
-﻿
-namespace com.esendex.sdk.rest
+﻿namespace com.esendex.sdk.rest
 {
     internal abstract class RestResource
     {
@@ -25,7 +24,7 @@ namespace com.esendex.sdk.rest
 
         public override bool Equals(object obj)
         {
-            RestResource other = obj as RestResource;
+            var other = obj as RestResource;
 
             if (other == null) return false;
 

@@ -41,7 +41,7 @@ namespace com.esendex.sdk.test.contacts
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("quickName", ex.ParamName);
@@ -54,7 +54,7 @@ namespace com.esendex.sdk.test.contacts
             // Arrange
 
             // Act
-            ContactCollection contactCollectionInstance = new ContactCollection();
+            var contactCollectionInstance = new ContactCollection();
 
             // Assert
             Assert.That(contactCollectionInstance.Items, Is.InstanceOf<List<Contact>>());
@@ -64,10 +64,10 @@ namespace com.esendex.sdk.test.contacts
         public void ContactCollection_DefaultDIConstructor_WithContact()
         {
             // Arrange
-            Contact contact = new Contact();
+            var contact = new Contact();
 
             // Act
-            ContactCollection contactCollectionInstance = new ContactCollection(contact);
+            var contactCollectionInstance = new ContactCollection(contact);
 
             // Assert
             Assert.AreEqual(contact, contactCollectionInstance.Items.ElementAt(0));
@@ -82,11 +82,11 @@ namespace com.esendex.sdk.test.contacts
             // Act
             try
             {
-                ContactCollection contactCollectionInstance = new ContactCollection(contact);
+                var contactCollectionInstance = new ContactCollection(contact);
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("contact", ex.ParamName);
@@ -97,14 +97,14 @@ namespace com.esendex.sdk.test.contacts
         public void ContactCollection_DefaultDIConstructor_WithContactsArray()
         {
             // Arrange
-            Contact contact = new Contact();
+            var contact = new Contact();
 
-            List<Contact> contacts = new List<Contact>();
+            var contacts = new List<Contact>();
 
             contacts.Add(contact);
 
             // Act
-            ContactCollection contactCollectionInstance = new ContactCollection(contacts);
+            var contactCollectionInstance = new ContactCollection(contacts);
 
             // Assert
             Assert.AreEqual(contact, contactCollectionInstance.Items.ElementAt(0));
@@ -119,11 +119,11 @@ namespace com.esendex.sdk.test.contacts
             // Act
             try
             {
-                ContactCollection contactCollectionInstance = new ContactCollection(contacts);
+                var contactCollectionInstance = new ContactCollection(contacts);
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentNullException ex)
             {
                 Assert.AreEqual("contacts", ex.ParamName);

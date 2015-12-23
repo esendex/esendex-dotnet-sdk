@@ -6,14 +6,14 @@ using NUnit.Framework;
 namespace com.esendex.sdk.test.rest.resources
 {
     [TestFixture]
-    public class ContactsResourceTests    
+    public class ContactsResourceTests
     {
         [Test]
         public void DefaultConstructor_WithContent()
         {
             // Arrange
-            string expectedResourcePath = "contacts";
-            string expectedContent = "content";
+            var expectedResourcePath = "contacts";
+            var expectedContent = "content";
 
             // Act
             RestResource resource = new ContactsResource(expectedContent);
@@ -27,9 +27,9 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithId()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
-            string expectedResourcePath = string.Format("contacts/{0}", id);
+            var expectedResourcePath = string.Format("contacts/{0}", id);
 
             // Act
             RestResource resource = new ContactsResource(id);
@@ -42,11 +42,11 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithPageNumber1AndPageSize15()
         {
             // Arrange
-            string accountReference = "frgjbhjrehre";
-            int pageNumber = 1;
-            int pageSize = 15;
+            var accountReference = "frgjbhjrehre";
+            var pageNumber = 1;
+            var pageSize = 15;
 
-            string expectedResourcePath = string.Format("contacts?accountReference={0}&startIndex=0&count={1}", accountReference, pageSize);
+            var expectedResourcePath = string.Format("contacts?accountReference={0}&startIndex=0&count={1}", accountReference, pageSize);
 
             // Act
             RestResource resource = new ContactsResource(accountReference, pageNumber, pageSize);
@@ -59,11 +59,11 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithPageNumber2AndPageSize15()
         {
             // Arrange
-            string accountReference = "frgjbhjrehre";
-            int pageNumber = 2;
-            int pageSize = 15;
+            var accountReference = "frgjbhjrehre";
+            var pageNumber = 2;
+            var pageSize = 15;
 
-            string expectedResourcePath = string.Format("contacts?accountReference={0}&startIndex=15&count={1}", accountReference, pageSize);            
+            var expectedResourcePath = string.Format("contacts?accountReference={0}&startIndex=15&count={1}", accountReference, pageSize);
 
             // Act
             RestResource resource = new ContactsResource(accountReference, pageNumber, pageSize);
@@ -76,9 +76,9 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithInvalidPageNumberAndPageSize()
         {
             // Arrange
-            string accountReference = "frgjbhjrehre";
-            int pageNumber = 0;
-            int pageSize = 0;
+            var accountReference = "frgjbhjrehre";
+            var pageNumber = 0;
+            var pageSize = 0;
 
             // Act
             try
@@ -87,7 +87,7 @@ namespace com.esendex.sdk.test.rest.resources
 
                 Assert.Fail();
             }
-            // Assert
+                // Assert
             catch (ArgumentException ex)
             {
                 Assert.AreEqual("pageNumber", ex.ParamName);
@@ -98,10 +98,10 @@ namespace com.esendex.sdk.test.rest.resources
         public void DefaultConstructor_WithIdAndContent()
         {
             // Arrange
-            Guid id = Guid.NewGuid();
+            var id = Guid.NewGuid();
 
-            string expectedResourcePath = string.Format("contacts/{0}", id);
-            string expectedContent = "content";            
+            var expectedResourcePath = string.Format("contacts/{0}", id);
+            var expectedContent = "content";
 
             // Act
             RestResource resource = new ContactsResource(id, expectedContent);

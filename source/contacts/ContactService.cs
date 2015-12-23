@@ -25,11 +25,15 @@ namespace com.esendex.sdk.contacts
         /// Initialises a new instance of the com.esendex.sdk.contacts.ContactService
         /// </summary>
         /// <param name="credentials">A com.esendex.sdk.EsendexCredentials instance that contains access credentials.</param>
-        public ContactService(EsendexCredentials credentials) 
-            : base(credentials){ }
+        public ContactService(EsendexCredentials credentials)
+            : base(credentials)
+        {
+        }
 
         internal ContactService(IRestClient restClient, ISerialiser serialiser)
-            : base(restClient, serialiser) { }
+            : base(restClient, serialiser)
+        {
+        }
 
         /// <summary>
         /// Creates a com.esendex.sdk.contacts.Contact instance and returns the new com.esendex.sdk.contacts.Contact instance.
@@ -44,7 +48,8 @@ namespace com.esendex.sdk.contacts
 
             RestResource resource = new ContactsResource(requestXml);
 
-            return MakeRequest<ContactResponse>(HttpMethod.POST, resource).Contact;
+            return MakeRequest<ContactResponse>(HttpMethod.POST, resource)
+                .Contact;
         }
 
         /// <summary>
@@ -57,7 +62,7 @@ namespace com.esendex.sdk.contacts
         {
             RestResource resource = new ContactsResource(id);
 
-            RestResponse response = MakeRequest(HttpMethod.DELETE, resource);
+            var response = MakeRequest(HttpMethod.DELETE, resource);
 
             return (response != null);
         }
@@ -71,11 +76,11 @@ namespace com.esendex.sdk.contacts
         /// <exception cref="System.Net.WebException"></exception>      
         public bool UpdateContact(Contact contact)
         {
-            string requestXml = Serialiser.Serialise(contact);
+            var requestXml = Serialiser.Serialise(contact);
 
             RestResource resource = new ContactsResource(contact.Id, requestXml);
 
-            RestResponse response = MakeRequest(HttpMethod.PUT, resource);
+            var response = MakeRequest(HttpMethod.PUT, resource);
 
             return (response != null);
         }

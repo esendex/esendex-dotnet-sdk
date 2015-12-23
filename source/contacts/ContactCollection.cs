@@ -15,7 +15,9 @@ namespace com.esendex.sdk.contacts
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.contacts.ContactCollection
         /// </summary>
-        public ContactCollection() { }
+        public ContactCollection()
+        {
+        }
 
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.contacts.ContactCollection
@@ -42,8 +44,7 @@ namespace com.esendex.sdk.contacts
         /// <summary>
         /// <![CDATA[A System.Collections.Generic.List<com.esendex.sdk.contacts.Contact> instance that contains the contacts.]]>
         /// </summary>
-        [XmlElement("contact")]
-        public List<Contact> Items = new List<Contact>();
+        [XmlElement("contact")] public List<Contact> Items = new List<Contact>();
 
         /// <summary>
         /// Determines whether the specified System.Object are considered equal.

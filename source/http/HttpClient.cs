@@ -6,7 +6,10 @@ namespace com.esendex.sdk.http
 {
     internal class HttpClient : IHttpClient
     {
-        private static readonly Version _version = Assembly.GetAssembly(typeof(IHttpRequestHelper)).GetName().Version;
+        private static readonly Version _version = Assembly.GetAssembly(typeof (IHttpRequestHelper))
+                                                           .GetName()
+                                                           .Version;
+
         public IHttpRequestHelper HttpRequestHelper { get; private set; }
         public IHttpResponseHelper HttpResponseHelper { get; private set; }
         public EsendexCredentials Credentials { get; private set; }

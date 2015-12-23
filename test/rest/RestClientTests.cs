@@ -3,8 +3,8 @@ using System.Net;
 using System.Text;
 using com.esendex.sdk.http;
 using com.esendex.sdk.rest;
-using NUnit.Framework;
 using Moq;
+using NUnit.Framework;
 
 namespace com.esendex.sdk.test.rest
 {
@@ -36,7 +36,9 @@ namespace com.esendex.sdk.test.rest
                 get { return "v1.2"; }
             }
 
-            public PostRestResourceContext(string content) : base(content) { }
+            public PostRestResourceContext(string content) : base(content)
+            {
+            }
         }
 
         internal class PutRestResourceContext : RestResource
@@ -51,7 +53,9 @@ namespace com.esendex.sdk.test.rest
                 get { return "v1.3"; }
             }
 
-            public PutRestResourceContext(string content) : base(content) { }
+            public PutRestResourceContext(string content) : base(content)
+            {
+            }
         }
 
         internal class DeleteRestResourceContext : RestResource
@@ -81,15 +85,15 @@ namespace com.esendex.sdk.test.rest
         public void DefaultDIConstructor()
         {
             // Arrange
-            Uri uri = new Uri("http://tempuri.org");
-            EsendexCredentials credentials = new EsendexCredentials("username", "password");
+            var uri = new Uri("http://tempuri.org");
+            var credentials = new EsendexCredentials("username", "password");
             IHttpRequestHelper httpRequestHelper = new HttpRequestHelper();
             IHttpResponseHelper httpResponseHelper = new HttpResponseHelper();
 
             IHttpClient httpClient = new HttpClient(credentials, uri, httpRequestHelper, httpResponseHelper);
 
             // Act
-            RestClient restClientInstance = new RestClient(httpClient);
+            var restClientInstance = new RestClient(httpClient);
 
             // Assert
             Assert.That(restClientInstance.HttpClient, Is.InstanceOf<HttpClient>());
@@ -99,11 +103,11 @@ namespace com.esendex.sdk.test.rest
         public void Post_HttpReturnsIn200Range_ReturnsRestResponse()
         {
             // Arrange
-            string content = "content";
+            var content = "content";
 
-            PostRestResourceContext postResourceContext = new PostRestResourceContext(content);
+            var postResourceContext = new PostRestResourceContext(content);
 
-            HttpRequest httpRequest = new HttpRequest()
+            var httpRequest = new HttpRequest
             {
                 HttpMethod = HttpMethod.POST,
                 ResourcePath = postResourceContext.ResourcePath,
@@ -112,20 +116,21 @@ namespace com.esendex.sdk.test.rest
                 ContentEncoding = Encoding.UTF8
             };
 
-            RestResponse expectedResponse = new RestResponse()
+            var expectedResponse = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK
             };
 
-            HttpResponse httpResponse = new HttpResponse()
+            var httpResponse = new HttpResponse
             {
                 StatusCode = HttpStatusCode.OK
             };
 
-            mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
+            mockHttpClient.Setup(hc => hc.Submit(httpRequest))
+                          .Returns(httpResponse);
 
             // Act
-            RestResponse actualResponse = restClient.Post(postResourceContext);
+            var actualResponse = restClient.Post(postResourceContext);
 
             // Assert
             Assert.IsNotNull(actualResponse);
@@ -136,11 +141,11 @@ namespace com.esendex.sdk.test.rest
         public void Post_HttpReturnsNull_ReturnsNull()
         {
             // Arrange
-            string content = "content";
+            var content = "content";
 
-            PostRestResourceContext postResourceContext = new PostRestResourceContext(content);
+            var postResourceContext = new PostRestResourceContext(content);
 
-            HttpRequest httpRequest = new HttpRequest()
+            var httpRequest = new HttpRequest
             {
                 HttpMethod = HttpMethod.POST,
                 ResourcePath = postResourceContext.ResourcePath,
@@ -151,10 +156,11 @@ namespace com.esendex.sdk.test.rest
 
             HttpResponse httpResponse = null;
 
-            mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
+            mockHttpClient.Setup(hc => hc.Submit(httpRequest))
+                          .Returns(httpResponse);
 
             // Act
-            RestResponse actualResponse = restClient.Post(postResourceContext);
+            var actualResponse = restClient.Post(postResourceContext);
 
             // Assert
             Assert.IsNull(actualResponse);
@@ -164,24 +170,24 @@ namespace com.esendex.sdk.test.rest
         public void Get_HttpReturnsIn200Range_ReturnsRestResponse()
         {
             // Arrange
-            string expectedContent = "content";
+            var expectedContent = "content";
 
-            GetRestResourceContext getResourceContext = new GetRestResourceContext();
+            var getResourceContext = new GetRestResourceContext();
 
-            HttpRequest httpRequest = new HttpRequest()
+            var httpRequest = new HttpRequest
             {
                 HttpMethod = HttpMethod.GET,
                 ResourcePath = getResourceContext.ResourcePath,
                 ContentType = "text/plain"
             };
 
-            RestResponse expectedResponse = new RestResponse()
+            var expectedResponse = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = expectedContent
             };
 
-            HttpResponse httpResponse = new HttpResponse()
+            var httpResponse = new HttpResponse
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = expectedContent,
@@ -189,10 +195,11 @@ namespace com.esendex.sdk.test.rest
                 ContentEncoding = Encoding.UTF8.WebName
             };
 
-            mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
+            mockHttpClient.Setup(hc => hc.Submit(httpRequest))
+                          .Returns(httpResponse);
 
             // Act
-            RestResponse actualResponse = restClient.Get(getResourceContext);
+            var actualResponse = restClient.Get(getResourceContext);
 
             // Assert
             Assert.IsNotNull(actualResponse);
@@ -203,9 +210,9 @@ namespace com.esendex.sdk.test.rest
         public void Get_HttpReturnsNull_ReturnsNull()
         {
             // Arrange
-            GetRestResourceContext getResourceContext = new GetRestResourceContext();
+            var getResourceContext = new GetRestResourceContext();
 
-            HttpRequest httpRequest = new HttpRequest()
+            var httpRequest = new HttpRequest
             {
                 HttpMethod = HttpMethod.GET,
                 ResourcePath = getResourceContext.ResourcePath,
@@ -214,10 +221,11 @@ namespace com.esendex.sdk.test.rest
 
             HttpResponse httpResponse = null;
 
-            mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
+            mockHttpClient.Setup(hc => hc.Submit(httpRequest))
+                          .Returns(httpResponse);
 
             // Act
-            RestResponse actualResponse = restClient.Get(getResourceContext);
+            var actualResponse = restClient.Get(getResourceContext);
 
             // Assert
             Assert.IsNull(actualResponse);
@@ -227,11 +235,11 @@ namespace com.esendex.sdk.test.rest
         public void Put_HttpReturnsIn200Range_ReturnsRestResponse()
         {
             // Arrange
-            string content = "content";
+            var content = "content";
 
-            PutRestResourceContext putResourceContext = new PutRestResourceContext(content);
+            var putResourceContext = new PutRestResourceContext(content);
 
-            HttpRequest httpRequest = new HttpRequest()
+            var httpRequest = new HttpRequest
             {
                 HttpMethod = HttpMethod.PUT,
                 ResourcePath = putResourceContext.ResourcePath,
@@ -240,35 +248,36 @@ namespace com.esendex.sdk.test.rest
                 ContentEncoding = Encoding.UTF8
             };
 
-            RestResponse expectedResponse = new RestResponse()
+            var expectedResponse = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK
             };
 
-            HttpResponse httpResponse = new HttpResponse()
+            var httpResponse = new HttpResponse
             {
                 StatusCode = HttpStatusCode.OK
             };
 
-            mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
+            mockHttpClient.Setup(hc => hc.Submit(httpRequest))
+                          .Returns(httpResponse);
 
             // Act
-            RestResponse actualResponse = restClient.Put(putResourceContext);
+            var actualResponse = restClient.Put(putResourceContext);
 
             // Assert
             Assert.IsNotNull(actualResponse);
-            Assert.AreEqual(expectedResponse.StatusCode, actualResponse.StatusCode);            
+            Assert.AreEqual(expectedResponse.StatusCode, actualResponse.StatusCode);
         }
 
         [Test]
         public void Put_HttpReturnsNull_ReturnsNull()
         {
             // Arrange
-            string content = "content";
+            var content = "content";
 
-            PutRestResourceContext putResourceContext = new PutRestResourceContext(content);
+            var putResourceContext = new PutRestResourceContext(content);
 
-            HttpRequest httpRequest = new HttpRequest()
+            var httpRequest = new HttpRequest
             {
                 HttpMethod = HttpMethod.PUT,
                 ResourcePath = putResourceContext.ResourcePath,
@@ -279,10 +288,11 @@ namespace com.esendex.sdk.test.rest
 
             HttpResponse httpResponse = null;
 
-            mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
+            mockHttpClient.Setup(hc => hc.Submit(httpRequest))
+                          .Returns(httpResponse);
 
             // Act
-            RestResponse actualResponse = restClient.Put(putResourceContext);
+            var actualResponse = restClient.Put(putResourceContext);
 
             // Assert
             Assert.IsNull(actualResponse);
@@ -292,29 +302,30 @@ namespace com.esendex.sdk.test.rest
         public void Delete_HttpReturnsIn200Range_ReturnsRestResponse()
         {
             // Arrange
-            DeleteRestResourceContext deleteResourceContext = new DeleteRestResourceContext();
+            var deleteResourceContext = new DeleteRestResourceContext();
 
-            HttpRequest httpRequest = new HttpRequest()
+            var httpRequest = new HttpRequest
             {
                 HttpMethod = HttpMethod.DELETE,
                 ResourcePath = deleteResourceContext.ResourcePath,
-                ContentType = "text/plain",
+                ContentType = "text/plain"
             };
 
-            RestResponse expectedResponse = new RestResponse()
+            var expectedResponse = new RestResponse
             {
                 StatusCode = HttpStatusCode.OK
             };
 
-            HttpResponse httpResponse = new HttpResponse()
+            var httpResponse = new HttpResponse
             {
                 StatusCode = HttpStatusCode.OK
             };
 
-            mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
+            mockHttpClient.Setup(hc => hc.Submit(httpRequest))
+                          .Returns(httpResponse);
 
             // Act
-            RestResponse actualResponse = restClient.Delete(deleteResourceContext);
+            var actualResponse = restClient.Delete(deleteResourceContext);
 
             // Assert
             Assert.IsNotNull(actualResponse);
@@ -325,9 +336,9 @@ namespace com.esendex.sdk.test.rest
         public void Delete_HttpReturnsNull_ReturnsNull()
         {
             // Arrange
-            DeleteRestResourceContext deleteResourceContext = new DeleteRestResourceContext();
+            var deleteResourceContext = new DeleteRestResourceContext();
 
-            HttpRequest httpRequest = new HttpRequest()
+            var httpRequest = new HttpRequest
             {
                 HttpMethod = HttpMethod.DELETE,
                 ResourcePath = deleteResourceContext.ResourcePath,
@@ -336,10 +347,11 @@ namespace com.esendex.sdk.test.rest
 
             HttpResponse httpResponse = null;
 
-            mockHttpClient.Setup(hc => hc.Submit(httpRequest)).Returns(httpResponse);
+            mockHttpClient.Setup(hc => hc.Submit(httpRequest))
+                          .Returns(httpResponse);
 
             // Act
-            RestResponse actualResponse = restClient.Delete(deleteResourceContext);
+            var actualResponse = restClient.Delete(deleteResourceContext);
 
             // Assert
             Assert.IsNull(actualResponse);

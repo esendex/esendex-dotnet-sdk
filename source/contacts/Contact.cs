@@ -8,7 +8,7 @@ namespace com.esendex.sdk.contacts
     /// </summary>
     [Serializable]
     [XmlRoot("contact", Namespace = Constants.API_NAMESPACE)]
-    public class Contact 
+    public class Contact
     {
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.contacts.Contact
@@ -41,7 +41,11 @@ namespace com.esendex.sdk.contacts
         /// </summary>
         [XmlAttribute("id")]
         public Guid Id { get; set; }
-        public bool ShouldSerializeId() { return Id != Guid.Empty; }
+
+        public bool ShouldSerializeId()
+        {
+            return Id != Guid.Empty;
+        }
 
         /// <summary>
         /// Gets or sets the first name.

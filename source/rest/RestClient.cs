@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using com.esendex.sdk.http;
 
 namespace com.esendex.sdk.rest
@@ -15,7 +14,7 @@ namespace com.esendex.sdk.rest
 
         public RestResponse Post(RestResource resource)
         {
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             {
                 Content = resource.Content,
                 ContentType = "application/xml",
@@ -25,7 +24,7 @@ namespace com.esendex.sdk.rest
                 HttpMethod = HttpMethod.POST
             };
 
-            HttpResponse response = HttpClient.Submit(request);
+            var response = HttpClient.Submit(request);
 
             if (response == null) return null;
 
@@ -38,7 +37,7 @@ namespace com.esendex.sdk.rest
 
         public RestResponse Get(RestResource resource)
         {
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             {
                 ContentType = "text/plain",
                 ResourcePath = resource.ResourcePath,
@@ -46,11 +45,11 @@ namespace com.esendex.sdk.rest
                 HttpMethod = HttpMethod.GET
             };
 
-            HttpResponse response = HttpClient.Submit(request);
+            var response = HttpClient.Submit(request);
 
             if (response == null) return null;
 
-            return new RestResponse()
+            return new RestResponse
             {
                 StatusCode = response.StatusCode,
                 Content = response.Content
@@ -60,7 +59,7 @@ namespace com.esendex.sdk.rest
 
         public RestResponse Put(RestResource resource)
         {
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             {
                 Content = resource.Content,
                 ContentType = "application/xml",
@@ -70,11 +69,11 @@ namespace com.esendex.sdk.rest
                 HttpMethod = HttpMethod.PUT
             };
 
-            HttpResponse response = HttpClient.Submit(request);
+            var response = HttpClient.Submit(request);
 
             if (response == null) return null;
 
-            return new RestResponse()
+            return new RestResponse
             {
                 StatusCode = response.StatusCode,
                 Content = response.Content
@@ -83,7 +82,7 @@ namespace com.esendex.sdk.rest
 
         public RestResponse Delete(RestResource resource)
         {
-            HttpRequest request = new HttpRequest()
+            var request = new HttpRequest
             {
                 ContentType = "text/plain",
                 ResourcePath = resource.ResourcePath,
@@ -91,11 +90,11 @@ namespace com.esendex.sdk.rest
                 HttpMethod = HttpMethod.DELETE
             };
 
-            HttpResponse response = HttpClient.Submit(request);
+            var response = HttpClient.Submit(request);
 
             if (response == null) return null;
 
-            return new RestResponse()
+            return new RestResponse
             {
                 StatusCode = response.StatusCode,
                 Content = response.Content

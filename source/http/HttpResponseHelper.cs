@@ -10,9 +10,9 @@ namespace com.esendex.sdk.http
         {
             if (response == null) return null;
 
-            string content = string.Empty;
+            var content = string.Empty;
 
-            using (StreamReader stream = new StreamReader(response.GetResponseStream()))
+            using (var stream = new StreamReader(response.GetResponseStream()))
             {
                 content = stream.ReadToEnd();
             }
@@ -28,7 +28,7 @@ namespace com.esendex.sdk.http
 
         public HttpResponse Create(WebException exception)
         {
-            IHttpWebResponseAdapter webResponse = exception.Response as IHttpWebResponseAdapter;
+            var webResponse = exception.Response as IHttpWebResponseAdapter;
 
             if (webResponse != null && webResponse.StatusCode == HttpStatusCode.NotFound) return null;
 
