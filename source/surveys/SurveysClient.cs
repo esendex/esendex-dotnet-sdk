@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
-using System.Reflection;
 using com.esendex.sdk.authenticators;
+using com.esendex.sdk.extensions;
 using com.esendex.sdk.models.requests;
 using com.esendex.sdk.results;
 using Newtonsoft.Json;
@@ -14,9 +13,8 @@ namespace com.esendex.sdk.surveys
     {
         private readonly string _baseUrl;
         private readonly IAuthenticator _authenticator;
-        private readonly Version _version = Assembly.GetAssembly(typeof (SurveysClient)).GetName().Version;
 
-        public SurveysClient(string baseUrl, IAuthenticator authenticator)
+        internal SurveysClient(string baseUrl, IAuthenticator authenticator)
         {
             _baseUrl = baseUrl;
             _authenticator = authenticator;
@@ -37,19 +35,10 @@ namespace com.esendex.sdk.surveys
             };
 
             var requestUrl = string.Format("{0}v1.0/surveys/{1}/send", _baseUrl, surveyId);
-            var request = (HttpWebRequest) WebRequest.Create(requestUrl);
-
-            request.Method = "POST";
-            request.ContentType = "application/json; charset=utf-8";
-            request.UserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build);
-
-            request.Headers.Add("Authorization", _authenticator.Value());
-
-            using (var requestStream = request.GetRequestStream())
-            using (var streamWriter = new StreamWriter(requestStream))
-            {
-                JsonSerializer.Create().Serialize(streamWriter, requestData);
-            }
+            var request = Request.Create("POST", requestUrl)
+                                 .WithHeader("Authorization", _authenticator.Value())
+                                 .WithAcceptHeader(Constants.JSON_MEDIA_TYPE)
+                                 .WriteBody(Constants.JSON_MEDIA_TYPE, streamWriter => JsonSerializer.Create().Serialize(streamWriter, requestData));
 
             try
             {
@@ -61,12 +50,7 @@ namespace com.esendex.sdk.surveys
                 if (response.StatusCode != HttpStatusCode.BadRequest)
                     throw;
 
-                var serializer = new JsonSerializer();
-                using (var sr = new StreamReader(response.GetResponseStream()))
-                using (var jsonTextReader = new JsonTextReader(sr))
-                {
-                    return serializer.Deserialize<SurveyResult>(jsonTextReader);
-                }
+                return response.DeserialiseJson<SurveyResult>();
             }
 
             return new SurveyResult();

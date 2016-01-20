@@ -5,6 +5,8 @@ namespace com.esendex.sdk
 {
     public class Client
     {
+        private const string SURVEYS_BASE_URL = "https://api.surveys.esendex.com";
+        
         private readonly IAuthenticator _authenticator;
 
         public Client(IAuthenticator authenticator)
@@ -15,7 +17,7 @@ namespace com.esendex.sdk
         private SurveysClient _surveysClient;
         public SurveysClient Surveys
         {
-            get { return _surveysClient ?? (_surveysClient = new SurveysClient("https://api.surveys.esendex.com", _authenticator)); }
+            get { return _surveysClient ?? (_surveysClient = new SurveysClient(SURVEYS_BASE_URL, _authenticator)); }
         }
     }
 }

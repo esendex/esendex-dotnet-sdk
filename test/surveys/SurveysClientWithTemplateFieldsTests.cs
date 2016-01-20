@@ -18,7 +18,7 @@ namespace com.esendex.sdk.test.surveys
         private Guid _surveyId;
         private string _recipient;
         private Dictionary<string, string> _templateFields;
-        private Request _request;
+        private mockapi.Request _request;
 
         [TestFixtureSetUp]
         public void Given()
@@ -58,6 +58,7 @@ namespace com.esendex.sdk.test.surveys
         [Test]
         public void ThenTheRequestHasTheExpectedHeaders()
         {
+            Assert.That(_request.Headers["Accept"], Is.EqualTo("application/json; charset=utf-8"));
             Assert.That(_request.Headers["Authorization"], Is.EqualTo("Basic dXNlckBleGFtcGxlLmNvbTpoZXl0aGlzY2FudGJlZ3Vlc3NlZA=="));
             Assert.That(_request.Headers["Content-Type"], Is.EqualTo("application/json; charset=utf-8"));
             Assert.That(_request.Headers["User-Agent"], Is.EqualTo(string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build)));

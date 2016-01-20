@@ -71,6 +71,7 @@
     <Compile Include="core\CharacterSet.cs" />
     <Compile Include="core\MessageCollection.cs" />
     <Compile Include="core\PagedCollection.cs" />
+    <Compile Include="extensions\HttpWebResponseExtensions.cs" />
     <Compile Include="http\HttpClient.cs" />
     <Compile Include="http\HttpRequest.cs" />
     <Compile Include="http\HttpRequestHelper.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="messaging\VoiceMessageLanguage.cs" />
     <Compile Include="models\requests\SurveysAddRecipientRequest.cs" />
     <Compile Include="models\requests\SurveysAddRecipientsRequest.cs" />
+    <Compile Include="Request.cs" />
     <Compile Include="rest\resources\ContactsResource.cs" />
     <Compile Include="rest\resources\InboxMessagesResource.cs" />
     <Compile Include="rest\resources\MessageHeadersResource.cs" />
@@ -138,6 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="builders\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
