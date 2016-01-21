@@ -30,7 +30,7 @@ namespace com.esendex.sdk.test.surveys
             MockApi.SetEndpoint(new MockEndpoint(200, "", "text/plain"));
 
             var surveysClient = new SurveysService(MockApi.Url, new EsendexCredentials(username, password));
-            _templateFields = new Dictionary<string, string> { {"KEK", "Toppest"}};
+            _templateFields = new Dictionary<string, string> { {"Field", "Value"}};
 
             surveysClient.Send(_surveyId, _recipient , _templateFields);
             _request = MockApi.LastRequest;
@@ -51,7 +51,7 @@ namespace com.esendex.sdk.test.surveys
 
             Assert.That(body.Recipients.Count, Is.EqualTo(1));
             Assert.That(recipient.PhoneNumber, Is.EqualTo(_recipient));
-            CollectionAssert.AreEquivalent(new Dictionary<string, string> { { "KEK", "Toppest" } }, recipient.TemplateFields);
+            CollectionAssert.AreEquivalent(_templateFields, recipient.TemplateFields);
         }
 
         [Test]

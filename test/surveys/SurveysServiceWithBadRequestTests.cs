@@ -2,6 +2,7 @@ using System;
 using com.esendex.sdk.results;
 using com.esendex.sdk.surveys;
 using com.esendex.sdk.test.mockapi;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace com.esendex.sdk.test.surveys
@@ -28,8 +29,16 @@ namespace com.esendex.sdk.test.surveys
             _errorValue = "THIS VALUE";
             _errorValue2 = "OTHER VALUE";
 
+            var data = new
+            {
+                errors = new[]
+                {
+                    new {code = _errorCode, description = _errorDescription, values = new[] {_errorValue, _errorValue2}}
+                }
+            };
+
             MockApi.SetEndpoint(new MockEndpoint(400,
-                                                 "{\"errors\": [{\"code\": \"" + _errorCode + "\", \"description\": \"" + _errorDescription + "\", \"values\": [\"" + _errorValue + "\", \"" + _errorValue2 + "\"]}]}",
+                                                 JsonConvert.SerializeObject(data),
                                                  "application/json; charset=utf-8"));
 
             var surveysClient = new SurveysService(MockApi.Url, new EsendexCredentials(username, password));
