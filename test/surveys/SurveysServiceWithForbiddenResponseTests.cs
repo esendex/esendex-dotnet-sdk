@@ -1,6 +1,5 @@
 using System;
 using System.Net;
-using com.esendex.sdk.authenticators;
 using com.esendex.sdk.surveys;
 using com.esendex.sdk.test.mockapi;
 using NUnit.Framework;
@@ -12,13 +11,13 @@ namespace com.esendex.sdk.test.surveys
     [TestFixture(413, (HttpStatusCode)413)]
     [TestFixture(415, HttpStatusCode.UnsupportedMediaType)]
     [TestFixture(500, HttpStatusCode.InternalServerError)]
-    public class SurveysClientWithForbiddenResponseTests
+    public class SurveysServiceWithForbiddenResponseTests
     {
         private readonly int _statusCode;
         private readonly HttpStatusCode _expectedCode;
         private WebException _result;
 
-        public SurveysClientWithForbiddenResponseTests(int statusCode, HttpStatusCode expectedCode)
+        public SurveysServiceWithForbiddenResponseTests(int statusCode, HttpStatusCode expectedCode)
         {
             _statusCode = statusCode;
             _expectedCode = expectedCode;
@@ -34,11 +33,11 @@ namespace com.esendex.sdk.test.surveys
 
             MockApi.SetEndpoint(new MockEndpoint(_statusCode));
 
-            var surveysClient = new SurveysClient(MockApi.Url, new BasicAuthenticator(username, password));
+            var surveysClient = new SurveysService(MockApi.Url, new EsendexCredentials(username, password));
 
             try
             {
-                surveysClient.AddRecipient(surveyId, recipient);
+                surveysClient.Send(surveyId, recipient);
             }
             catch (WebException ex)
             {

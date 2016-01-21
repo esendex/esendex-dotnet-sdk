@@ -1,5 +1,4 @@
 using System;
-using com.esendex.sdk.authenticators;
 using com.esendex.sdk.results;
 using com.esendex.sdk.surveys;
 using com.esendex.sdk.test.mockapi;
@@ -8,7 +7,7 @@ using NUnit.Framework;
 namespace com.esendex.sdk.test.surveys
 {
     [TestFixture]
-    public class SurveysClientWithBadRequestTests
+    public class SurveysServiceWithBadRequestTests
     {
         private SurveyResult _result;
         private string _errorValue;
@@ -33,9 +32,9 @@ namespace com.esendex.sdk.test.surveys
                                                  "{\"errors\": [{\"code\": \"" + _errorCode + "\", \"description\": \"" + _errorDescription + "\", \"values\": [\"" + _errorValue + "\", \"" + _errorValue2 + "\"]}]}",
                                                  "application/json; charset=utf-8"));
 
-            var surveysClient = new SurveysClient(MockApi.Url, new BasicAuthenticator(username, password));
+            var surveysClient = new SurveysService(MockApi.Url, new EsendexCredentials(username, password));
 
-            _result = surveysClient.AddRecipient(surveyId, recipient);
+            _result = surveysClient.Send(surveyId, recipient);
         }
 
         [Test]

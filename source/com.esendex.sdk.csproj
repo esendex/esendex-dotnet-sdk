@@ -58,10 +58,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="authenticators\BasicAuthenticator.cs" />
-    <Compile Include="authenticators\IAuthenticator.cs" />
-    <Compile Include="authenticators\SessionAuthenticator.cs" />
-    <Compile Include="Client.cs" />
     <Compile Include="contacts\Contact.cs" />
     <Compile Include="contacts\ContactCollection.cs" />
     <Compile Include="contacts\ContactResponse.cs" />
@@ -127,7 +123,7 @@
     <Compile Include="session\ISessionService.cs" />
     <Compile Include="session\EsendexSession.cs" />
     <Compile Include="session\SessionService.cs" />
-    <Compile Include="surveys\SurveysClient.cs" />
+    <Compile Include="surveys\SurveysService.cs" />
     <Compile Include="utilities\ISerialiser.cs" />
     <Compile Include="rest\resources\MessageDispatcherResource.cs" />
     <Compile Include="rest\RestClient.cs" />

@@ -83,8 +83,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="authenticators\BasicAuthenticatorTests.cs" />
-    <Compile Include="authenticators\SessionAuthenticatorTests.cs" />
     <Compile Include="contacts\ContactServiceTests.cs" />
     <Compile Include="contacts\ContactTests.cs" />
     <Compile Include="http\HttpClientTests.cs" />
@@ -112,10 +110,10 @@
     <Compile Include="sent\SentServiceTests.cs" />
     <Compile Include="sent\SentMessageTests.cs" />
     <Compile Include="session\SessionServiceTests.cs" />
-    <Compile Include="surveys\SurveysClientTests.cs" />
-    <Compile Include="surveys\SurveysClientWithBadRequestTests.cs" />
-    <Compile Include="surveys\SurveysClientWithForbiddenResponseTests.cs" />
-    <Compile Include="surveys\SurveysClientWithTemplateFieldsTests.cs" />
+    <Compile Include="surveys\SurveysServiceTests.cs" />
+    <Compile Include="surveys\SurveysServiceWithBadRequestTests.cs" />
+    <Compile Include="surveys\SurveysServiceWithForbiddenResponseTests.cs" />
+    <Compile Include="surveys\SurveysServiceWithTemplateFieldsTests.cs" />
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="utilities\XmlSerialiserTests.cs" />
     <Compile Include="messaging\MessagingServiceTests.cs" />

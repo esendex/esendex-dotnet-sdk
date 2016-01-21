@@ -8,7 +8,7 @@ namespace com.esendex.sdk
 {
     internal class Request
     {
-        private readonly Version _version = Assembly.GetAssembly(typeof (SurveysClient)).GetName().Version;
+        private readonly Version _version = Assembly.GetAssembly(typeof (SurveysService)).GetName().Version;
         private readonly HttpWebRequest _request;
 
         private Request(string method, string url)
@@ -32,6 +32,17 @@ namespace com.esendex.sdk
         public Request WithHeader(string key, string value)
         {
             _request.Headers.Add(key, value);
+            return this;
+        }
+
+        public Request If(bool p, Func<Request, Request> f)
+        {
+            return p ? f(this) : this;
+        }
+
+        public Request WithProxy(IWebProxy webProxy)
+        {
+            _request.Proxy = webProxy;
             return this;
         }
 

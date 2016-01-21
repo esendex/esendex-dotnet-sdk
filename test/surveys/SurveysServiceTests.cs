@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using com.esendex.sdk.authenticators;
 using com.esendex.sdk.surveys;
 using com.esendex.sdk.test.mockapi;
 using com.esendex.sdk.test.models.requests;
@@ -11,9 +10,9 @@ using NUnit.Framework;
 namespace com.esendex.sdk.test.surveys
 {
     [TestFixture]
-    public class SurveysClientTests
+    public class SurveysServiceTests
     {
-        private readonly Version _version = Assembly.GetAssembly(typeof(SurveysClient)).GetName().Version;
+        private readonly Version _version = Assembly.GetAssembly(typeof(SurveysService)).GetName().Version;
         private Guid _surveyId;
         private string _recipient;
         private mockapi.Request _request;
@@ -28,9 +27,9 @@ namespace com.esendex.sdk.test.surveys
 
             MockApi.SetEndpoint(new MockEndpoint(200, "", "text/plain"));
 
-            var surveysClient = new SurveysClient(MockApi.Url, new BasicAuthenticator(username, password));
+            var surveysClient = new SurveysService(MockApi.Url, new EsendexCredentials(username, password));
 
-            surveysClient.AddRecipient(_surveyId, _recipient);
+            surveysClient.Send(_surveyId, _recipient);
             _request = MockApi.LastRequest;
         }
 
