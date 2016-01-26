@@ -68,21 +68,7 @@ namespace com.esendex.sdk.test.mockapi
 
         private static string ExtractRequestBody(Stream inputStream)
         {
-            byte[] b;
-            using (var stream = inputStream)
-            using (var ms = new MemoryStream())
-            {
-                int count;
-                do
-                {
-                    var buf = new byte[1024];
-                    count = stream.Read(buf, 0, 1024);
-                    ms.Write(buf, 0, count);
-                } while (stream.CanRead && count > 0);
-                b = ms.ToArray();
-            }
-            using (var dataStream = new MemoryStream(b))
-            using (var reader = new StreamReader(dataStream))
+            using (var reader = new StreamReader(inputStream))
             {
                 return reader.ReadToEnd();
             }

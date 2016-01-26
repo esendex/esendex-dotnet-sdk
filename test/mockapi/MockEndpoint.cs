@@ -1,4 +1,3 @@
-using System;
 using System.Net;
 using System.Text;
 
@@ -20,10 +19,8 @@ namespace com.esendex.sdk.test.mockapi
         public void HandleRequest(HttpListenerContext context)
         {
             context.Response.Headers.Add(HttpResponseHeader.ContentType, _contentType);
-
-            var responseBytes = Encoding.UTF8.GetBytes(_body);
             context.Response.StatusCode = _statusCode;
-            context.Response.Close(responseBytes, false);
+            context.Response.Close(Encoding.UTF8.GetBytes(_body), false);
         }
     }
 }
