@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using com.esendex.sdk.extensions;
 using com.esendex.sdk.models.requests;
@@ -37,8 +38,8 @@ namespace com.esendex.sdk.surveys
                     }
                 }
             };
-
-            var requestUrl = string.Format("{0}v1.0/surveys/{1}/send", _baseUrl, surveyId);
+            
+            var requestUrl = Path.Combine(_baseUrl, string.Format("v1.0/surveys/{0}/send", surveyId));
             var request = Request.Create("POST", requestUrl)
                                  .WithHeader("Authorization", "Basic " + _credentials.EncodedValue())
                                  .WithAcceptHeader(Constants.JSON_MEDIA_TYPE)
