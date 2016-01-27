@@ -67,6 +67,7 @@
     <Compile Include="core\CharacterSet.cs" />
     <Compile Include="core\MessageCollection.cs" />
     <Compile Include="core\PagedCollection.cs" />
+    <Compile Include="exceptions\BadRequestException.cs" />
     <Compile Include="extensions\HttpWebResponseExtensions.cs" />
     <Compile Include="http\HttpClient.cs" />
     <Compile Include="http\HttpRequest.cs" />

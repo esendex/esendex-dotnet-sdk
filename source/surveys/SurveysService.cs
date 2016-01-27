@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using com.esendex.sdk.exceptions;
 using com.esendex.sdk.extensions;
 using com.esendex.sdk.models.requests;
 using com.esendex.sdk.results;
@@ -56,7 +57,7 @@ namespace com.esendex.sdk.surveys
                 if (response.StatusCode != HttpStatusCode.BadRequest)
                     throw;
 
-                return response.DeserialiseJson<SurveyResult>();
+                throw new BadRequestException(ex, response.DeserialiseJson<SurveyResult>().Errors);
             }
 
             return new SurveyResult();

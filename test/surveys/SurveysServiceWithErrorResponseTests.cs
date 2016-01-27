@@ -11,13 +11,13 @@ namespace com.esendex.sdk.test.surveys
     [TestFixture(413, (HttpStatusCode)413)]
     [TestFixture(415, HttpStatusCode.UnsupportedMediaType)]
     [TestFixture(500, HttpStatusCode.InternalServerError)]
-    public class SurveysServiceWithForbiddenResponseTests
+    public class SurveysServiceWithErrorResponseTests
     {
         private readonly int _statusCode;
         private readonly HttpStatusCode _expectedCode;
         private WebException _result;
 
-        public SurveysServiceWithForbiddenResponseTests(int statusCode, HttpStatusCode expectedCode)
+        public SurveysServiceWithErrorResponseTests(int statusCode, HttpStatusCode expectedCode)
         {
             _statusCode = statusCode;
             _expectedCode = expectedCode;
