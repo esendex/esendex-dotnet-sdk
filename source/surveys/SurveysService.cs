@@ -12,7 +12,7 @@ namespace com.esendex.sdk.surveys
 {
     public class SurveysService
     {
-        private const string SURVEYS_BASE_URL = "https://api.surveys.esendex.com";
+        private const string SURVEYS_BASE_URL = "https://surveys.api.esendex.com";
 
         private readonly string _baseUrl;
         private readonly EsendexCredentials _credentials;
