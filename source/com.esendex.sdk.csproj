@@ -99,6 +99,7 @@
     <Compile Include="messaging\MessageCollection.cs" />
     <Compile Include="rest\resources\ResourceLinkResource.cs" />
     <Compile Include="rest\resources\SessionResource.cs" />
+    <Compile Include="sent\FailureReason.cs" />
     <Compile Include="sent\SentMessage.cs" />
     <Compile Include="messaging\SmsMessage.cs" />
     <Compile Include="messaging\SmsMessageCollection.cs" />
