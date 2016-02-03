@@ -14,12 +14,12 @@ namespace com.esendex.sdk.surveys
     {
         private const string SURVEYS_BASE_URL = "https://surveys.api.esendex.com";
 
-        private readonly string _baseUrl;
+        private readonly Uri _baseUrl;
         private readonly EsendexCredentials _credentials;
 
         internal SurveysService(string baseUrl, EsendexCredentials credentials)
         {
-            _baseUrl = baseUrl;
+            _baseUrl = new Uri(baseUrl);
             _credentials = credentials;
         }
 
@@ -40,7 +40,7 @@ namespace com.esendex.sdk.surveys
                 }
             };
             
-            var requestUrl = Path.Combine(_baseUrl, string.Format("v1.0/surveys/{0}/send", surveyId));
+            var requestUrl = new Uri(_baseUrl, string.Format("v1.0/surveys/{0}/send", surveyId));
             var request = Request.Create("POST", requestUrl)
                                  .WithHeader("Authorization", "Basic " + _credentials.EncodedValue())
                                  .WithAcceptHeader(Constants.JSON_MEDIA_TYPE)

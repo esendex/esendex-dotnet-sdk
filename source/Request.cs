@@ -11,14 +11,14 @@ namespace com.esendex.sdk
         private readonly Version _version = Assembly.GetAssembly(typeof (SurveysService)).GetName().Version;
         private readonly HttpWebRequest _request;
 
-        private Request(string method, string url)
+        private Request(string method, Uri url)
         {
             _request = (HttpWebRequest) WebRequest.Create(url);
             _request.Method = method;
             _request.UserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build);
         }
 
-        public static Request Create(string method, string url)
+        public static Request Create(string method, Uri url)
         {
             return new Request(method, url);
         }
