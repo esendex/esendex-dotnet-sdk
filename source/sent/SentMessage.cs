@@ -54,7 +54,7 @@ namespace com.esendex.sdk.sent
         /// <summary>
         /// Gets or sets the FailureReason which contains failure reason information of the message.
         /// </summary>
-        [XmlElement("FailureReason")]
+        [XmlElement("failurereason")]
         public FailureReason FailureReason { get; set; }
 
         internal SentMessage()
