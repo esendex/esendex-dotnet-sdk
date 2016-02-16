@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using com.esendex.sdk.http;
 using com.esendex.sdk.rest;
@@ -167,86 +166,6 @@ namespace com.esendex.sdk.test.sent
             // Assert
             Assert.AreEqual(pageNumber, actualResult.PageNumber);
             Assert.AreEqual(pageSize, actualResult.PageSize);
-        }
-
-        [Test]
-        public void GetMessages_WithFailedMessage_ReturnsSentMessagesWithFailureReason()
-        {
-            // Arrange
-            var pageNumber = 1;
-            var pageSize = 15;
-            var accountReference = "accountReference";
-
-            RestResource resource = new MessageHeadersResource(accountReference, pageNumber, pageSize);
-
-            var response = new RestResponse
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = "serialisedItem"
-            };
-
-            var sentMessage = new SentMessage {FailureReason = new FailureReason {Code = 80, Description = "yolo", PermanentFailure = true}};
-
-            var expectedResult = new SentMessageCollection
-            {
-                PageNumber = pageNumber,
-                PageSize = pageSize,
-                Messages = new List<SentMessage> {sentMessage}
-            };
-
-            mockRestClient
-                .Setup(rc => rc.Get(resource))
-                .Returns(response);
-
-            mockSerialiser
-                .Setup(s => s.Deserialise<SentMessageCollection>(response.Content))
-                .Returns(expectedResult);
-
-            // Act
-            var actualResult = service.GetMessages(accountReference, pageNumber, pageSize);
-
-            // Assert
-            Assert.AreEqual(pageNumber, actualResult.PageNumber);
-            Assert.AreEqual(pageSize, actualResult.PageSize);
-
-            Assert.That(actualResult.Messages[0].FailureReason.Code, Is.EqualTo(sentMessage.FailureReason.Code));
-            Assert.That(actualResult.Messages[0].FailureReason.Description, Is.EqualTo(sentMessage.FailureReason.Description));
-            Assert.That(actualResult.Messages[0].FailureReason.PermanentFailure, Is.EqualTo(sentMessage.FailureReason.PermanentFailure));
-        }
-
-        [Test]
-        public void GetMessage_WithFailedMessage_ReturnsSentMessagesWithFailureReason()
-        {
-
-            var messageId = Guid.NewGuid();
-
-            RestResource resource = new MessageHeadersResource(messageId);
-
-            var response = new RestResponse
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = "serialisedItem"
-            };
-
-            var sentMessage = new SentMessage { Id = messageId, FailureReason = new FailureReason { Code = 80, Description = "yolo", PermanentFailure = true } };
-
-
-            mockRestClient
-                .Setup(rc => rc.Get(resource))
-                .Returns(response);
-
-            mockSerialiser
-                .Setup(s => s.Deserialise<SentMessage>(response.Content))
-                .Returns(sentMessage);
-
-
-            // Act
-            var result = service.GetMessage(sentMessage.Id);
-
-            // Assert
-            Assert.That(result.FailureReason.Code, Is.EqualTo(sentMessage.FailureReason.Code));
-            Assert.That(result.FailureReason.Description, Is.EqualTo(sentMessage.FailureReason.Description));
-            Assert.That(result.FailureReason.PermanentFailure, Is.EqualTo(sentMessage.FailureReason.PermanentFailure));
         }
     }
 }

@@ -65,10 +65,6 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -96,10 +92,6 @@
     <Compile Include="messaging\MessageSerialisationTests.cs" />
     <Compile Include="messaging\MessageTests.cs" />
     <Compile Include="messaging\SmsMessageSerializationTests.cs" />
-    <Compile Include="mockapi\MockApi.cs" />
-    <Compile Include="mockapi\MockEndpoint.cs" />
-    <Compile Include="models\requests\SurveyAddRecipientRequest.cs" />
-    <Compile Include="models\requests\SurveyAddRecipientsRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rest\resources\ContactsResourceTests.cs" />
     <Compile Include="rest\resources\InboxMessagesResourceTests.cs" />
@@ -110,11 +102,6 @@
     <Compile Include="sent\SentServiceTests.cs" />
     <Compile Include="sent\SentMessageTests.cs" />
     <Compile Include="session\SessionServiceTests.cs" />
-    <Compile Include="surveys\SurveysServiceTests.cs" />
-    <Compile Include="surveys\SurveysServiceWithBadRequestTests.cs" />
-    <Compile Include="surveys\SurveysServiceWithErrorResponseTests.cs" />
-    <Compile Include="surveys\SurveysServiceWithTemplateFieldsTests.cs" />
-    <Compile Include="SetUpFixture.cs" />
     <Compile Include="utilities\XmlSerialiserTests.cs" />
     <Compile Include="messaging\MessagingServiceTests.cs" />
   </ItemGroup>

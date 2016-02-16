@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Text;
 
 namespace com.esendex.sdk
 {
@@ -104,11 +103,6 @@ namespace com.esendex.sdk
             if (proxy == null) throw new ArgumentNullException("proxy");
 
             WebProxy = proxy;
-        }
-
-        internal string EncodedValue()
-        {
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(UseSessionAuthentication ? SessionId.Value.ToString() : Username + ":" + Password));
         }
     }
 }
