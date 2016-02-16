@@ -109,7 +109,7 @@ namespace com.esendex.sdk.samples
             Console.WriteLine("Contacts in Group Example\r\n");
             GetContactsByGroupExample(credentials);
 
-            AddContacttoGroup(credentials);
+            AddContactToGroup(credentials);
 
             Console.WriteLine();
             Console.WriteLine("Press enter to continue ... ");
@@ -282,16 +282,16 @@ namespace com.esendex.sdk.samples
             }
         }
 
-        private static void AddContacttoGroup(EsendexCredentials credentials)
+        private static void AddContactToGroup(EsendexCredentials credentials)
         {
             var groupService = new GroupService(credentials);
             var contactService = new ContactService(credentials);
 
             try
             {
-                var guid = new Guid("6c5e0669-af2e-4682-85c1-bd97a45c590d");
+                var guid = new Guid("{YOUR Contact GUID}");
                 var contact = contactService.GetContact(guid);
-                groupService.AddContactToGroup(_accountReference, "1c259623-00bf-4629-af38-b1f770b12634", contact);
+                groupService.AddContactToGroup(_accountReference, "{YOUR Group GUID}", contact);
 
             }
             catch (WebException ex)
