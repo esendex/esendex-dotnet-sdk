@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using com.esendex.sdk.exceptions;
 using com.esendex.sdk.extensions;

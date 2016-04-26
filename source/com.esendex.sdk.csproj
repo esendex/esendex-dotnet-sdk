@@ -55,6 +55,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +67,8 @@
     <Compile Include="contacts\PagedContactCollection.cs" />
     <Compile Include="core\CharacterSet.cs" />
     <Compile Include="core\MessageCollection.cs" />
+    <Compile Include="core\OptOutCollection.cs" />
+    <Compile Include="core\SubscriptionCollection.cs" />
     <Compile Include="core\PagedCollection.cs" />
     <Compile Include="exceptions\BadRequestException.cs" />
     <Compile Include="extensions\HttpWebResponseExtensions.cs" />
@@ -99,6 +102,12 @@
     <Compile Include="messaging\VoiceMessageLanguage.cs" />
     <Compile Include="models\requests\SurveysAddRecipientRequest.cs" />
     <Compile Include="models\requests\SurveysAddRecipientsRequest.cs" />
+    <Compile Include="optouts\models\ErrorResponse.cs" />
+    <Compile Include="optouts\models\FromAddress.cs" />
+    <Compile Include="optouts\models\Link.cs" />
+    <Compile Include="optouts\models\OptOut.cs" />
+    <Compile Include="optouts\models\OptOutCreateRootResponse.cs" />
+    <Compile Include="optouts\OptOutsService.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="rest\resources\ContactsResource.cs" />
     <Compile Include="rest\resources\InboxMessagesResource.cs" />
