@@ -106,6 +106,7 @@
     <Compile Include="optouts\models\FromAddress.cs" />
     <Compile Include="optouts\models\Link.cs" />
     <Compile Include="optouts\models\OptOut.cs" />
+    <Compile Include="optouts\models\OptOutCreateRequest.cs" />
     <Compile Include="optouts\models\OptOutCreateRootResponse.cs" />
     <Compile Include="optouts\OptOutsService.cs" />
     <Compile Include="Request.cs" />
