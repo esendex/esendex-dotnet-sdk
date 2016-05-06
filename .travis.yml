@@ -9,7 +9,7 @@ install:
   - nuget restore com.esendex.sdk.sln
   - nuget install NUnit.Runners -Version 2.6.2 -OutputDirectory testrunner
 script:
-  - xbuild /p:Configuration=Release com.esendex.sdk.sln
+  - xbuild .solution/build.msbuild
   - mono ./testrunner/NUnit.Runners.2.6.2/tools/nunit-console.exe ./test/bin/Release/com.esendex.sdk.test.dll
   
 cache:
