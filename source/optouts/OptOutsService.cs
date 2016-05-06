@@ -1,15 +1,16 @@
 using System;
-using System.IO;
 using System.Net;
-using System.Text;
-using System.Web;
-using com.esendex.sdk.core;
-using com.esendex.sdk.exceptions;
-using com.esendex.sdk.optouts.models;
-using com.esendex.sdk.utilities;
+using com.esendex.sdk.extensions;
+using com.esendex.sdk.http;
+using com.esendex.sdk.optouts.models.request;
+using com.esendex.sdk.optouts.models.response;
+using Newtonsoft.Json;
 
 namespace com.esendex.sdk.optouts
 {
+    /// <summary>
+    /// A service to create and retrieve opt outs.
+    /// </summary>
     public class OptOutsService
     {
         private const string OPTOUTS_BASE_URL = "https://api.esendex.com";
@@ -23,91 +24,118 @@ namespace com.esendex.sdk.optouts
             _credentials = esendexCredentials;
         }
 
+        /// <summary>
+        /// Initialises a new instance of the InboxService
+        /// </summary>
+        /// <param name="credentials">A com.esendex.sdk.EsendexCredentials instance containing your username and password.</param>
         public OptOutsService(EsendexCredentials credentials) : this(OPTOUTS_BASE_URL, credentials)
         {
         }
 
+        /// <summary>
+        /// Initialises a new instance of the InboxService
+        /// </summary>
+        /// <param name="username">A string containing your username.</param>
+        /// <param name="password">A string containing your password.</param>
         public OptOutsService(string username, string password) : this(OPTOUTS_BASE_URL, new EsendexCredentials(username, password))
         {
         }
 
+        /// <summary>
+        /// Gets a com.esendex.sdk.optouts.OptOut instance containing an opt out.
+        /// </summary>
+        /// <param name="id">A System.Guid instance that contains the Id of an opt out.</param>
+        /// <returns>A com.esendex.sdk.optouts.OptOut instance containing an opt out.</returns>
+        /// <exception cref="System.Net.WebException"></exception>
         public OptOut GetById(Guid optOutId)
         {
             var requestUrl = new Uri(_baseUrl, string.Format("v1.0/optouts/{0}", optOutId));
             var request = Request.Create("GET", requestUrl)
                                  .WithHeader("Authorization", "Basic " + _credentials.EncodedValue())
-                                 .WithAcceptHeader(Constants.XML_MEDIA_TYPE)
+                                 .WithAcceptHeader(Constants.JSON_MEDIA_TYPE)
                                  .If(_credentials.UseProxy, r => r.WithProxy(_credentials.WebProxy));
 
-            try
-            {
-                var response = request.GetResponse();
-                using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
-                {
-                    string responseText = reader.ReadToEnd();
-                    return new XmlSerialiser().Deserialise<OptOut>(responseText);
-                }
-            }
-            catch (WebException ex)
-            {
-                var response = (HttpWebResponse)ex.Response;
-                if (response.StatusCode != HttpStatusCode.BadRequest)
-                    throw;
-
-                throw new BadRequestException(ex, null);
-            }
+            var response = request.GetResponse();
+            return response.DeserialiseJson<OptOut>();
         }
 
-        public SubscriptionCollection GetByPhoneNumber(string phoneNumber, string accountReference, int pageNumber, int pageSize)
+        /// <summary>
+        /// Gets a com.esendex.sdk.optouts.OptOutCollection instance containing a collection of com.esendex.sdk.optouts.OptOut.
+        /// </summary>
+        /// <param name="phoneNumber">A string that contains the phone number to search with.</param>
+        /// <param name="accountReference">A string that contains the account reference to search with.</param>
+        /// <param name="pageNumber">An int that that specifies which page of results to return.</param>
+        /// <param name="pageSize">An int that specifies how many results to return in a page.</param>
+        /// <returns>A com.esendex.sdk.optouts.OptOutCollection instance containing a collection of com.esendex.sdk.optouts.OptOut.</returns>
+        /// <exception cref="System.Net.WebException"></exception>
+        public OptOutCollection GetByPhoneNumber(string phoneNumber, string accountReference, int pageNumber, int pageSize)
         {
-            var requestUrl = string.Concat(_baseUrl, "v1.0/optouts");
-            var uriBuilder = new UriBuilder(requestUrl);
-            var query = HttpUtility.ParseQueryString(string.Empty);
-            
-            if (accountReference != null)
-                query["accountreference"] = accountReference;
-            if (phoneNumber != null)
-                query["from"] = phoneNumber;
-            query["startIndex"] = GetStartIndex(pageNumber, pageSize).ToString();
-            query["count"] = pageSize.ToString();
+            var uri = BuildGetAllUri(phoneNumber, accountReference, pageNumber, pageSize);
 
-            uriBuilder.Query = query.ToString();
-
-            var request = Request.Create("GET", uriBuilder.Uri)
+            var request = Request.Create("GET", uri)
                                  .WithHeader("Authorization", "Basic " + _credentials.EncodedValue())
-                                 .WithAcceptHeader(Constants.XML_MEDIA_TYPE)
+                                 .WithAcceptHeader(Constants.JSON_MEDIA_TYPE)
                                  .If(_credentials.UseProxy, r => r.WithProxy(_credentials.WebProxy));
 
-            try
-            {
-                var response = request.GetResponse();
-                using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
-                {
-                    string responseText = reader.ReadToEnd();
-                    return new XmlSerialiser().Deserialise<OptOutCollection>(responseText);
-                }
-            }
-            catch (WebException ex)
-            {
-                var response = (HttpWebResponse)ex.Response;
-                if (response.StatusCode != HttpStatusCode.BadRequest)
-                    throw;
-
-                throw new BadRequestException(ex, null);
-            }
+            var response = request.GetResponse();
+            return response.DeserialiseJson<OptOutCollection>();
         }
 
-        public SubscriptionCollection GetByFromAddress(string from, int pageNumber, int pageSize)
+        private Uri BuildGetAllUri(string phoneNumber, string accountReference, int pageNumber, int pageSize)
+        {
+            var requestUrl = _baseUrl + "v1.0/optouts";
+
+            var builder = HttpUriBuilder.Create(requestUrl)
+                                        .WithParameter("startIndex", GetStartIndex(pageNumber, pageSize).ToString())
+                                        .WithParameter("count", pageSize.ToString());
+
+            if (accountReference != null)
+            {
+                builder.WithParameter("accountreference", accountReference);
+            }
+
+            if (phoneNumber != null)
+            {
+                builder.WithParameter("from", phoneNumber);
+            }
+
+            return builder.Build();
+        }
+
+        /// <summary>
+        /// Gets a com.esendex.sdk.optouts.OptOutCollection instance containing a collection of com.esendex.sdk.optouts.OptOut.
+        /// </summary>
+        /// <param name="phoneNumber">A string that contains the phone number to search with.</param>
+        /// <param name="pageNumber">An int that that specifies which page of results to return.</param>
+        /// <param name="pageSize">An int that specifies how many results to return in a page.</param>
+        /// <returns>A com.esendex.sdk.optouts.OptOutCollection instance containing a collection of com.esendex.sdk.optouts.OptOut.</returns>
+        /// <exception cref="System.Net.WebException"></exception>
+        public OptOutCollection GetByFromAddress(string from, int pageNumber, int pageSize)
         {
             return GetByPhoneNumber(from, null, pageNumber, pageSize);
         }
 
-        public SubscriptionCollection GetByAccountReference(string accountReference, int pageNumber, int pageSize)
+        /// <summary>
+        /// Gets a com.esendex.sdk.optouts.OptOutCollection instance containing a collection of com.esendex.sdk.optouts.OptOut.
+        /// </summary>
+        /// <param name="accountReference">A string that contains the account reference to search with.</param>
+        /// <param name="pageNumber">An int that that specifies which page of results to return.</param>
+        /// <param name="pageSize">An int that specifies how many results to return in a page.</param>
+        /// <returns>A com.esendex.sdk.optouts.OptOutCollection instance containing a collection of com.esendex.sdk.optouts.OptOut.</returns>
+        /// <exception cref="System.Net.WebException"></exception>
+        public OptOutCollection GetByAccountReference(string accountReference, int pageNumber, int pageSize)
         {
             return GetByPhoneNumber(null, accountReference, pageNumber, pageSize);
         }
 
-        public SubscriptionCollection GetAll(int pageNumber, int pageSize)
+        /// <summary>
+        /// Gets a com.esendex.sdk.optouts.OptOutCollection instance containing a collection of com.esendex.sdk.optouts.OptOut.
+        /// </summary>
+        /// <param name="pageNumber">An int that that specifies which page of results to return.</param>
+        /// <param name="pageSize">An int that specifies how many results to return in a page.</param>
+        /// <returns>A com.esendex.sdk.optouts.OptOutCollection instance containing a collection of com.esendex.sdk.optouts.OptOut.</returns>
+        /// <exception cref="System.Net.WebException"></exception>
+        public OptOutCollection GetAll(int pageNumber, int pageSize)
         {
             return GetByPhoneNumber(null, null, pageNumber, pageSize);
         }
@@ -117,11 +145,18 @@ namespace com.esendex.sdk.optouts
             if (pageNumber < 1) throw new ArgumentException("Page number must be greater than zero.", "pageNumber");
             if (pageSize < 1) throw new ArgumentException("Page size must be greater than zero.", "pageSize");
 
-            var startIndex = ((--pageNumber)*pageSize);
+            var startIndex = ((pageNumber - 1) * pageSize);
             return startIndex;
         }
 
-        public OptOut Add(string accountReference, string phoneNumber)
+        /// <summary>
+        /// Gets a com.esendex.sdk.optouts.OptOutCreateResult instance containing an opt out.
+        /// </summary>
+        /// <param name="phoneNumber">A string that contains the phone number to be opted out.</param>
+        /// <param name="accountReference">A string that contains the account reference to which the opt out will be applied.</param>
+        /// <returns>A com.esendex.sdk.optouts.OptOutCreateResult instance containing the created opt out.</returns>
+        /// <exception cref="System.Net.WebException"></exception>
+        public OptOutCreateResult Add(string accountReference, string phoneNumber)
         {
             var requestData = new OptOutCreateRequest
             {
@@ -132,26 +167,26 @@ namespace com.esendex.sdk.optouts
                 }
             };
 
-            var request = Request.Create("POST", new Uri(string.Concat(_baseUrl, "v1.0/optouts")))
+            var requestUrl = new Uri(string.Concat(_baseUrl, "v1.0/optouts"));
+            var request = Request.Create("POST", requestUrl)
                                  .WithHeader("Authorization", "Basic " + _credentials.EncodedValue())
-                                 .WithAcceptHeader(Constants.XML_MEDIA_TYPE)
+                                 .WithAcceptHeader(Constants.JSON_MEDIA_TYPE)
                                  .If(_credentials.UseProxy, r => r.WithProxy(_credentials.WebProxy))
-                                 .WriteBody(Constants.XML_MEDIA_TYPE, streamWriter => streamWriter.Write(new XmlSerialiser().Serialise(requestData)));
+                                 .WriteBody(Constants.JSON_MEDIA_TYPE, streamWriter => JsonSerializer.Create().Serialize(streamWriter, requestData));
 
+            HttpWebResponse response;
             try
             {
-                var response = request.GetResponse();
-                using (var reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8))
-                {
-                    string responseText = reader.ReadToEnd();
-                    return new XmlSerialiser().Deserialise<OptOutCreateRootResponse>(responseText).OptOut;
-                    
-                }
+                response = request.GetResponse();
             }
-            catch (WebException)
+            catch (WebException ex)
             {
-                return null;
+                response = (HttpWebResponse)ex.Response;
+                if (response.StatusCode != HttpStatusCode.BadRequest)
+                    throw;
             }
+
+            return response.DeserialiseJson<OptOutCreateResult>();
         }
     }
 }

@@ -1,6 +1,6 @@
-namespace com.esendex.sdk.results
+namespace com.esendex.sdk.surveys.models
 {
-    public class Error
+    public class SurveysAddRecipientError
     {
         public string Code { get; set; }
         public string Description { get; set; }

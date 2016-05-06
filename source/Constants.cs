@@ -14,6 +14,5 @@ namespace com.esendex.sdk
         }
 
         internal static string JSON_MEDIA_TYPE = "application/json; charset=utf-8";
-        internal static string XML_MEDIA_TYPE = "application/xml; charset=utf-8";
     }
 }

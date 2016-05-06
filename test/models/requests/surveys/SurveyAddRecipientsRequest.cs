@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace com.esendex.sdk.test.models.requests
+namespace com.esendex.sdk.test.models.requests.surveys
 {
     public class SurveyAddRecipientsRequest
     {
