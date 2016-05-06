@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Build">
+	<PropertyGroup>
+		<solutionToBuild>..\com.esendex.sdk.sln</solutionToBuild>
+		<buildProperties>Configuration=Release;Platform=Any CPU;DefineConstants="SIGNED"</buildProperties>
+	</PropertyGroup>
+	
+	<Target Name="Build" DependsOnTargets="apply_sn">
+		<MSBuild Projects="$(solutionToBuild)" 
+				 Targets="Rebuild" 
+				 Properties="$(buildProperties)"/>
+	</Target>
+	
+	<Target Name="apply_sn">
+		<ItemGroup>
+		 <AssemblyAttributes Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>com.esendex.sdk.test,PublicKey=00240000048000009400000006020000002400005253413100040000010001007da9ad8afead9400c99245e496c17484254c424dffbcf7874dfde37c94538691227946eb79f059df426b7aa7b7b5aa5a3eb9191e2bbf0fa51df19799eb54ac2d833c22ba87de438d074a7c9a1cecd1f37f623792d6356c91ca3e7504b5f7fc820ad313b77c46325779ae10a212078860e9118a5a5d88f467762b64da81569eaf</_Parameter1>
+		 </AssemblyAttributes>
+		</ItemGroup>
+	  <WriteCodeFragment Language="C#" OutputFile="..\source\Properties\BuildInfo.cs" AssemblyAttributes="@(AssemblyAttributes)" />
+	</Target>
+</Project>

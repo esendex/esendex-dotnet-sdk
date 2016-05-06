@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Build">
+	<PropertyGroup>
+		<solutionToBuild>..\com.esendex.sdk.sln</solutionToBuild>
+		<buildProperties>Configuration=Release;Platform=Any CPU</buildProperties>
+	</PropertyGroup>
+	
+	<Target Name="Build">
+		<MSBuild Projects="$(solutionToBuild)" 
+				 Targets="Rebuild" 
+				 Properties="$(buildProperties)"/>
+	</Target>
+</Project>
