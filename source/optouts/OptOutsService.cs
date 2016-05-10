@@ -13,7 +13,7 @@ namespace com.esendex.sdk.optouts
     /// </summary>
     public class OptOutsService
     {
-        private const string OPTOUTS_BASE_URL = "https://api.esendex.com";
+        private const string BASE_URL = "https://api.esendex.com";
 
         private readonly Uri _baseUrl;
         private readonly EsendexCredentials _credentials;
@@ -28,7 +28,7 @@ namespace com.esendex.sdk.optouts
         /// Initialises a new instance of the InboxService
         /// </summary>
         /// <param name="credentials">A com.esendex.sdk.EsendexCredentials instance containing your username and password.</param>
-        public OptOutsService(EsendexCredentials credentials) : this(OPTOUTS_BASE_URL, credentials)
+        public OptOutsService(EsendexCredentials credentials) : this(BASE_URL, credentials)
         {
         }
 
@@ -37,7 +37,7 @@ namespace com.esendex.sdk.optouts
         /// </summary>
         /// <param name="username">A string containing your username.</param>
         /// <param name="password">A string containing your password.</param>
-        public OptOutsService(string username, string password) : this(OPTOUTS_BASE_URL, new EsendexCredentials(username, password))
+        public OptOutsService(string username, string password) : this(BASE_URL, new EsendexCredentials(username, password))
         {
         }
 
@@ -145,7 +145,7 @@ namespace com.esendex.sdk.optouts
             if (pageNumber < 1) throw new ArgumentException("Page number must be greater than zero.", "pageNumber");
             if (pageSize < 1) throw new ArgumentException("Page size must be greater than zero.", "pageSize");
 
-            var startIndex = ((pageNumber - 1) * pageSize);
+            var startIndex = (pageNumber - 1) * pageSize;
             return startIndex;
         }
 

@@ -18,8 +18,6 @@ namespace com.esendex.sdk.test.optouts.getbyid
         private string _accountReference;
         private DateTime _receivedAt;
         private Guid _optOutId;
-        private string _expectedUrl;
-        private string _expectedUserAgent;
 
         [TestFixtureSetUp]
         public void Given()
@@ -31,9 +29,6 @@ namespace com.esendex.sdk.test.optouts.getbyid
             _receivedAt = DateTime.UtcNow;
             _accountReference = "EX0123456";
             _phoneNumber = "44123456789";
-
-            _expectedUrl = string.Format("/v1.0/optouts/{0}", _optOutId);
-            _expectedUserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build);
 
             var data = new
             {
@@ -58,15 +53,17 @@ namespace com.esendex.sdk.test.optouts.getbyid
         public void ThenTheExpectedRequestIsMade()
         {
             Assert.That(_request.Method, Is.EqualTo("GET"));
-            Assert.That(_request.Url, Is.EqualTo(_expectedUrl));
+            Assert.That(_request.Url, Is.EqualTo(string.Format("/v1.0/optouts/{0}", _optOutId)));
         }
 
         [Test]
         public void ThenTheRequestHasTheExpectedHeaders()
         {
+            var expectedUrl = string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build);
+
             Assert.That(_request.Headers["Accept"], Is.EqualTo("application/json; charset=utf-8"));
             Assert.That(_request.Headers["Authorization"], Is.EqualTo("Basic dXNlckBleGFtcGxlLmNvbTpoZXl0aGlzY2FudGJlZ3Vlc3NlZA=="));
-            Assert.That(_request.Headers["User-Agent"], Is.EqualTo(_expectedUserAgent));
+            Assert.That(_request.Headers["User-Agent"], Is.EqualTo(expectedUrl));
         }
 
         [Test]

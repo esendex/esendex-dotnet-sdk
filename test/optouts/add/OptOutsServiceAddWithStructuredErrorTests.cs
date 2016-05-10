@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using com.esendex.sdk.optouts;
-using com.esendex.sdk.optouts.models;
 using com.esendex.sdk.optouts.models.response;
 using com.esendex.sdk.test.mockapi;
 using Newtonsoft.Json;
