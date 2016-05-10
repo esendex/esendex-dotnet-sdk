@@ -18,7 +18,6 @@ namespace com.esendex.sdk.test.optouts.add
         private OptOutCreateResult _result;
         private string _phoneNumber;
         private string _accountReference;
-        private string _expectedUserAgent;
         private Guid _optOutId;
         private DateTime _receivedAt;
 
@@ -27,8 +26,6 @@ namespace com.esendex.sdk.test.optouts.add
         {
             const string username = "user@example.com";
             const string password = "heythiscantbeguessed";
-
-            _expectedUserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build);
 
             _optOutId = Guid.NewGuid();
             _accountReference = "EX0123456";
@@ -67,9 +64,11 @@ namespace com.esendex.sdk.test.optouts.add
         [Test]
         public void ThenTheRequestHasTheExpectedHeaders()
         {
+            var expectedUserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build);
+            Assert.That(_request.Headers["User-Agent"], Is.EqualTo(expectedUserAgent));
+
             Assert.That(_request.Headers["Accept"], Is.EqualTo("application/json; charset=utf-8"));
             Assert.That(_request.Headers["Authorization"], Is.EqualTo("Basic dXNlckBleGFtcGxlLmNvbTpoZXl0aGlzY2FudGJlZ3Vlc3NlZA=="));
-            Assert.That(_request.Headers["User-Agent"], Is.EqualTo(_expectedUserAgent));
         }
 
         [Test]

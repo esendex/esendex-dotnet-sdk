@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using com.esendex.sdk.optouts;
-using com.esendex.sdk.optouts.models;
 using com.esendex.sdk.optouts.models.response;
 using com.esendex.sdk.test.mockapi;
 using Newtonsoft.Json;
@@ -22,14 +21,15 @@ namespace com.esendex.sdk.test.optouts.getall
         private int _pageNumber;
         private Guid _optOutId;
         private DateTime _receivedAt;
-        private string _expectedUrl;
-        private string _expectedUserAgent;
 
         [TestFixtureSetUp]
         public void Given()
         {
             const string username = "user@example.com";
             const string password = "heythiscantbeguessed";
+
+            _pageSize = 15;
+            _pageNumber = 1;
 
             _optOutId = Guid.NewGuid();
             _receivedAt = DateTime.UtcNow;
@@ -50,12 +50,6 @@ namespace com.esendex.sdk.test.optouts.getall
                 }
             };
 
-            _pageSize = 15;
-            _pageNumber = 1;
-
-            _expectedUrl = string.Format("/v1.0/optouts?startIndex={0}&count={1}", (_pageNumber - 1) * _pageSize, _pageSize);
-            _expectedUserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build);
-
             MockApi.SetEndpoint(new MockEndpoint(200, JsonConvert.SerializeObject(data), "application/json"));
 
             var optOutClient = new OptOutsService(MockApi.Url, new EsendexCredentials(username, password));
@@ -67,16 +61,20 @@ namespace com.esendex.sdk.test.optouts.getall
         [Test]
         public void ThenTheExpectedRequestIsMade()
         {
+            var expectedUrl = string.Format("/v1.0/optouts?startIndex={0}&count={1}", (_pageNumber - 1) * _pageSize, _pageSize);
+
             Assert.That(_request.Method, Is.EqualTo("GET"));
-            Assert.That(_request.Url, Is.EqualTo(_expectedUrl));
+            Assert.That(_request.Url, Is.EqualTo(expectedUrl));
         }
 
         [Test]
         public void ThenTheRequestHasTheExpectedHeaders()
         {
+            var expectedUserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build);
+            Assert.That(_request.Headers["User-Agent"], Is.EqualTo(expectedUserAgent));
+
             Assert.That(_request.Headers["Accept"], Is.EqualTo("application/json; charset=utf-8"));
             Assert.That(_request.Headers["Authorization"], Is.EqualTo("Basic dXNlckBleGFtcGxlLmNvbTpoZXl0aGlzY2FudGJlZ3Vlc3NlZA=="));
-            Assert.That(_request.Headers["User-Agent"], Is.EqualTo(_expectedUserAgent));
         }
 
         [Test]
