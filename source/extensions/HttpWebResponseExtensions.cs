@@ -9,6 +9,7 @@ namespace com.esendex.sdk.extensions
         public static T DeserialiseJson<T>(this HttpWebResponse response)
         {
             var serializer = new JsonSerializer();
+
             using (var sr = new StreamReader(response.GetResponseStream()))
             using (var jsonTextReader = new JsonTextReader(sr))
             {

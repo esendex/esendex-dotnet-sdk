@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using com.esendex.sdk.surveys;
 using com.esendex.sdk.test.mockapi;
-using com.esendex.sdk.test.models.requests;
+using com.esendex.sdk.test.models.requests.surveys;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
@@ -18,6 +18,8 @@ namespace com.esendex.sdk.test.surveys
         private string _recipient;
         private Dictionary<string, string> _templateFields;
         private mockapi.Request _request;
+        private string _expectedUrl;
+        private string _expectedUserAgent;
 
         [TestFixtureSetUp]
         public void Given()
@@ -27,7 +29,10 @@ namespace com.esendex.sdk.test.surveys
             _recipient = "44123456789";
             _surveyId = Guid.NewGuid();
 
-            MockApi.SetEndpoint(new MockEndpoint(200, "", "text/plain"));
+            _expectedUrl = string.Format("/v1.0/surveys/{0}/send", _surveyId);
+            _expectedUserAgent = string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build);
+
+            MockApi.SetEndpoint(new MockEndpoint(200, contentType: "text/plain"));
 
             var surveysClient = new SurveysService(MockApi.Url, new EsendexCredentials(username, password));
             _templateFields = new Dictionary<string, string> { {"Field", "Value"}};
@@ -40,7 +45,7 @@ namespace com.esendex.sdk.test.surveys
         public void ThenTheExpectedRequestIsMade()
         {
             Assert.That(_request.Method, Is.EqualTo("POST"));
-            Assert.That(_request.Url, Is.EqualTo(string.Format("/v1.0/surveys/{0}/send", _surveyId)));
+            Assert.That(_request.Url, Is.EqualTo(_expectedUrl));
         }
 
         [Test]
@@ -60,7 +65,7 @@ namespace com.esendex.sdk.test.surveys
             Assert.That(_request.Headers["Accept"], Is.EqualTo("application/json; charset=utf-8"));
             Assert.That(_request.Headers["Authorization"], Is.EqualTo("Basic dXNlckBleGFtcGxlLmNvbTpoZXl0aGlzY2FudGJlZ3Vlc3NlZA=="));
             Assert.That(_request.Headers["Content-Type"], Is.EqualTo("application/json; charset=utf-8"));
-            Assert.That(_request.Headers["User-Agent"], Is.EqualTo(string.Format("Esendex .NET SDK v{0}.{1}.{2}", _version.Major, _version.Minor, _version.Build)));
+            Assert.That(_request.Headers["User-Agent"], Is.EqualTo(_expectedUserAgent));
         }
     }
 }

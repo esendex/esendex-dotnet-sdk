@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
-using com.esendex.sdk.exceptions;
 using com.esendex.sdk.extensions;
 using com.esendex.sdk.models.requests;
-using com.esendex.sdk.results;
+using com.esendex.sdk.surveys.models;
 using Newtonsoft.Json;
 
 namespace com.esendex.sdk.surveys
@@ -47,20 +45,19 @@ namespace com.esendex.sdk.surveys
                                  .If(_credentials.UseProxy, r => r.WithProxy(_credentials.WebProxy))
                                  .WriteBody(Constants.JSON_MEDIA_TYPE, streamWriter => JsonSerializer.Create().Serialize(streamWriter, requestData));
 
+            HttpWebResponse response;
             try
             {
-                request.GetResponse();
+                response = request.GetResponse();
             }
             catch (WebException ex)
             {
-                var response = (HttpWebResponse) ex.Response;
+                response = (HttpWebResponse) ex.Response;
                 if (response.StatusCode != HttpStatusCode.BadRequest)
                     throw;
-
-                throw new BadRequestException(ex, response.DeserialiseJson<SurveyResult>().Errors);
             }
 
-            return new SurveyResult();
+            return response.DeserialiseJson<SurveyResult>();
         }
     }
 }
