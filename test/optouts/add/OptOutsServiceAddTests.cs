@@ -38,7 +38,7 @@ namespace com.esendex.sdk.test.optouts.add
                     Id = _optOutId,
                     ReceivedAt = _receivedAt,
                     AccountReference = _accountReference,
-                    FromAddress = new
+                    From = new
                     {
                         PhoneNumber = _phoneNumber
                     }
@@ -85,7 +85,7 @@ namespace com.esendex.sdk.test.optouts.add
             Assert.That(_result.OptOut.Id, Is.EqualTo(_optOutId));
             Assert.That(_result.OptOut.AccountReference, Is.EqualTo(_accountReference));
             Assert.That(_result.OptOut.ReceivedAt, Is.EqualTo(_receivedAt).Within(1).Seconds);
-            Assert.That(_result.OptOut.FromAddress.PhoneNumber, Is.EqualTo(_phoneNumber));
+            Assert.That(_result.OptOut.From.PhoneNumber, Is.EqualTo(_phoneNumber));
 
             Assert.That(_result.Errors.Length, Is.EqualTo(0));
         }

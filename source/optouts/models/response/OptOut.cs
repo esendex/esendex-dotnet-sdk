@@ -25,6 +25,6 @@ namespace com.esendex.sdk.optouts.models.response
         /// <summary>
         /// <![CDATA[A com.esendex.sdk.optouts.models.response.FromAddress instance that represents the address of the opt out.]]>
         /// </summary>
-        public FromAddress FromAddress { get; set; }
+        public FromAddress From { get; set; }
     }
 }
