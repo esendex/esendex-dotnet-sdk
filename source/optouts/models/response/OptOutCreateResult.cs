@@ -6,6 +6,14 @@ namespace com.esendex.sdk.optouts.models.response
     public class OptOutCreateResult
     {
         /// <summary>
+        /// <![CDATA[Initialises a new instance of the com.esendex.sdk.optouts.models.response.OptOutCreateResult<T>]]>
+        /// </summary>
+        public OptOutCreateResult()
+        {
+            Errors = new OptOutCreateError[0];
+        }
+
+        /// <summary>
         /// <![CDATA[A com.esendex.sdk.optouts.models.response.OptOut instance that contains the created opt out if it was successful.]]>
         /// </summary>
         public OptOut OptOut { get; set; }

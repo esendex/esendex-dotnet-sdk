@@ -120,6 +120,7 @@
     <Compile Include="optouts\getall\OptOutsServiceGetAllWithErrorTests.cs" />
     <Compile Include="optouts\getall\OptOutsServiceGetAllWithFromAndAccountReferenceTests.cs" />
     <Compile Include="optouts\getall\OptOutsServiceGetAllWithFromTests.cs" />
+    <Compile Include="optouts\getall\OptOutsServiceGetAllWithNoResultsTests.cs" />
     <Compile Include="optouts\getbyid\OptOutsServiceGetByIdTests.cs" />
     <Compile Include="optouts\getbyid\OptOutsServiceGetByIdWithErrorResponseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

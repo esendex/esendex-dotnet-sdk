@@ -46,6 +46,8 @@ namespace com.esendex.sdk.test.optouts.add
             Assert.That(_result.Errors.Length, Is.EqualTo(1));
             Assert.That(_result.Errors.First().Code, Is.EqualTo(_code));
             Assert.That(_result.Errors.First().Description, Is.EqualTo(_description));
+
+            Assert.That(_result.OptOut, Is.Null);
         }
     }
 }

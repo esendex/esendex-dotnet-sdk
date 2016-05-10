@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using com.esendex.sdk.optouts;
-using com.esendex.sdk.optouts.models;
 using com.esendex.sdk.optouts.models.response;
 using com.esendex.sdk.test.mockapi;
 using com.esendex.sdk.test.models.requests.optouts;
@@ -88,6 +87,8 @@ namespace com.esendex.sdk.test.optouts.add
             Assert.That(_result.OptOut.AccountReference, Is.EqualTo(_accountReference));
             Assert.That(_result.OptOut.ReceivedAt, Is.EqualTo(_receivedAt).Within(1).Seconds);
             Assert.That(_result.OptOut.FromAddress.PhoneNumber, Is.EqualTo(_phoneNumber));
+
+            Assert.That(_result.Errors.Length, Is.EqualTo(0));
         }
     }
 }

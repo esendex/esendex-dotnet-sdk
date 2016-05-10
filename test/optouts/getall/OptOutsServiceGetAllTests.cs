@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using com.esendex.sdk.optouts;
-using com.esendex.sdk.optouts.models;
 using com.esendex.sdk.optouts.models.response;
 using com.esendex.sdk.test.mockapi;
 using Newtonsoft.Json;
@@ -47,7 +46,10 @@ namespace com.esendex.sdk.test.optouts.getall
                         AccountReference = _accountReference,
                         FromAddress = new { PhoneNumber = _phoneNumber },
                      }
-                }
+                },
+                StartIndex = 0,
+                Count = 1,
+                TotalCount = 1
             };
 
             _pageSize = 15;
@@ -87,6 +89,10 @@ namespace com.esendex.sdk.test.optouts.getall
             Assert.That(optOut.AccountReference, Is.EqualTo(_accountReference));
             Assert.That(optOut.ReceivedAt, Is.EqualTo(_receivedAt));
             Assert.That(optOut.FromAddress.PhoneNumber, Is.EqualTo(_phoneNumber));
+
+            Assert.That(_result.PageNumber, Is.EqualTo(1));
+            Assert.That(_result.PageSize, Is.EqualTo(1));
+            Assert.That(_result.TotalItems, Is.EqualTo(1));
         }
     }
 }
