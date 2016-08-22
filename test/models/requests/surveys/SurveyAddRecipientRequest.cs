@@ -10,5 +10,8 @@ namespace com.esendex.sdk.test.models.requests.surveys
 
         [JsonProperty("templatefields")]
         public Dictionary<string, string> TemplateFields { get; set; }
+
+        [JsonProperty("metadata")]
+        public Dictionary<string, string> MetaData { get; set; }
     }
 }

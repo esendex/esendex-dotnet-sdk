@@ -11,11 +11,12 @@ using NUnit.Framework;
 namespace com.esendex.sdk.test.surveys
 {
     [TestFixture]
-    public class SurveysServiceTests
+    public class SurveysServiceWithMetadataFieldsTests
     {
         private readonly Version _version = Assembly.GetAssembly(typeof(SurveysService)).GetName().Version;
         private Guid _surveyId;
         private string _recipient;
+        private Dictionary<string, string> _metaDataFields;
         private mockapi.Request _request;
         private string _expectedUrl;
         private string _expectedUserAgent;
@@ -34,8 +35,9 @@ namespace com.esendex.sdk.test.surveys
             MockApi.SetEndpoint(new MockEndpoint(200, contentType: "text/plain"));
 
             var surveysClient = new SurveysService(MockApi.Url, new EsendexCredentials(username, password));
-            
-            surveysClient.Send(_surveyId, _recipient);
+            _metaDataFields = new Dictionary<string, string> { {"Field", "Value"}};
+
+            surveysClient.Send(_surveyId, _recipient , null, _metaDataFields);
             _request = MockApi.LastRequest;
         }
 
@@ -54,7 +56,7 @@ namespace com.esendex.sdk.test.surveys
 
             Assert.That(body.Recipients.Count, Is.EqualTo(1));
             Assert.That(recipient.PhoneNumber, Is.EqualTo(_recipient));
-            Assert.That(recipient.TemplateFields, Is.Null);
+            CollectionAssert.AreEquivalent(_metaDataFields, recipient.MetaData);
         }
 
         [Test]

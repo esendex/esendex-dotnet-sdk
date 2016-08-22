@@ -10,5 +10,8 @@ namespace com.esendex.sdk.models.requests
 
         [JsonProperty("templatefields", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, string> TemplateFields { get; set; }
+
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, string> MetaData { get; set; }
     }
 }

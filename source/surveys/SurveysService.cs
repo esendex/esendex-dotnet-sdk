@@ -24,7 +24,7 @@ namespace com.esendex.sdk.surveys
         public SurveysService(EsendexCredentials credentials) : this(SURVEYS_BASE_URL, credentials) { }
         public SurveysService(string username, string password) : this(SURVEYS_BASE_URL, new EsendexCredentials(username, password)) {}
 
-        public SurveyResult Send(Guid surveyId, string recipient, Dictionary<string, string> templateFields = null)
+        public SurveyResult Send(Guid surveyId, string recipient, Dictionary<string, string> templateFields = null, Dictionary<string, string> metaData = null)
         {
             var requestData = new SurveysAddRecipientsRequest
             {
@@ -33,7 +33,8 @@ namespace com.esendex.sdk.surveys
                     new SurveysAddRecipientRequest
                     {
                         PhoneNumber = recipient,
-                        TemplateFields = templateFields
+                        TemplateFields = templateFields,
+                        MetaData = metaData
                     }
                 }
             };
