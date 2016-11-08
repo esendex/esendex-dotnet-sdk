@@ -78,6 +78,12 @@
     <Compile Include="core\MessageCollection.cs" />
     <Compile Include="core\PagedCollection.cs" />
     <Compile Include="extensions\HttpWebResponseExtensions.cs" />
+    <Compile Include="groups\Group.cs" />
+    <Compile Include="groups\GroupCollection.cs" />
+    <Compile Include="groups\GroupResponse.cs" />
+    <Compile Include="groups\GroupService.cs" />
+    <Compile Include="groups\IGroupService.cs" />
+    <Compile Include="groups\PagedGroupCollection.cs" />
     <Compile Include="http\HttpClient.cs" />
     <Compile Include="http\HttpRequest.cs" />
     <Compile Include="http\HttpRequestHelper.cs" />
