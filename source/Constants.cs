@@ -12,5 +12,7 @@ namespace com.esendex.sdk
         {
             get { return api_uri ?? (api_uri = new UriBuilder("https", "api.esendex.com").Uri); }
         }
+
+        internal static string JSON_MEDIA_TYPE = "application/json; charset=utf-8";
     }
 }

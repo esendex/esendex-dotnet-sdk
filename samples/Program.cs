@@ -261,11 +261,10 @@ namespace com.esendex.sdk.samples
 
                 var groupId = "";
 
-                foreach (var item in collection.Groups.Where(item => item.Name == "Test group"))
-                {
-                    groupId = item.Id.ToString();
-                    break;
-                }
+                var contactGroup = collection.Groups.FirstOrDefault(item => item.Name == "Test group");
+      
+                if (contactGroup == null)
+                    return;
 
                 if (groupId == "") return;
 

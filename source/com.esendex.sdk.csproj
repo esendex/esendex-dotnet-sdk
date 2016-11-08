@@ -111,8 +111,8 @@
     <Compile Include="inbox\InboxMessageCollection.cs" />
     <Compile Include="inbox\InboxMessageStatus.cs" />
     <Compile Include="inbox\InboxService.cs" />
-    <Compile Include="messaging\MessageBodyService.cs" />
-    <Compile Include="messaging\VoiceMessageLanguage.cs" />
+    <Compile Include="models\messaging\MessageBodyService.cs" />
+    <Compile Include="models\messaging\VoiceMessageLanguage.cs" />
     <Compile Include="models\requests\SurveysAddRecipientRequest.cs" />
     <Compile Include="models\requests\SurveysAddRecipientsRequest.cs" />
     <Compile Include="optouts\models\response\FromAddress.cs" />
@@ -124,22 +124,23 @@
     <Compile Include="Properties\BuildInfo.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="rest\resources\ContactsResource.cs" />
+    <Compile Include="rest\resources\GroupsResource.cs" />
     <Compile Include="rest\resources\InboxMessagesResource.cs" />
     <Compile Include="rest\resources\MessageHeadersResource.cs" />
     <Compile Include="core\IPagedCollection.cs" />
-    <Compile Include="messaging\Message.cs" />
-    <Compile Include="messaging\MessagingResult.cs" />
-    <Compile Include="messaging\MessageCollection.cs" />
+    <Compile Include="models\messaging\Message.cs" />
+    <Compile Include="models\messaging\MessagingResult.cs" />
+    <Compile Include="models\messaging\MessageCollection.cs" />
     <Compile Include="rest\resources\ResourceLinkResource.cs" />
     <Compile Include="rest\resources\SessionResource.cs" />
     <Compile Include="sent\FailureReason.cs" />
     <Compile Include="optouts\models\response\OptOutCreateError.cs" />
     <Compile Include="surveys\models\SurveyResult.cs" />
     <Compile Include="sent\SentMessage.cs" />
-    <Compile Include="messaging\SmsMessage.cs" />
-    <Compile Include="messaging\SmsMessageCollection.cs" />
-    <Compile Include="messaging\VoiceMessage.cs" />
-    <Compile Include="messaging\VoiceMessageCollection.cs" />
+    <Compile Include="models\messaging\SmsMessage.cs" />
+    <Compile Include="models\messaging\SmsMessageCollection.cs" />
+    <Compile Include="models\messaging\VoiceMessage.cs" />
+    <Compile Include="models\messaging\VoiceMessageCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rest\IRestClient.cs" />
     <Compile Include="sent\ISentService.cs" />
@@ -156,8 +157,8 @@
     <Compile Include="rest\RestResource.cs" />
     <Compile Include="rest\RestResponse.cs" />
     <Compile Include="utilities\XmlSerialiser.cs" />
-    <Compile Include="messaging\IMessagingService.cs" />
-    <Compile Include="messaging\MessagingService.cs" />
+    <Compile Include="models\messaging\IMessagingService.cs" />
+    <Compile Include="models\messaging\MessagingService.cs" />
     <Compile Include="ServiceBase.cs" />
   </ItemGroup>
   <ItemGroup>
