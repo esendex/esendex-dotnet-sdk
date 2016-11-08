@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Build">
+	<PropertyGroup>
+		<solutionToBuild>..\com.esendex.sdk.sln</solutionToBuild>
+		<buildProperties>Configuration=Release;Platform=Any CPU</buildProperties>
+	</PropertyGroup>
+
+  <Target Name="Build" DependsOnTargets="apply_visible">
+    <MSBuild Projects="$(solutionToBuild)"
+				 Targets="Rebuild"
+				 Properties="$(buildProperties)"/>
+  </Target>
+
+  <Target Name="apply_visible">
+    <ItemGroup>
+      <AssemblyAttributes Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>com.esendex.sdk.test</_Parameter1>
+      </AssemblyAttributes>
+      <AssemblyAttributes Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
+      </AssemblyAttributes>
+    </ItemGroup>
+    <WriteCodeFragment Language="C#" OutputFile="..\source\Properties\BuildInfo.cs" AssemblyAttributes="@(AssemblyAttributes)" />
+  </Target>
+</Project>

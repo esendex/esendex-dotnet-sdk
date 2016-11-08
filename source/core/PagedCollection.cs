@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace com.esendex.sdk.core
 {
@@ -27,11 +28,16 @@ namespace com.esendex.sdk.core
         /// Gets or sets the page number.
         /// </summary>
         [XmlAttribute("startindex")]
+        [JsonProperty("startindex")]
         public int PageNumber
         {
             get
             {
                 // Convert the zero based collection index to a real page number.
+                if (PageSize == 0 && TotalItems == 0)
+                {
+                    return 1;
+                }
                 return (startIndex/PageSize) + 1;
             }
             set { startIndex = value; }
@@ -41,12 +47,14 @@ namespace com.esendex.sdk.core
         /// Gets or sets the page size.
         /// </summary>
         [XmlAttribute("count")]
+        [JsonProperty("count")]
         public int PageSize { get; set; }
 
         /// <summary>
         /// Gets or sets the total number of items in the paged resource.
         /// </summary>
         [XmlAttribute("totalcount")]
+        [JsonProperty("totalcount")]
         public int TotalItems { get; set; }
 
         /// <summary>

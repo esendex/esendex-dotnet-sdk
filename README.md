@@ -1,5 +1,7 @@
 Esendex .Net SDK
-==================
+================
+
+[![Build Status](https://travis-ci.org/esendex/esendex-dotnet-sdk.svg?branch=master)](https://travis-ci.org/esendex/esendex-dotnet-sdk)
 
 The Esendex .Net SDK is an easy to use client for Esendex's REST API which you can use to integrate SMS and Voice messaging into any application built with C#, VB.NET, Managed C++, F# or any other language built on the .NET framework. 
 

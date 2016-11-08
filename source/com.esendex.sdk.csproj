@@ -45,11 +45,21 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\com.esendex.sdk.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup Condition=" !$(DefineConstants.Contains('SIGNED')) ">
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup Condition=" $(DefineConstants.Contains('SIGNED')) ">
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\.solution\KeyFile.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +85,7 @@
     <Compile Include="adapters\HttpWebRequestAdapter.cs" />
     <Compile Include="adapters\HttpWebResponseAdapter.cs" />
     <Compile Include="http\HttpResponseHelper.cs" />
+    <Compile Include="http\HttpUriBuilder.cs" />
     <Compile Include="http\IHttpClient.cs" />
     <Compile Include="adapters\IHttpWebRequestAdapter.cs" />
     <Compile Include="adapters\IHttpWebResponseAdapter.cs" />
@@ -96,6 +107,13 @@
     <Compile Include="inbox\InboxService.cs" />
     <Compile Include="messaging\MessageBodyService.cs" />
     <Compile Include="messaging\VoiceMessageLanguage.cs" />
+    <Compile Include="optouts\models\response\FromAddress.cs" />
+    <Compile Include="optouts\models\response\OptOut.cs" />
+    <Compile Include="optouts\models\response\OptOutCollection.cs" />
+    <Compile Include="optouts\models\request\OptOutCreateRequest.cs" />
+    <Compile Include="optouts\models\response\OptOutCreateResult.cs" />
+    <Compile Include="optouts\OptOutsService.cs" />
+    <Compile Include="Properties\BuildInfo.cs" />
     <Compile Include="rest\resources\ContactsResource.cs" />
     <Compile Include="rest\resources\GroupsResource.cs" />
     <Compile Include="rest\resources\InboxMessagesResource.cs" />
@@ -106,6 +124,8 @@
     <Compile Include="messaging\MessageCollection.cs" />
     <Compile Include="rest\resources\ResourceLinkResource.cs" />
     <Compile Include="rest\resources\SessionResource.cs" />
+    <Compile Include="optouts\models\response\OptOutCreateError.cs" />
+    <Compile Include="surveys\models\SurveyResult.cs" />
     <Compile Include="sent\SentMessage.cs" />
     <Compile Include="messaging\SmsMessage.cs" />
     <Compile Include="messaging\SmsMessageCollection.cs" />
@@ -119,6 +139,7 @@
     <Compile Include="session\ISessionService.cs" />
     <Compile Include="session\EsendexSession.cs" />
     <Compile Include="session\SessionService.cs" />
+    <Compile Include="surveys\models\SurveysAddRecipientError.cs" />
     <Compile Include="utilities\ISerialiser.cs" />
     <Compile Include="rest\resources\MessageDispatcherResource.cs" />
     <Compile Include="rest\RestClient.cs" />
@@ -129,6 +150,10 @@
     <Compile Include="messaging\MessagingService.cs" />
     <Compile Include="ServiceBase.cs" />
   </ItemGroup>
+    <None Include="..\.solution\KeyFile.snk">
+      <Link>KeyFile.snk</Link>
+    </None>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
