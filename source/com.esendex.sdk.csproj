@@ -25,6 +25,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,6 +57,9 @@
     <AssemblyOriginatorKeyFile>..\.solution\KeyFile.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -72,12 +77,7 @@
     <Compile Include="core\CharacterSet.cs" />
     <Compile Include="core\MessageCollection.cs" />
     <Compile Include="core\PagedCollection.cs" />
-    <Compile Include="groups\Group.cs" />
-    <Compile Include="groups\GroupCollection.cs" />
-    <Compile Include="groups\GroupResponse.cs" />
-    <Compile Include="groups\GroupService.cs" />
-    <Compile Include="groups\IGroupService.cs" />
-    <Compile Include="groups\PagedGroupCollection.cs" />
+    <Compile Include="extensions\HttpWebResponseExtensions.cs" />
     <Compile Include="http\HttpClient.cs" />
     <Compile Include="http\HttpRequest.cs" />
     <Compile Include="http\HttpRequestHelper.cs" />
@@ -107,6 +107,8 @@
     <Compile Include="inbox\InboxService.cs" />
     <Compile Include="messaging\MessageBodyService.cs" />
     <Compile Include="messaging\VoiceMessageLanguage.cs" />
+    <Compile Include="models\requests\SurveysAddRecipientRequest.cs" />
+    <Compile Include="models\requests\SurveysAddRecipientsRequest.cs" />
     <Compile Include="optouts\models\response\FromAddress.cs" />
     <Compile Include="optouts\models\response\OptOut.cs" />
     <Compile Include="optouts\models\response\OptOutCollection.cs" />
@@ -114,8 +116,8 @@
     <Compile Include="optouts\models\response\OptOutCreateResult.cs" />
     <Compile Include="optouts\OptOutsService.cs" />
     <Compile Include="Properties\BuildInfo.cs" />
+    <Compile Include="Request.cs" />
     <Compile Include="rest\resources\ContactsResource.cs" />
-    <Compile Include="rest\resources\GroupsResource.cs" />
     <Compile Include="rest\resources\InboxMessagesResource.cs" />
     <Compile Include="rest\resources\MessageHeadersResource.cs" />
     <Compile Include="core\IPagedCollection.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="messaging\MessageCollection.cs" />
     <Compile Include="rest\resources\ResourceLinkResource.cs" />
     <Compile Include="rest\resources\SessionResource.cs" />
+    <Compile Include="sent\FailureReason.cs" />
     <Compile Include="optouts\models\response\OptOutCreateError.cs" />
     <Compile Include="surveys\models\SurveyResult.cs" />
     <Compile Include="sent\SentMessage.cs" />
@@ -140,6 +143,7 @@
     <Compile Include="session\EsendexSession.cs" />
     <Compile Include="session\SessionService.cs" />
     <Compile Include="surveys\models\SurveysAddRecipientError.cs" />
+    <Compile Include="surveys\SurveysService.cs" />
     <Compile Include="utilities\ISerialiser.cs" />
     <Compile Include="rest\resources\MessageDispatcherResource.cs" />
     <Compile Include="rest\RestClient.cs" />
@@ -150,9 +154,12 @@
     <Compile Include="messaging\MessagingService.cs" />
     <Compile Include="ServiceBase.cs" />
   </ItemGroup>
+  <ItemGroup>
     <None Include="..\.solution\KeyFile.snk">
       <Link>KeyFile.snk</Link>
     </None>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -166,4 +173,5 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>
