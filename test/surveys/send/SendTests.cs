@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using com.esendex.sdk.surveys;
@@ -8,15 +7,14 @@ using com.esendex.sdk.test.models.requests.surveys;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace com.esendex.sdk.test.surveys
+namespace com.esendex.sdk.test.surveys.send
 {
     [TestFixture]
-    public class SurveysServiceWithMetadataFieldsTests
+    public class SendTests
     {
-        private readonly Version _version = Assembly.GetAssembly(typeof(SurveysService)).GetName().Version;
+        private readonly Version _version = Assembly.GetAssembly(typeof(SurveySendService)).GetName().Version;
         private Guid _surveyId;
         private string _recipient;
-        private Dictionary<string, string> _metaDataFields;
         private mockapi.Request _request;
         private string _expectedUrl;
         private string _expectedUserAgent;
@@ -34,10 +32,9 @@ namespace com.esendex.sdk.test.surveys
 
             MockApi.SetEndpoint(new MockEndpoint(200, contentType: "text/plain"));
 
-            var surveysClient = new SurveysService(MockApi.Url, new EsendexCredentials(username, password));
-            _metaDataFields = new Dictionary<string, string> { {"Field", "Value"}};
-
-            surveysClient.Send(_surveyId, _recipient , null, _metaDataFields);
+            var surveySendService = new SurveySendService(MockApi.Url, new EsendexCredentials(username, password));
+            
+            surveySendService.Send(_surveyId, _recipient);
             _request = MockApi.LastRequest;
         }
 
@@ -56,7 +53,7 @@ namespace com.esendex.sdk.test.surveys
 
             Assert.That(body.Recipients.Count, Is.EqualTo(1));
             Assert.That(recipient.PhoneNumber, Is.EqualTo(_recipient));
-            CollectionAssert.AreEquivalent(_metaDataFields, recipient.MetaData);
+            Assert.That(recipient.TemplateFields, Is.Null);
         }
 
         [Test]

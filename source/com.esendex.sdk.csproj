@@ -107,8 +107,8 @@
     <Compile Include="inbox\InboxService.cs" />
     <Compile Include="messaging\MessageBodyService.cs" />
     <Compile Include="messaging\VoiceMessageLanguage.cs" />
-    <Compile Include="models\requests\SurveysAddRecipientRequest.cs" />
-    <Compile Include="models\requests\SurveysAddRecipientsRequest.cs" />
+    <Compile Include="models\requests\SurveysRecipient.cs" />
+    <Compile Include="models\requests\SurveysSendRequest.cs" />
     <Compile Include="optouts\models\response\FromAddress.cs" />
     <Compile Include="optouts\models\response\OptOut.cs" />
     <Compile Include="optouts\models\response\OptOutCollection.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="rest\resources\SessionResource.cs" />
     <Compile Include="sent\FailureReason.cs" />
     <Compile Include="optouts\models\response\OptOutCreateError.cs" />
-    <Compile Include="surveys\models\SurveyResult.cs" />
+    <Compile Include="surveys\models\SurveySendResult.cs" />
     <Compile Include="sent\SentMessage.cs" />
     <Compile Include="messaging\SmsMessage.cs" />
     <Compile Include="messaging\SmsMessageCollection.cs" />
@@ -142,8 +142,9 @@
     <Compile Include="session\ISessionService.cs" />
     <Compile Include="session\EsendexSession.cs" />
     <Compile Include="session\SessionService.cs" />
-    <Compile Include="surveys\models\SurveysAddRecipientError.cs" />
-    <Compile Include="surveys\SurveysService.cs" />
+    <Compile Include="surveys\models\SurveySendError.cs" />
+    <Compile Include="surveys\SurveyReportService.cs" />
+    <Compile Include="surveys\SurveySendService.cs" />
     <Compile Include="utilities\ISerialiser.cs" />
     <Compile Include="rest\resources\MessageDispatcherResource.cs" />
     <Compile Include="rest\RestClient.cs" />
