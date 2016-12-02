@@ -8,7 +8,7 @@ namespace com.esendex.sdk
 {
     internal class Request
     {
-        private readonly Version _version = Assembly.GetAssembly(typeof (SurveysService)).GetName().Version;
+        private readonly Version _version = Assembly.GetAssembly(typeof (SurveySendService)).GetName().Version;
         private readonly HttpWebRequest _request;
 
         private Request(string method, Uri url)

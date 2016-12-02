@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace com.esendex.sdk.models.requests
 {
-    public class SurveysAddRecipientRequest
+    public class SurveysRecipient
     {
         [JsonProperty("phonenumber")]
         public string PhoneNumber { get; set; }
