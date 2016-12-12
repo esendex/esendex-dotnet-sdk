@@ -5,12 +5,12 @@ using com.esendex.sdk.test.mockapi;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
-namespace com.esendex.sdk.test.surveys
+namespace com.esendex.sdk.test.surveys.send
 {
     [TestFixture]
-    public class SurveysServiceWithBadRequestTests
+    public class SendWithBadRequestTests
     {
-        private SurveyResult _result;
+        private SurveySendResult _sendResult;
         private string _errorValue;
         private string _errorDescription;
         private string _errorCode;
@@ -41,18 +41,18 @@ namespace com.esendex.sdk.test.surveys
                                                  JsonConvert.SerializeObject(data),
                                                  "application/json; charset=utf-8"));
 
-            var surveysClient = new SurveysService(MockApi.Url, new EsendexCredentials(username, password));
+            var surveysClient = new SurveySendService(MockApi.Url, new EsendexCredentials(username, password));
 
-            _result = surveysClient.Send(surveyId, recipient);
+            _sendResult = surveysClient.Send(surveyId, recipient);
         }
 
         [Test]
         public void ThenTheResultContainsTheErrors()
         {
-            Assert.That(_result.Errors[0].Code, Is.EqualTo(_errorCode));
-            Assert.That(_result.Errors[0].Description, Is.EqualTo(_errorDescription));
-            Assert.That(_result.Errors[0].Values[0], Is.EqualTo(_errorValue));
-            Assert.That(_result.Errors[0].Values[1], Is.EqualTo(_errorValue2));
+            Assert.That(_sendResult.Errors[0].Code, Is.EqualTo(_errorCode));
+            Assert.That(_sendResult.Errors[0].Description, Is.EqualTo(_errorDescription));
+            Assert.That(_sendResult.Errors[0].Values[0], Is.EqualTo(_errorValue));
+            Assert.That(_sendResult.Errors[0].Values[1], Is.EqualTo(_errorValue2));
         }
     }
 }
