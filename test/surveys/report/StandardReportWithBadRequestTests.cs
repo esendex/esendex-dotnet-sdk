@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace com.esendex.sdk.test.surveys.report
 {
     [TestFixture]
-    public class GivenABadRequestError
+    public class GivenABadRequest
     {
         private Guid _surveyId;
         private DateTime _startDate;
