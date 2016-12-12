@@ -49,7 +49,7 @@ namespace com.esendex.sdk.test.surveys.report
                         AnswerLabel = "1",
                         AnswerDateTime = new DateTime(2016, 10, 11),
                         AnswerText = "Hello",
-                        DeliveryStatus = "Delivered",
+                        Status = DeliveryStatus.Delivered,
                         QuestionLabel = "1",
                         RecipientData = new Dictionary<string, string> {{"my key", "my value"}}
                     }
@@ -94,7 +94,7 @@ namespace com.esendex.sdk.test.surveys.report
                 Assert.That(expected.AnswerLabel, Is.EqualTo(result.AnswerLabel));
                 Assert.That(expected.AnswerDateTime, Is.EqualTo(result.AnswerDateTime));
                 Assert.That(expected.AnswerText, Is.EqualTo(result.AnswerText));
-                Assert.That(expected.DeliveryStatus, Is.EqualTo(result.DeliveryStatus));
+                Assert.That(expected.Status, Is.EqualTo(result.Status));
                 Assert.That(expected.QuestionLabel, Is.EqualTo(result.QuestionLabel));
                 Assert.That(expected.RecipientData, Is.EqualTo(result.RecipientData));
             }
@@ -136,7 +136,7 @@ namespace com.esendex.sdk.test.surveys.report
                         AnswerLabel = "1",
                         AnswerDateTime = new DateTime(2016, 10, 11),
                         AnswerText = "Hello",
-                        DeliveryStatus = "Delivered",
+                        Status = DeliveryStatus.Delivered,
                         QuestionLabel = "1",
                         RecipientData = new Dictionary<string, string> {{"my key", "my value"}}
                     }
@@ -181,7 +181,7 @@ namespace com.esendex.sdk.test.surveys.report
                 Assert.That(expected.AnswerLabel, Is.EqualTo(result.AnswerLabel));
                 Assert.That(expected.AnswerDateTime, Is.EqualTo(result.AnswerDateTime));
                 Assert.That(expected.AnswerText, Is.EqualTo(result.AnswerText));
-                Assert.That(expected.DeliveryStatus, Is.EqualTo(result.DeliveryStatus));
+                Assert.That(expected.Status, Is.EqualTo(result.Status));
                 Assert.That(expected.QuestionLabel, Is.EqualTo(result.QuestionLabel));
                 Assert.That(expected.RecipientData, Is.EqualTo(result.RecipientData));
             }

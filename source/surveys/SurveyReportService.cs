@@ -43,7 +43,7 @@ namespace com.esendex.sdk.surveys
         /// <param name="endDate">A DateTime representing the upper bound for the report date range.</param>
         /// <param name="type">An enum representing what to filter report rows on. Defaults to 'QuestionSent'</param>
         /// <returns>A StandardReportResult object containing any errors and the actual report rows</returns>
-        public StandardReportResult GetStandardReport(Guid surveyId, DateTime? startDate, DateTime? endDate, DateRangeType type = DateRangeType.QuestionSent)
+        public StandardReportResult GetStandardReport(Guid surveyId, DateTime? startDate = null, DateTime? endDate = null, DateRangeType type = DateRangeType.QuestionSent)
         {
             var request = Request.Create("GET", GetStandardReportUri(surveyId, startDate, endDate, type))
                                  .WithHeader("Authorization", "Basic " + _credentials.EncodedValue())

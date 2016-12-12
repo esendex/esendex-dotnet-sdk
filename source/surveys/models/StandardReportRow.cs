@@ -14,9 +14,9 @@ namespace com.esendex.sdk.surveys.models
         public string Recipient { get; set; }
 
         /// <summary>
-        /// A string containing the delivery status of the question sent.
+        /// A DeliveryStatus representing the delivery status of the question sent.
         /// </summary>
-        public string DeliveryStatus { get; set; }
+        public DeliveryStatus Status { get; set; }
 
         /// <summary>
         /// A string containing the label of the question.
