@@ -129,6 +129,7 @@
     <Compile Include="sent\FailureReason.cs" />
     <Compile Include="optouts\models\response\OptOutCreateError.cs" />
     <Compile Include="surveys\models\DateRangeType.cs" />
+    <Compile Include="surveys\models\DeliveryStatus.cs" />
     <Compile Include="surveys\models\StandardReportResult.cs" />
     <Compile Include="surveys\models\StandardReportRow.cs" />
     <Compile Include="surveys\models\SurveyReportError.cs" />
