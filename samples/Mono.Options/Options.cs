@@ -1100,7 +1100,7 @@ namespace Mono.Options
 				c.Option.Invoke (c);
 			else if (c.OptionValues.Count > c.Option.MaxValueCount) {
 				throw new OptionException (localizer (string.Format (
-								"Error: Found {0} option values when expecting {1}.", 
+								"Errors: Found {0} option values when expecting {1}.", 
 								c.OptionValues.Count, c.Option.MaxValueCount)),
 						c.OptionName);
 			}
