@@ -119,6 +119,7 @@
     <Compile Include="Request.cs" />
     <Compile Include="rest\resources\ContactsResource.cs" />
     <Compile Include="rest\resources\InboxMessagesResource.cs" />
+    <Compile Include="rest\resources\MessageBatchesResource.cs" />
     <Compile Include="rest\resources\MessageHeadersResource.cs" />
     <Compile Include="core\IPagedCollection.cs" />
     <Compile Include="messaging\Message.cs" />
