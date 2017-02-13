@@ -2,9 +2,9 @@ using Newtonsoft.Json;
 
 namespace com.esendex.sdk.models.requests
 {
-    public class SurveysAddRecipientsRequest
+    public class SurveysSendRequest
     {
         [JsonProperty("recipients")]
-        public SurveysAddRecipientRequest[] Recipients { get; set; }
+        public SurveysRecipient[] Recipients { get; set; }
     }
 }

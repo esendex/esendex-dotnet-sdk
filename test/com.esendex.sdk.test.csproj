@@ -87,6 +87,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -133,12 +134,15 @@
     <Compile Include="sent\SentServiceTests.cs" />
     <Compile Include="sent\SentMessageTests.cs" />
     <Compile Include="session\SessionServiceTests.cs" />
+    <Compile Include="surveys\report\StandardReportTests.cs" />
+    <Compile Include="surveys\report\StandardReportWithErrorResponseTests.cs" />
+    <Compile Include="surveys\report\StandardReportWithBadRequestTests.cs" />
+    <Compile Include="surveys\send\SendTests.cs" />
+    <Compile Include="surveys\send\SendWithBadRequestTests.cs" />
+    <Compile Include="surveys\send\SendWithErrorResponseTests.cs" />
+    <Compile Include="surveys\send\SendWithMetaDataFieldsTests.cs" />
+    <Compile Include="surveys\send\SendWithTemplateFieldsTests.cs" />
     <Compile Include="SetUpFixture.cs" />
-    <Compile Include="surveys\SurveysServiceTests.cs" />
-    <Compile Include="surveys\SurveysServiceWithBadRequestTests.cs" />
-    <Compile Include="surveys\SurveysServiceWithErrorResponseTests.cs" />
-    <Compile Include="surveys\SurveysServiceWithMetaDataFieldsTests.cs" />
-    <Compile Include="surveys\SurveysServiceWithTemplateFieldsTests.cs" />
     <Compile Include="utilities\XmlSerialiserTests.cs" />
     <Compile Include="messaging\MessagingServiceTests.cs" />
   </ItemGroup>
