@@ -58,6 +58,7 @@ namespace com.esendex.sdk.test.http
         {
             // Arrange
             var credentials = new EsendexCredentials("username", "password");
+            var expectedHeaderValue = string.Format("Basic {0}", Convert.ToBase64String(new UTF8Encoding().GetBytes($"{credentials.Username}:{credentials.Password}")));
 
             IHttpWebRequestAdapter httpRequest = new HttpWebRequestAdapter(_uri);
 
@@ -65,13 +66,9 @@ namespace com.esendex.sdk.test.http
             _helper.AddCredentials(httpRequest, credentials);
 
             //  Assert
-            var username = httpRequest.Credentials.GetCredential(_uri, "Basic")
-                                      .UserName;
-            var password = httpRequest.Credentials.GetCredential(_uri, "Basic")
-                                      .Password;
+            var actualHeaderValue = httpRequest.Headers.Get("Authorization");
 
-            Assert.AreEqual(credentials.Username, username);
-            Assert.AreEqual(credentials.Password, password);
+            Assert.AreEqual(expectedHeaderValue, actualHeaderValue);
         }
 
         [Test]

@@ -21,25 +21,12 @@ namespace com.esendex.sdk.http
 
         public void AddCredentials(IHttpWebRequestAdapter httpRequest, EsendexCredentials credentials)
         {
-            if (credentials.UseSessionAuthentication)
-            {
-                var value = string.Format("Basic {0}", Convert.ToBase64String(new UTF8Encoding().GetBytes(credentials.SessionId.Value.ToString())));
+            var authBytes = credentials.UseSessionAuthentication
+                ? new UTF8Encoding().GetBytes(credentials.SessionId.Value.ToString())
+                : new UTF8Encoding().GetBytes($"{credentials.Username}:{credentials.Password}");
 
-                httpRequest.Headers.Add(HttpRequestHeader.Authorization, value);
-            }
-            else
-            {
-                var credentialCache = new CredentialCache
-                {
-                    {
-                        httpRequest.RequestUri,
-                        "Basic",
-                        new NetworkCredential(credentials.Username, credentials.Password)
-                    }
-                };
-
-                httpRequest.Credentials = credentialCache;
-            }
+            var value = string.Format("Basic {0}", Convert.ToBase64String(authBytes));
+            httpRequest.Headers.Add(HttpRequestHeader.Authorization, value);
         }
 
         public void AddProxy(IHttpWebRequestAdapter httpRequest, IWebProxy proxy)
