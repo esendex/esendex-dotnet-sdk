@@ -58,7 +58,7 @@ namespace com.esendex.sdk.test.http
         {
             // Arrange
             var credentials = new EsendexCredentials("username", "password");
-            var expectedHeaderValue = string.Format("Basic {0}", Convert.ToBase64String(new UTF8Encoding().GetBytes($"{credentials.Username}:{credentials.Password}")));
+            var expectedHeaderValue = string.Format("Basic {0}", Convert.ToBase64String(new UTF8Encoding().GetBytes(string.Format("{0}:{1}", credentials.Username, credentials.Password))));
 
             IHttpWebRequestAdapter httpRequest = new HttpWebRequestAdapter(_uri);
 

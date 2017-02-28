@@ -23,7 +23,7 @@ namespace com.esendex.sdk.http
         {
             var authBytes = credentials.UseSessionAuthentication
                 ? new UTF8Encoding().GetBytes(credentials.SessionId.Value.ToString())
-                : new UTF8Encoding().GetBytes($"{credentials.Username}:{credentials.Password}");
+                : new UTF8Encoding().GetBytes(string.Format("{0}:{1}", credentials.Username, credentials.Password));
 
             var value = string.Format("Basic {0}", Convert.ToBase64String(authBytes));
             httpRequest.Headers.Add(HttpRequestHeader.Authorization, value);
