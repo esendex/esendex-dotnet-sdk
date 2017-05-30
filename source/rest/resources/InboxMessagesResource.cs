@@ -50,6 +50,11 @@ namespace com.esendex.sdk.rest.resources
                                                                        .ToLowerInvariant());
         }
 
+        public InboxMessagesResource(DateTime start, DateTime finish)
+        {
+            Initialise(start, finish);
+        }
+
         private void Initialise(int pageNumber, int pageSize)
         {
             if (pageNumber < 1) throw new ArgumentException("Page number must be greater than zero.", "pageNumber");
@@ -65,6 +70,14 @@ namespace com.esendex.sdk.rest.resources
             if (string.IsNullOrEmpty(accountReference)) throw new ArgumentNullException("accountReference");
 
             ResourcePath += string.Format("/{0}/messages", accountReference);
+        }
+
+        private void Initialise(DateTime start, DateTime finish)
+        {
+            //start date must be set before finish date
+            if (finish <= start) throw new ArgumentException("Start Date must be before the Finish Date", "start");
+
+            ResourcePath += string.Format("/messages?start={0}Z&finish={1}", start.ToString("yyyy-MM-ddTHH:mm:ss"), finish.ToString("yyyy-MM-ddTHH:mm:ss"));
         }
     }
 }
