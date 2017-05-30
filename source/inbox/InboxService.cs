@@ -109,7 +109,9 @@ namespace com.esendex.sdk.inbox
         /// </summary>
         /// <param name="start">A System.DateTime instance that contains the start date for messages to be retrieved from</param>
         /// <param name="finish">A System.DateTime instance that contains the finish date for messages to be retrieved until</param>
-        /// <returns></returns>
+        /// <returns>A com.esendex.sdk.inbox.InboxMessageCollection instance containing inbox messages.</returns>
+        /// <exception cref="System.Net.WebException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
         public InboxMessageCollection GetMessages(DateTime start, DateTime finish)
         {
             RestResource resource = new InboxMessagesResource(start, finish);
