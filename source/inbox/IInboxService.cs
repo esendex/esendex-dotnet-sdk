@@ -52,16 +52,6 @@ namespace com.esendex.sdk.inbox
         InboxMessageCollection GetMessages(string accountReference);
 
         /// <summary>
-        /// Gets a com.esendex.sdk.inbox.InboxMessageCollection instance containing inbox messages for a specific date range.
-        /// </summary>
-        /// <param name="start"></param>
-        /// <param name="finish"></param>
-        /// <returns>A com.esendex.sdk.inbox.InboxMessageCollection instance containing inbox messages.</returns>
-        /// <exception cref="System.Net.WebException"></exception>
-        /// <exception cref="System.ArgumentException"></exception>
-        InboxMessageCollection GetMessages(DateTime start, DateTime finish);
-
-        /// <summary>
         /// Returns true if the message was successfully marked as read; otherwise, false.
         /// </summary>
         /// <param name="id">A System.Guid instance that contains the Id of an inbox message.</param>
