@@ -156,5 +156,20 @@ namespace com.esendex.sdk.test.rest.resources
             // Assert
             Assert.AreEqual(expectedResourcePath, resource.ResourcePath);
         }
+
+        [Test]
+        public void DefaultConstructor_WithDateRange()
+        {
+            // Arrange
+            DateTime start = DateTime.Today;
+            DateTime finish = DateTime.Today.AddDays(1);
+            var expectedResourcePath = string.Format("inbox/messages?start={0}Z&finish={1}", start.ToString("yyyy-MM-ddTHH:mm:ss"), finish.ToString("yyyy-MM-ddTHH:mm:ss"));
+
+            // Act
+            RestResource resource = new InboxMessagesResource(start, finish);
+
+            // Assert
+            Assert.AreEqual(expectedResourcePath, resource.ResourcePath);
+        }
     }
 }

@@ -45,3 +45,5 @@ packages/
 !NuGet.exe
 artifacts/
 build/
+.vs/
+/.vs

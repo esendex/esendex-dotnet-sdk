@@ -105,6 +105,21 @@ namespace com.esendex.sdk.inbox
         }
 
         /// <summary>
+        /// Gets a com.esendex.sdk.inbox.InboxMessageCollection instance containing inbox messages for a specific date range.
+        /// </summary>
+        /// <param name="start">A System.DateTime instance that contains the start date for messages to be retrieved from</param>
+        /// <param name="finish">A System.DateTime instance that contains the finish date for messages to be retrieved until</param>
+        /// <returns>A com.esendex.sdk.inbox.InboxMessageCollection instance containing inbox messages.</returns>
+        /// <exception cref="System.Net.WebException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
+        public InboxMessageCollection GetMessages(DateTime start, DateTime finish)
+        {
+            RestResource resource = new InboxMessagesResource(start, finish);
+
+            return MakeRequest<InboxMessageCollection>(HttpMethod.GET, resource);
+        }
+
+        /// <summary>
         /// Returns true if the message was successfully marked as read; otherwise, false.
         /// </summary>
         /// <param name="id">A System.Guid instance that contains the Id of an inbox message.</param>
