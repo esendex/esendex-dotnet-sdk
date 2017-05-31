@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using com.esendex.sdk.contacts;
+using com.esendex.sdk.groups;
 using com.esendex.sdk.inbox;
 using com.esendex.sdk.messaging;
 using com.esendex.sdk.sent;
@@ -100,22 +102,27 @@ namespace com.esendex.sdk.samples
             GetContactsExample(credentials);
 
             Console.WriteLine();
+            Console.WriteLine("Groups Example\r\n");
+            GetGroupsExample(credentials);
+
+            Console.WriteLine();
+            Console.WriteLine("Contacts in Group Example\r\n");
+            GetContactsByGroupExample(credentials);
+
+            AddContactToGroup(credentials);
+
+            Console.WriteLine();
             Console.WriteLine("Press enter to continue ... ");
             Console.ReadLine();
         }
 
         private static void ShowUsage(OptionSet optionSet)
         {
-            Console.WriteLine(
-                @"
-Esendex .Net SDK Samples
-");
+            Console.WriteLine(@"Esendex .Net SDK Samples");
 
             optionSet.WriteOptionDescriptions(Console.Out);
 
-            Console.WriteLine(@"
-Enjoy...
-");
+            Console.WriteLine(@"Enjoy...");
         }
 
         private static void SendMessageExample(EsendexCredentials credentials)
@@ -217,6 +224,74 @@ Enjoy...
                 {
                     Console.WriteLine("\tContact Id:{0}\tQuickname:{1}", item.Id, item.QuickName);
                 }
+            }
+            catch (WebException ex)
+            {
+                Console.Write(ex.Message);
+            }
+        }
+
+        private static void GetGroupsExample(EsendexCredentials credentials)
+        {
+            var groupService = new GroupService(credentials);
+
+            try
+            {
+                var collection = groupService.GetGroups(_accountReference, PageIndex, PageSize);
+
+                foreach (var item in collection.Groups)
+                {
+                    Console.WriteLine("\tGroup Id:{0}\tName:{1}", item.Id, item.Name);
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.Write(ex.Message);
+            }
+        }
+
+        private static void GetContactsByGroupExample(EsendexCredentials credentials)
+        {
+            var groupService = new GroupService(credentials);
+
+            try
+            {
+                var collection = groupService.GetGroups(_accountReference, PageIndex, PageSize);
+                var contacts = new PagedContactCollection();
+
+                var groupId = "";
+
+                var contactGroup = collection.Groups.FirstOrDefault(item => item.Name == "Test group");
+      
+                if (contactGroup == null)
+                    return;
+
+                if (groupId == "") return;
+
+                contacts = groupService.GetContactsFromGroup(_accountReference, groupId, 1, 15);
+
+                foreach (var item in contacts.Contacts)
+                {
+                    Console.WriteLine("\tContact Id:{0}\tNumber:{1}", item.Id, item.PhoneNumber);
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.Write(ex.Message);
+            }
+        }
+
+        private static void AddContactToGroup(EsendexCredentials credentials)
+        {
+            var groupService = new GroupService(credentials);
+            var contactService = new ContactService(credentials);
+
+            try
+            {
+                var guid = new Guid("{YOUR Contact GUID}");
+                var contact = contactService.GetContact(guid);
+                groupService.AddContactToGroup(_accountReference, "{YOUR Group GUID}", contact);
+
             }
             catch (WebException ex)
             {

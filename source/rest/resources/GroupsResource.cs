@@ -1,12 +1,13 @@
 ﻿using System;
+using com.esendex.sdk.contacts;
 
 namespace com.esendex.sdk.rest.resources
 {
-    internal class ContactsResource : RestResource
+    internal class GroupsResource : RestResource
     {
         public override string ResourceName
         {
-            get { return "contacts"; }
+            get { return "contactgroups"; }
         }
 
         public override string ResourceVersion
@@ -14,23 +15,23 @@ namespace com.esendex.sdk.rest.resources
             get { return "v2.0"; }
         }
 
-        public ContactsResource(Guid id)
+        public GroupsResource(Guid id)
         {
             AppendWithId(id);
         }
 
-        public ContactsResource(string content)
+        public GroupsResource(string content)
             : base(content)
         {
         }
 
-        public ContactsResource(Guid id, string content)
+        public GroupsResource(Guid id, string content)
             : base(content)
         {
             AppendWithId(id);
         }
 
-        public ContactsResource(string accountReference, int pageNumber, int pageSize)
+        public GroupsResource(string accountReference, int pageNumber, int pageSize)
         {
             if (pageNumber < 1) throw new ArgumentException("Page number must be greater than zero.", "pageNumber");
             if (pageSize < 1) throw new ArgumentException("Page size must be greater than zero.", "pageSize");
@@ -40,17 +41,16 @@ namespace com.esendex.sdk.rest.resources
             ResourcePath += string.Format("?accountReference={0}&startIndex={1}&count={2}", accountReference, startIndex, pageSize);
         }
 
-        public ContactsResource(string accountReference, int pageNumber, int pageSize, string groupName)
+        public GroupsResource(string accountReference, string groupId, int pageNumber, int pageSize)
         {
             if (pageNumber < 1) throw new ArgumentException("Page number must be greater than zero.", "pageNumber");
             if (pageSize < 1) throw new ArgumentException("Page size must be greater than zero.", "pageSize");
-
             var startIndex = ((--pageNumber) * pageSize);
 
-            ResourcePath += string.Format("?accountReference={0}&startIndex={1}&count={2}", accountReference, startIndex, pageSize);
+            ResourcePath += string.Format("/{0}/contacts?accountReference={1}&startIndex={2}&count={3}", groupId, accountReference, startIndex, pageSize);
         }
 
-        public ContactsResource(string accountReference, string groupId, string content)
+        public GroupsResource(string accountReference, string groupId, string content)
             :base(content)
         {
             ResourcePath += string.Format("/{0}/contacts?accountReference={1}", groupId, accountReference);

@@ -33,6 +33,17 @@ namespace com.esendex.sdk.contacts
         /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.contacts.ContactCollection
         /// </summary>
+        /// <param name="id">A com.esendex.sdk.contacts.Contact.Id instance that contains a contacts guid.</param>
+        public ContactCollection(string id)
+        {
+            if (id == null) throw new ArgumentNullException("contact");
+
+            ItemsId.Add(id);
+        }
+
+        /// <summary>
+        /// Initialises a new instance of the com.esendex.sdk.contacts.ContactCollection
+        /// </summary>
         /// <param name="contacts"><![CDATA[A System.Collections.Generic.IEnumerable<com.esendex.sdk.contacts.Contact> instance that contains the contacts.]]></param>
         public ContactCollection(IEnumerable<Contact> contacts)
         {
@@ -45,6 +56,12 @@ namespace com.esendex.sdk.contacts
         /// <![CDATA[A System.Collections.Generic.List<com.esendex.sdk.contacts.Contact> instance that contains the contacts.]]>
         /// </summary>
         [XmlElement("contact")] public List<Contact> Items = new List<Contact>();
+
+        /// <summary>
+        /// <![CDATA[A System.Collections.Generic.List<com.esendex.sdk.contacts.Contact.Id> instance that contains the contacts guid.]]>
+        /// </summary>
+        [XmlElement("contactid")]
+        public List<string> ItemsId = new List<string>();
 
         /// <summary>
         /// Determines whether the specified System.Object are considered equal.
