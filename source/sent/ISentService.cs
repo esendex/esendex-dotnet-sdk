@@ -35,5 +35,13 @@ namespace com.esendex.sdk.sent
         /// <exception cref="System.ArgumentException"></exception>
         /// <exception cref="System.Net.WebException"></exception>
         SentMessageCollection GetMessages(string accountReference, int pageNumber, int pageSize);
+
+        /// <summary>
+        /// Gets a com.esendex.sdk.sent.SentMessageCollection instance containing sent messages from a batch.
+        /// </summary>
+        /// <param name="id">A System.Guid instance that contains the Id of a sent batch.</param>
+        /// <returns>A com.esendex.sdk.sent.SentMessageCollection instance that contains the sent message.</returns>
+        /// <exception cref="System.Net.WebException"></exception>
+        SentMessageCollection GetBatchMessages(Guid id);
     }
 }

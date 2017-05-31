@@ -64,6 +64,39 @@ namespace com.esendex.sdk.test.sent
         }
 
         [Test]
+        public void GetBatchMessages_WithId_ReturnsSentBatchMessages()
+        {
+            // Arrange
+            var pageNumber = 1;
+            var pageSize = 15;
+            var id = Guid.NewGuid();
+
+            RestResource resource = new MessageBatchesResource(id);
+
+            var response = new RestResponse
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = "serialisedItem"
+            };
+
+            var expectedResult = new SentMessageCollection();
+
+            mockRestClient
+                .Setup(rc => rc.Get(resource))
+                .Returns(response);
+
+            mockSerialiser
+                .Setup(s => s.Deserialise<SentMessageCollection>(response.Content))
+                .Returns(expectedResult);
+
+            // Act
+            var actualResult = service.GetBatchMessages(id);
+
+            // Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [Test]
         public void GetMessage_WithId_ReturnsSentMessage()
         {
             // Arrange
