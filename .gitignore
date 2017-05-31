@@ -46,3 +46,4 @@ packages/
 artifacts/
 build/
 .vs/
+/.vs
