@@ -16,7 +16,7 @@ namespace com.esendex.sdk.test.surveys.send
         private string _errorCode;
         private string _errorValue2;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Given()
         {
             const string username = "user@example.com";

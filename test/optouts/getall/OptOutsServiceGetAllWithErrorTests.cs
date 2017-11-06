@@ -20,7 +20,7 @@ namespace com.esendex.sdk.test.optouts.getall
             _expectedCode = expectedCode;
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Given()
         {
             const string username = "user@example.com";

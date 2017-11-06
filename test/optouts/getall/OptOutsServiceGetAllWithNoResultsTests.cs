@@ -17,7 +17,7 @@ namespace com.esendex.sdk.test.optouts.getall
         private int _pageSize;
         private int _pageNumber;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Given()
         {
             const string username = "user@example.com";

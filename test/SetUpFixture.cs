@@ -6,13 +6,13 @@ namespace com.esendex.sdk.test
     [SetUpFixture]
     public class SetUpFixture
     {
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
             MockApi.Start("localhost:6789");
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void TearDown()
         {
             MockApi.Stop();

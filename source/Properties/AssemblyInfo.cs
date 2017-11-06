@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -36,3 +37,6 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("3.2.0")]
 [assembly: AssemblyFileVersion("3.2.0")]
+
+[assembly: InternalsVisibleTo("com.esendex.sdk.test.net46")]
+[assembly: InternalsVisibleTo("com.esendex.sdk.test.netcore20")]

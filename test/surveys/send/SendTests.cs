@@ -19,7 +19,7 @@ namespace com.esendex.sdk.test.surveys.send
         private string _expectedUrl;
         private string _expectedUserAgent;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Given()
         {
             const string username = "user@example.com";
