@@ -6,8 +6,16 @@
     <Description>Esendex API .NET SDK</Description>
     <Company>Esendex</Company>
     <Product>Esendex .NET SDK</Product>
-    <AssemblyVersion>3.2.0</AssemblyVersion>
-    <AssemblyFileVersion>3.2.0</AssemblyFileVersion>
+    <AssemblyVersion>3.3.0</AssemblyVersion>
+    <AssemblyFileVersion>3.3.0</AssemblyFileVersion>
+    <PackageVersion>3.3.0</PackageVersion>
+    <Authors>Esendex</Authors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>http://opensource.org/licenses/BSD-3-Clause</PackageLicenseUrl>
+    <PackageProjectUrl>http://developers.esendex.com/SDKs/DotNet-SDK</PackageProjectUrl>
+    <PackageIconUrl>http://www.esendex.co.uk/sites/all/themes/esendex14/favicon.ico</PackageIconUrl>
+    <PackageTags>SDK API Esendex .NET</PackageTags>
+
   </PropertyGroup>
 
   <PropertyGroup Condition="$(DefineConstants.Contains('SIGNED'))">
