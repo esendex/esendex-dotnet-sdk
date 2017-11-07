@@ -17,6 +17,9 @@
         <_Parameter1>com.esendex.sdk.test</_Parameter1>
       </AssemblyAttributes>
       <AssemblyAttributes Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+        <_Parameter1>com.esendex.sdk.test.net35</_Parameter1>
+      </AssemblyAttributes>
+      <AssemblyAttributes Include="System.Runtime.CompilerServices.InternalsVisibleTo">
         <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
       </AssemblyAttributes>
     </ItemGroup>

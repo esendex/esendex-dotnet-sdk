@@ -2,7 +2,17 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net35</TargetFrameworks>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Title>Esendex .NET SDK</Title>
+    <Description>Esendex API .NET SDK</Description>
+    <Company>Esendex</Company>
+    <Product>Esendex .NET SDK</Product>
+    <AssemblyVersion>3.2.0</AssemblyVersion>
+    <AssemblyFileVersion>3.2.0</AssemblyFileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(DefineConstants.Contains('SIGNED'))">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\.solution\KeyFile.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

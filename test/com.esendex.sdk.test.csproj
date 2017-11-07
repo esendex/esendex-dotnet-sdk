@@ -6,6 +6,11 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(DefineConstants.Contains('SIGNED'))">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\.solution\KeyFile.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="microsoft.net.test.sdk" Version="15.3.0" />
     <PackageReference Include="moq" Version="4.7.142" />
