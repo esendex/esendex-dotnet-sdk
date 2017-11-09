@@ -7,6 +7,7 @@ language: csharp
 solution: com.esendex.sdk.sln
 install:
   - nuget restore com.esendex.sdk.sln
+  - msbuild com.esendex.sdk.sln /t:Restore
   - nuget install NUnit.Console -Version 3.7.0 -OutputDirectory testrunner
 script:
   - msbuild .solution/build.msbuild
