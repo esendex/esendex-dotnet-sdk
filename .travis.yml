@@ -11,7 +11,7 @@ install:
   - msbuild com.esendex.sdk.sln /t:Restore
 script:
   - msbuild .solution/build.msbuild
-  - dotnet test --no-build test/com.esendex.sdk.test.dll
+  - dotnet test --no-build test/com.esendex.sdk.test.csproj
   
 cache:
   directories:
