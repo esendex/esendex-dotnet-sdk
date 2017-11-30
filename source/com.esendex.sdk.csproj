@@ -15,6 +15,7 @@
     <PackageProjectUrl>http://developers.esendex.com/SDKs/DotNet-SDK</PackageProjectUrl>
     <PackageIconUrl>http://www.esendex.co.uk/sites/all/themes/esendex14/favicon.ico</PackageIconUrl>
     <PackageTags>SDK API Esendex .NET</PackageTags>
+    <PackageId>esendex-dotnet-sdk</PackageId>
 
   </PropertyGroup>
 
