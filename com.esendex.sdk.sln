@@ -1,27 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.esendex.sdk", "source\com.esendex.sdk.csproj", "{E5FFC32F-9C13-47FB-A1E7-8834EAF289B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "com.esendex.sdk", "source\com.esendex.sdk.csproj", "{11784347-7C79-4E9F-8E44-B6B47A9A7DF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.esendex.sdk.test", "test\com.esendex.sdk.test.csproj", "{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "com.esendex.sdk.test", "test\com.esendex.sdk.test.csproj", "{36602B7E-83F8-4A75-B157-7E76DD57C3CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.esendex.sdk.samples", "samples\com.esendex.sdk.samples.csproj", "{E8851A83-8861-4B1C-8CA2-07C29BB508D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.esendex.sdk.test.net35", "test\net35\com.esendex.sdk.test.net35.csproj", "{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{39FA5B76-66E2-401A-A308-FC4BFBCA4E4B}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution", ".solution", "{E7C0ED30-2AA4-48E9-A307-FF0231D80235}"
-	ProjectSection(SolutionItems) = preProject
-		.solution\build.msbuild = .solution\build.msbuild
-		.solution\buildsigned.msbuild = .solution\buildsigned.msbuild
-		.solution\KeyFile.snk = .solution\KeyFile.snk
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.esendex.sdk.samples", "samples\com.esendex.sdk.samples.csproj", "{964C0B32-C96B-4BC4-97B6-1AC504F39474}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,20 +17,27 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E5FFC32F-9C13-47FB-A1E7-8834EAF289B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E5FFC32F-9C13-47FB-A1E7-8834EAF289B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E5FFC32F-9C13-47FB-A1E7-8834EAF289B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E5FFC32F-9C13-47FB-A1E7-8834EAF289B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11784347-7C79-4E9F-8E44-B6B47A9A7DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11784347-7C79-4E9F-8E44-B6B47A9A7DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11784347-7C79-4E9F-8E44-B6B47A9A7DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11784347-7C79-4E9F-8E44-B6B47A9A7DF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36602B7E-83F8-4A75-B157-7E76DD57C3CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36602B7E-83F8-4A75-B157-7E76DD57C3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36602B7E-83F8-4A75-B157-7E76DD57C3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36602B7E-83F8-4A75-B157-7E76DD57C3CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8851A83-8861-4B1C-8CA2-07C29BB508D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8851A83-8861-4B1C-8CA2-07C29BB508D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8851A83-8861-4B1C-8CA2-07C29BB508D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8851A83-8861-4B1C-8CA2-07C29BB508D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964C0B32-C96B-4BC4-97B6-1AC504F39474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964C0B32-C96B-4BC4-97B6-1AC504F39474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964C0B32-C96B-4BC4-97B6-1AC504F39474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964C0B32-C96B-4BC4-97B6-1AC504F39474}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EAF53AA-6464-4954-81E7-C4FC679F3EB9}
 	EndGlobalSection
 EndGlobal

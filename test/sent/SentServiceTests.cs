@@ -67,8 +67,6 @@ namespace com.esendex.sdk.test.sent
         public void GetBatchMessages_WithId_ReturnsSentBatchMessages()
         {
             // Arrange
-            var pageNumber = 1;
-            var pageSize = 15;
             var id = Guid.NewGuid();
 
             RestResource resource = new MessageBatchesResource(id);

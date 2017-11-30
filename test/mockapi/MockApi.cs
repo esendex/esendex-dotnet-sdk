@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Net;
 
 namespace com.esendex.sdk.test.mockapi
@@ -52,6 +53,15 @@ namespace com.esendex.sdk.test.mockapi
                     Url = context.Request.Url.PathAndQuery,
                     Method = context.Request.HttpMethod
                 };
+
+#if NET35
+                // .NET 3.5 doesn't pass User-Agent through the headers (it pulls it out and populates .UserAgent instead)
+                // But .NET 4.0+ does. So if we're under .NET 3.5 we add it manually.
+                if (!LastRequest.Headers.AllKeys.Contains("User-Agent"))
+                {
+                    LastRequest.Headers.Add("User-Agent", context.Request.UserAgent);
+                }
+#endif
 
                 _endpoint.HandleRequest(context);
             }

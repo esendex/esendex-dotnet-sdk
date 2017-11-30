@@ -8,15 +8,15 @@ using System.Xml;
 using System.Xml.Schema;
 using com.esendex.sdk.messaging;
 using com.esendex.sdk.test.messaging.schemas;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace com.esendex.sdk.test.messaging
 {
-    [TestClass]
+    [TestFixture]
     public class MessageSchemaTests
     {
-        [TestMethod]
-        [Ignore]
+        [Test]
+        [Ignore("")]
         public void SerialiseSmsMessage()
         {
             // Arrange

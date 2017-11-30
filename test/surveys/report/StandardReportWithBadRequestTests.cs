@@ -16,7 +16,7 @@ namespace com.esendex.sdk.test.surveys.report
         private StandardReportResult _result;
         private StandardReportResult _apiResponse;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void WhenGettingTheStandardReport()
         {
             const string username = "user@example.com";

@@ -26,7 +26,7 @@ namespace com.esendex.sdk.test.surveys.report
             private mockapi.Request _request;
             private StandardReportResult _apiResponse;
 
-            [TestFixtureSetUp]
+            [OneTimeSetUp]
             public void WhenGettingTheStandardReport()
             {
                 const string username = "user@example.com";
@@ -113,7 +113,7 @@ namespace com.esendex.sdk.test.surveys.report
             private mockapi.Request _request;
             private StandardReportResult _apiResponse;
 
-            [TestFixtureSetUp]
+            [OneTimeSetUp]
             public void WhenGettingTheStandardReport()
             {
                 const string username = "user@example.com";
@@ -194,7 +194,7 @@ namespace com.esendex.sdk.test.surveys.report
             private Guid _surveyId;
             private DateTime _startDate;
 
-            [TestFixtureSetUp]
+            [OneTimeSetUp]
             public void WhenGettingTheStandardReport()
             {
                 _surveyId = Guid.NewGuid();
@@ -225,7 +225,7 @@ namespace com.esendex.sdk.test.surveys.report
             private Guid _surveyId;
             private DateTime _endDate;
 
-            [TestFixtureSetUp]
+            [OneTimeSetUp]
             public void WhenGettingTheStandardReport()
             {
                 _surveyId = Guid.NewGuid();
@@ -256,7 +256,7 @@ namespace com.esendex.sdk.test.surveys.report
             private Guid _surveyId;
             private DateTime _startDate;
 
-            [TestFixtureSetUp]
+            [OneTimeSetUp]
             public void WhenGettingTheStandardReport()
             {
                 _surveyId = Guid.NewGuid();
@@ -287,7 +287,7 @@ namespace com.esendex.sdk.test.surveys.report
             private Guid _surveyId;
             private DateTime _endDate;
 
-            [TestFixtureSetUp]
+            [OneTimeSetUp]
             public void WhenGettingTheStandardReport()
             {
                 _surveyId = Guid.NewGuid();

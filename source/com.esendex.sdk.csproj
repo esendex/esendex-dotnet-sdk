@@ -1,184 +1,34 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E5FFC32F-9C13-47FB-A1E7-8834EAF289B8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.esendex.sdk</RootNamespace>
-    <AssemblyName>com.esendex.sdk</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <TargetFrameworks>netstandard2.0;net35</TargetFrameworks>
+    <Title>Esendex .NET SDK</Title>
+    <Description>Esendex API .NET SDK</Description>
+    <Company>Esendex</Company>
+    <Product>Esendex .NET SDK</Product>
+    <AssemblyVersion>3.3.0</AssemblyVersion>
+    <AssemblyFileVersion>3.3.0</AssemblyFileVersion>
+    <PackageVersion>3.3.0</PackageVersion>
+    <Authors>Esendex</Authors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseUrl>http://opensource.org/licenses/BSD-3-Clause</PackageLicenseUrl>
+    <PackageProjectUrl>http://developers.esendex.com/SDKs/DotNet-SDK</PackageProjectUrl>
+    <PackageIconUrl>http://www.esendex.co.uk/sites/all/themes/esendex14/favicon.ico</PackageIconUrl>
+    <PackageTags>SDK API Esendex .NET</PackageTags>
+
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\com.esendex.sdk.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\com.esendex.sdk.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" !$(DefineConstants.Contains('SIGNED')) ">
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup Condition=" $(DefineConstants.Contains('SIGNED')) ">
+
+  <PropertyGroup Condition="$(DefineConstants.Contains('SIGNED'))">
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\.solution\KeyFile.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <PackageReference Include="newtonsoft.json" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net35'">
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="contacts\Contact.cs" />
-    <Compile Include="contacts\ContactCollection.cs" />
-    <Compile Include="contacts\ContactResponse.cs" />
-    <Compile Include="contacts\ContactService.cs" />
-    <Compile Include="contacts\IContactService.cs" />
-    <Compile Include="contacts\PagedContactCollection.cs" />
-    <Compile Include="core\CharacterSet.cs" />
-    <Compile Include="core\MessageCollection.cs" />
-    <Compile Include="core\PagedCollection.cs" />
-    <Compile Include="extensions\HttpWebResponseExtensions.cs" />
-    <Compile Include="http\HttpClient.cs" />
-    <Compile Include="http\HttpRequest.cs" />
-    <Compile Include="http\HttpRequestHelper.cs" />
-    <Compile Include="http\HttpResponse.cs" />
-    <Compile Include="adapters\HttpWebRequestAdapter.cs" />
-    <Compile Include="adapters\HttpWebResponseAdapter.cs" />
-    <Compile Include="http\HttpResponseHelper.cs" />
-    <Compile Include="http\HttpUriBuilder.cs" />
-    <Compile Include="http\IHttpClient.cs" />
-    <Compile Include="adapters\IHttpWebRequestAdapter.cs" />
-    <Compile Include="adapters\IHttpWebResponseAdapter.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="http\IHttpRequestHelper.cs" />
-    <Compile Include="http\IHttpResponseHelper.cs" />
-    <Compile Include="EsendexCredentials.cs" />
-    <Compile Include="core\MessageBody.cs" />
-    <Compile Include="core\MessageDirection.cs" />
-    <Compile Include="core\Message.cs" />
-    <Compile Include="core\MessageContact.cs" />
-    <Compile Include="core\MessageStatus.cs" />
-    <Compile Include="core\MessageType.cs" />
-    <Compile Include="core\ResourceLink.cs" />
-    <Compile Include="inbox\IInboxService.cs" />
-    <Compile Include="inbox\InboxMessage.cs" />
-    <Compile Include="inbox\InboxMessageCollection.cs" />
-    <Compile Include="inbox\InboxMessageStatus.cs" />
-    <Compile Include="inbox\InboxService.cs" />
-    <Compile Include="messaging\MessageBodyService.cs" />
-    <Compile Include="messaging\VoiceMessageLanguage.cs" />
-    <Compile Include="models\requests\SurveysRecipient.cs" />
-    <Compile Include="models\requests\SurveysSendRequest.cs" />
-    <Compile Include="optouts\models\response\FromAddress.cs" />
-    <Compile Include="optouts\models\response\OptOut.cs" />
-    <Compile Include="optouts\models\response\OptOutCollection.cs" />
-    <Compile Include="optouts\models\request\OptOutCreateRequest.cs" />
-    <Compile Include="optouts\models\response\OptOutCreateResult.cs" />
-    <Compile Include="optouts\OptOutsService.cs" />
-    <Compile Include="Properties\BuildInfo.cs" />
-    <Compile Include="Request.cs" />
-    <Compile Include="rest\resources\ContactsResource.cs" />
-    <Compile Include="rest\resources\InboxMessagesResource.cs" />
-    <Compile Include="rest\resources\MessageBatchesResource.cs" />
-    <Compile Include="rest\resources\MessageHeadersResource.cs" />
-    <Compile Include="core\IPagedCollection.cs" />
-    <Compile Include="messaging\Message.cs" />
-    <Compile Include="messaging\MessagingResult.cs" />
-    <Compile Include="messaging\MessageCollection.cs" />
-    <Compile Include="rest\resources\ResourceLinkResource.cs" />
-    <Compile Include="rest\resources\SessionResource.cs" />
-    <Compile Include="sent\FailureReason.cs" />
-    <Compile Include="optouts\models\response\OptOutCreateError.cs" />
-    <Compile Include="surveys\models\DateRangeType.cs" />
-    <Compile Include="surveys\models\DeliveryStatus.cs" />
-    <Compile Include="surveys\models\StandardReportResult.cs" />
-    <Compile Include="surveys\models\StandardReportRow.cs" />
-    <Compile Include="surveys\models\SurveyReportError.cs" />
-    <Compile Include="surveys\models\SurveySendResult.cs" />
-    <Compile Include="sent\SentMessage.cs" />
-    <Compile Include="messaging\SmsMessage.cs" />
-    <Compile Include="messaging\SmsMessageCollection.cs" />
-    <Compile Include="messaging\VoiceMessage.cs" />
-    <Compile Include="messaging\VoiceMessageCollection.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="rest\IRestClient.cs" />
-    <Compile Include="sent\ISentService.cs" />
-    <Compile Include="sent\SentMessageCollection.cs" />
-    <Compile Include="sent\SentService.cs" />
-    <Compile Include="session\ISessionService.cs" />
-    <Compile Include="session\EsendexSession.cs" />
-    <Compile Include="session\SessionService.cs" />
-    <Compile Include="surveys\models\SurveySendError.cs" />
-    <Compile Include="surveys\SurveyReportService.cs" />
-    <Compile Include="surveys\SurveySendService.cs" />
-    <Compile Include="utilities\ISerialiser.cs" />
-    <Compile Include="rest\resources\MessageDispatcherResource.cs" />
-    <Compile Include="rest\RestClient.cs" />
-    <Compile Include="rest\RestResource.cs" />
-    <Compile Include="rest\RestResponse.cs" />
-    <Compile Include="utilities\XmlSerialiser.cs" />
-    <Compile Include="messaging\IMessagingService.cs" />
-    <Compile Include="messaging\MessagingService.cs" />
-    <Compile Include="ServiceBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\.solution\KeyFile.snk">
-      <Link>KeyFile.snk</Link>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+
 </Project>

@@ -22,7 +22,7 @@ namespace com.esendex.sdk.test.optouts.getall
         private Guid _optOutId;
         private DateTime _receivedAt;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Given()
         {
             const string username = "user@example.com";

@@ -23,7 +23,7 @@ namespace com.esendex.sdk.test.surveys.send
             _expectedCode = expectedCode;
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Given()
         {
             const string username = "user@example.com";

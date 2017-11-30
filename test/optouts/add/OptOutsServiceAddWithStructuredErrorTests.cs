@@ -14,7 +14,7 @@ namespace com.esendex.sdk.test.optouts.add
         private string _code = "phonenumber_missing";
         private string _description = "Phone number is missing";
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void Given()
         {
             const string username = "user@example.com";
