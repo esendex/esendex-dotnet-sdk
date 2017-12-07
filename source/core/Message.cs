@@ -103,6 +103,12 @@ namespace com.esendex.sdk.core
         public string AccountReference { get; set; }
 
         /// <summary>
+        /// Gets or sets the batch
+        /// </summary>
+        [XmlElement("batch")]
+        public ResourceLink Batch { get; set; }
+
+        /// <summary>
         /// Initialises a new instance of the com.esendex.sdk.core.Message
         /// </summary>
         public Message()
