@@ -1,7 +1,7 @@
-Esendex .Net SDK
+Commify .Net SDK
 ================
 
-The Esendex .Net SDK is an easy to use client for Esendex's REST API which you can use to integrate SMS and Voice messaging into any application built with C#, VB.NET, Managed C++, F# or any other language built on the .NET framework. 
+The Commify .Net SDK is an easy to use client for Commify's REST API which you can use to integrate SMS and Voice messaging into any application built with C#, VB.NET, Managed C++, F# or any other language built on the .NET framework. 
 
 It contains a set of services for sending SMS and Voice messages, receiving SMS, tracking the status of your sent messages and more.
 
@@ -23,7 +23,7 @@ Use the MSBuild scripts in the .solution directory to build. This will build .NE
 
 - build.msbuild: builds unsigned assemblies
 - buildsigned.local.msbuild: builds signed assemblies using the key in the .solution folder, for testing purposes
-- buildsigned.msbuild: builds signed assemblies using the Esendex private key (not included in this repository)
+- buildsigned.msbuild: builds signed assemblies using the Commify private key (not included in this repository)
 
 To allow Visual Studio to build the tests, run MSBuild first to generate the BuildInfo file which grants access to the library internals to the unit test assemblies.
 
