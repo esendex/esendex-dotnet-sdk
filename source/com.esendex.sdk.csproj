@@ -6,9 +6,9 @@
     <Description>Esendex API .NET SDK</Description>
     <Company>Esendex</Company>
     <Product>Esendex .NET SDK</Product>
-    <AssemblyVersion>3.5.0</AssemblyVersion>
-    <AssemblyFileVersion>3.5.0</AssemblyFileVersion>
-    <PackageVersion>3.5.0</PackageVersion>
+    <AssemblyVersion>3.6.0</AssemblyVersion>
+    <AssemblyFileVersion>3.6.0</AssemblyFileVersion>
+    <PackageVersion>3.6.0</PackageVersion>
     <Authors>Esendex</Authors>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl>http://opensource.org/licenses/BSD-3-Clause</PackageLicenseUrl>
