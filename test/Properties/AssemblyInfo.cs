@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("com.esendex.sdk.test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Esendex Ltd")]
+[assembly: AssemblyCompany("Commify Ltd")]
 [assembly: AssemblyProduct("test")]
-[assembly: AssemblyCopyright("Copyright © Esendex Ltd 2010")]
+[assembly: AssemblyCopyright("Copyright © Commify Ltd 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
