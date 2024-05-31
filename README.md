@@ -10,25 +10,22 @@ Full details at http://developers.esendex.com/SDKs/DotNet-SDK
 
 ## Building
 
-Building the SDK requires Visual Studio 2017 or its build tools, including the .NET Framework 3.5 build components.
+Building the SDK requires Visual Studio 2017 or its build tools, including the .NET 8.0 build components.
 
-First, restore NuGet packages. This must be done twice, or the .NET 3.5 test project's packages don't get restored:
+First, restore NuGet packages.
 
-- `msbuild com.esendex.sdk.sln /t:Restore`
-- `.nuget\nuget.exe restore test\net35\com.esendex.sdk.test.net35.csproj -SolutionDirectory .`
+- `dotnet restore`
 
 Visual Studio 2017 will restore all the NuGet packages by itself.
 
-Use the MSBuild scripts in the .solution directory to build. This will build .NET Standard 2.0 and .NET Framework 3.5 libraries.
+To build the solution use the following commands:
 
-- build.msbuild: builds unsigned assemblies
-- buildsigned.local.msbuild: builds signed assemblies using the key in the .solution folder, for testing purposes
-- buildsigned.msbuild: builds signed assemblies using the Esendex private key (not included in this repository)
-
-To allow Visual Studio to build the tests, run MSBuild first to generate the BuildInfo file which grants access to the library internals to the unit test assemblies.
+- `dotnet build -c Debug`: builds unsigned assemblies
+- `dotnet build -c Release --property:LOCAL=true`: builds signed assemblies using the key in the .solution folder, for testing purposes
+- `dotnet build -c Release`: builds signed assemblies using the Esendex private key (not included in this repository)
 
 To build a NuGet package, use the following command after building:
 
-- `msbuild source\com.esendex.sdk.csproj /t:Pack /p:Configuration=Release`
+- `dotnet pack -c Release`
 
 The package will be created in `source\bin\Release\esendex-dotnet-sdk.$version.nupkg`

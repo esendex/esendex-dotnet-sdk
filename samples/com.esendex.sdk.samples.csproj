@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <TargetFramework>net8.0</TargetFramework>
+    <Version>1.2.0</Version>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
     <Company>Esendex Ltd</Company>
     <Copyright>Copyright © Esendex Ltd 2010</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mono.Options" Version="5.3.0.1" />
+    <PackageReference Include="Mono.Options" Version="6.12.0.148" />
   </ItemGroup>
 
   <ItemGroup>

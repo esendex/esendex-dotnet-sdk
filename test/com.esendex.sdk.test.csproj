@@ -1,29 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>com.esendex.sdk.test</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(DefineConstants.Contains('SIGNED'))">
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\.solution\KeyFile.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="microsoft.net.test.sdk" Version="15.3.0" />
-    <PackageReference Include="moq" Version="4.7.142" />
-    <PackageReference Include="nunit" Version="3.8.1" />
-    <PackageReference Include="nunit3testadapter" Version="3.9.0" />
+    <PackageReference Include="microsoft.net.test.sdk" Version="17.10.0"/>
+    <PackageReference Include="moq" Version="4.20.70"/>
+    <PackageReference Include="nunit" Version="3.14.0"/>
+    <PackageReference Include="nunit3testadapter" Version="4.5.0"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\source\com.esendex.sdk.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
-    <Reference Include="System.Web" />
+    <ProjectReference Include="..\source\com.esendex.sdk.csproj"/>
   </ItemGroup>
 
 </Project>

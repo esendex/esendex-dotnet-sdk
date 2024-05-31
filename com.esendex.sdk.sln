@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "com.esendex.sdk", "source\c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "com.esendex.sdk.test", "test\com.esendex.sdk.test.csproj", "{36602B7E-83F8-4A75-B157-7E76DD57C3CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.esendex.sdk.test.net35", "test\net35\com.esendex.sdk.test.net35.csproj", "{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.esendex.sdk.samples", "samples\com.esendex.sdk.samples.csproj", "{964C0B32-C96B-4BC4-97B6-1AC504F39474}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{36602B7E-83F8-4A75-B157-7E76DD57C3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36602B7E-83F8-4A75-B157-7E76DD57C3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36602B7E-83F8-4A75-B157-7E76DD57C3CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1AE63BDE-FAEC-4EE3-BC52-61DF6581DFB9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{964C0B32-C96B-4BC4-97B6-1AC504F39474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{964C0B32-C96B-4BC4-97B6-1AC504F39474}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{964C0B32-C96B-4BC4-97B6-1AC504F39474}.Release|Any CPU.ActiveCfg = Release|Any CPU

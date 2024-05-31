@@ -1,35 +1,48 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net35</TargetFrameworks>
+    <TargetFrameworks>net40;net45;net461;netstandard2.0;net6.0;net8.0</TargetFrameworks>
     <Title>Esendex .NET SDK</Title>
     <Description>Esendex API .NET SDK</Description>
     <Company>Esendex</Company>
     <Product>Esendex .NET SDK</Product>
-    <AssemblyVersion>3.8.0</AssemblyVersion>
-    <AssemblyFileVersion>3.8.0</AssemblyFileVersion>
-    <PackageVersion>3.8.0</PackageVersion>
+    <AssemblyVersion>3.9.0</AssemblyVersion>
+    <AssemblyFileVersion>3.9.0</AssemblyFileVersion>
+    <PackageVersion>3.9.0</PackageVersion>
     <Authors>Esendex</Authors>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl>http://opensource.org/licenses/BSD-3-Clause</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>http://developers.esendex.com/SDKs/DotNet-SDK</PackageProjectUrl>
     <PackageIconUrl>http://www.esendex.co.uk/sites/all/themes/esendex14/favicon.ico</PackageIconUrl>
     <PackageTags>SDK API Esendex .NET</PackageTags>
     <PackageId>esendex-dotnet-sdk</PackageId>
-
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(DefineConstants.Contains('SIGNED'))">
+  <PropertyGroup Condition="'$(LOCAL)' == 'true'">
+    <DefineConstants>LOCAL</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\.solution\KeyFile.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="newtonsoft.json" Version="10.0.3" />
+    <PackageReference Include="newtonsoft.json" Version="13.0.3" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net35'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net40'">
     <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net45'">
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net461'">
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE" Pack="true" PackagePath=""/>
   </ItemGroup>
 
 </Project>

@@ -46,6 +46,7 @@ packages/
 artifacts/
 build/
 .vs/
+.idea/
 /.vs
 *.nupkg
 nuget/lib/
